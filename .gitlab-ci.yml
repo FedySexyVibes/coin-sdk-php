@@ -1,0 +1,23 @@
+---
+variables:
+  AWS_DEFAULT_REGION: eu-central-1
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - make test
+  after_script:
+    - make integration-test-clean
+
+php publish:
+  stage: deploy
+  only:
+    - master
+  except:
+    - schedules
+  script:
+    - make snapshot

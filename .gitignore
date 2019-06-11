@@ -1,0 +1,11 @@
+build
+dist
+coin_numberportability.egg-info
+.eggs
+.idea
+*__pycache__*
+coin_sdk.egg-info
+samples/number_portability/keys
+test/setup/private*
+test/setup/public*
+test/setup/sharedkey*

@@ -82,5 +82,5 @@ services:
       - coin-sdk-php
 
 networks:
-  coin-sdk-php
+  coin-sdk-php:
 

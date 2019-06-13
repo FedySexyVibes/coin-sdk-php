@@ -1,0 +1,9 @@
+{
+  "name": "coin/common-sdk",
+  "description": "",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "phpseclib/phpseclib": "2.0.18"
+  }
+}

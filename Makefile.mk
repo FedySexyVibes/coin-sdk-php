@@ -28,7 +28,7 @@ SHELL=/bin/bash
 
 .PHONY: pre-build docker-build post-build build release patch-release minor-release major-release tag check-status check-release showver upload do-upload post-upload
 
-build: pre-build docker-build post-build
+build: #pre-build docker-build post-build
 
 pre-build:
 
@@ -40,7 +40,6 @@ docker-build:
 	docker build --build-arg VERSION=$(VERSION) -t $(IMAGE):$(VERSION) .
 
 upload:
-	docker run --rm -e VERSION=$(VERSION) $(IMAGE):$(VERSION) upload
 
 .release:
 	@echo "release=0.0.0" > .release

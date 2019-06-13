@@ -1,8 +1,8 @@
 # PHP SDK
 ## Introduction
-The PHP SDK supports secured access to the numberportability API.
+The PHP SDK supports secured access to the number portability API.
 
-For a quickstart follow the steps below:
+For a quick start follow the steps below:
 * [Setup](#setup)
 * [Configure Credentials](#cred)
 * [Send Messages](#sendm)

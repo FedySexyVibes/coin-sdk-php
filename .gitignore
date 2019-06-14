@@ -11,3 +11,5 @@ test/setup/public*
 test/setup/sharedkey*
 *.iml
 */vendor/*
+*.pem
+*.encrypted

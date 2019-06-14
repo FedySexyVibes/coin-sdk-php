@@ -6,8 +6,8 @@ use common\crypto\CtpApiClientUtil;
 class CtpApiClientUtilTest extends TestCase
 {
     public function testCtpUtils() {
-        echo CtpApiClientUtil::hmacSecretFromEncryptedFile("../../../sharedkey.encrypted", "../../../private-key.pem");
+        $privateKey = CtpApiClientUtil::readPrivateKeyFile("../../../private-key.pem");
+        echo CtpApiClientUtil::hmacSecretFromEncryptedFile("../../../sharedkey.encrypted", $privateKey);
         TestCase::assertTrue(true);
     }
-
 }

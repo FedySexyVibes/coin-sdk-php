@@ -2,16 +2,12 @@
 
 namespace common\crypto;
 
+use Firebase\JWT\JWT;
+use phpseclib\Crypt\Hash;
 use phpseclib\Crypt\RSA;
 
 class CtpApiClientUtil
 {
-    /*public static function readUtf8File($filename) {
-    $content = file_get_contents($filename);
-    return mb_convert_encoding($content, 'UTF-8',
-        mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
-    }*/
-
     public static function readPrivateKeyFile($fileName) {
         $privateKey = file_get_contents($fileName);
         $rsa = new RSA();
@@ -20,9 +16,33 @@ class CtpApiClientUtil
         return $rsa;
     }
 
-    public static function hmacSecretFromEncryptedFile($hmacFile, $privateKeyFile) {
-        $privateKey = CtpApiClientUtil::readPrivateKeyFile($privateKeyFile);
+    public static function hmacSecretFromEncryptedFile($hmacFile, RSA $privateKey) {
         $encryptedHmac = file_get_contents($hmacFile);
         return $privateKey->decrypt(base64_decode($encryptedHmac));
+    }
+
+    public static function getHmacHeaders($body) {
+        $hash = base64_encode((new Hash('sha256'))->hash($body ?: ''));
+        return array(
+            "x-date" => date(\DateTime::RFC1123),
+            "digest" => "SHA-256=$hash"
+        );
+    }
+
+    public static function CalculateHttpRequestHmac($hmacSecret, $consumerName, array $hmacHeaders, $requestLine) {
+        $headerKeys = array_keys($hmacHeaders);
+        $message = implode("\n", array_map(function($key, $val) {return "$key: $val";}, $headerKeys, $hmacHeaders))."\n".$requestLine;
+        $signature = base64_encode(hash_hmac('sha256', $message, $hmacSecret));
+        $joinedHeaders = implode(" ", $headerKeys);
+        return "hmac username=\"$consumerName\", algorithm=\"hmac-sha256\", headers=\"$joinedHeaders request-line\", signature=\"$signature\"";
+    }
+
+    public static function createJwt(RSA $privateKey, $consumerName, $validPeriodInSeconds) {
+        $token = array(
+            "iss" => "$consumerName",
+            "nbf" => round(microtime(true)) - 30,
+            "exp" => round(microtime(true)) + 30 + $validPeriodInSeconds
+        );
+        return JWT::encode($token, $privateKey, "RS256");
     }
 }

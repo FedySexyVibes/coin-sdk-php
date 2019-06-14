@@ -16,7 +16,7 @@ class CtpApiClientUtil
         $privateKey = file_get_contents($fileName);
         $rsa = new RSA();
         $rsa->setEncryptionMode(RSA::ENCRYPTION_PKCS1);
-        $rsa->setPrivateKey($privateKey);
+        $rsa->loadKey($privateKey);
         return $rsa;
     }
 

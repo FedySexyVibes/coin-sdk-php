@@ -15,7 +15,7 @@ class CtpApiClientUtil
     public static function readPrivateKeyFile($fileName) {
         $privateKey = file_get_contents($fileName);
         $rsa = new RSA();
-        $rsa->setPrivateKeyFormat(RSA::PRIVATE_FORMAT_PKCS1);
+        $rsa->setEncryptionMode(RSA::ENCRYPTION_PKCS1);
         $rsa->setPrivateKey($privateKey);
         return $rsa;
     }
@@ -23,7 +23,6 @@ class CtpApiClientUtil
     public static function hmacSecretFromEncryptedFile($hmacFile, $privateKeyFile) {
         $privateKey = CtpApiClientUtil::readPrivateKeyFile($privateKeyFile);
         $encryptedHmac = file_get_contents($hmacFile);
-        echo $encryptedHmac;
-        return $privateKey->decrypt($encryptedHmac);
+        return $privateKey->decrypt(base64_decode($encryptedHmac));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace common\crypto;
 
+require_once __DIR__.'/../../../vendor/autoload.php';
+
 use phpseclib\Crypt\RSA;
 
 class CtpApiClientUtil

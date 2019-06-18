@@ -10,6 +10,6 @@ test/setup/private*
 test/setup/public*
 test/setup/sharedkey*
 *.iml
-*/vendor/*
+vendor/*
 *.pem
 *.encrypted

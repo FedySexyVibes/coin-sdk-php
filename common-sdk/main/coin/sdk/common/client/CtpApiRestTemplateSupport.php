@@ -1,11 +1,9 @@
 <?php
 
-namespace common\client;
+namespace coin\sdk\common\client;
 
-
-use common\crypto\CtpApiClientUtil;
+use coin\sdk\common\crypto\CtpApiClientUtil;
 use GuzzleHttp\Client;
-
 
 abstract class CtpApiRestTemplateSupport
 {
@@ -27,7 +25,8 @@ abstract class CtpApiRestTemplateSupport
      * @param int $method
      * @param string $url
      * @param string $content [optional]
-     * @return \HttpMessage
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function SendWithToken($method, $url, $content = null)
     {

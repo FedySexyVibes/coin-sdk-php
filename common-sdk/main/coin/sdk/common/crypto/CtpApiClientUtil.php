@@ -1,6 +1,6 @@
 <?php
 
-namespace common\crypto;
+namespace coin\sdk\common\crypto;
 
 use Firebase\JWT\JWT;
 use phpseclib\Crypt\Hash;

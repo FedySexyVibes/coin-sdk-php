@@ -5,13 +5,12 @@
   "license": "proprietary",
   "autoload": {
     "classmap": [
-      "main/"
+      "common-sdk/"
     ]
   },
   "require": {
     "phpseclib/phpseclib": "2.0.18",
     "ext-mbstring": "*",
-    "ext-http": "*",
     "firebase/php-jwt": "^5.0",
     "guzzlehttp/guzzle": "~6.0"
   },

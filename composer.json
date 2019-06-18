@@ -12,7 +12,8 @@
     "phpseclib/phpseclib": "2.0.18",
     "ext-mbstring": "*",
     "firebase/php-jwt": "^5.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "spatie/enum": "^2.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0"

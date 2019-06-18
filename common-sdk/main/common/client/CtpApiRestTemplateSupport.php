@@ -4,15 +4,19 @@ namespace common\client;
 
 
 use common\crypto\CtpApiClientUtil;
+use GuzzleHttp\Client;
 
-abstract class CtpApiRestTemplateSupport {
+
+abstract class CtpApiRestTemplateSupport
+{
 
     var $hmacSecret;
     var $privateKey;
     var $consumerName;
     var $validPeriodInSeconds;
 
-    function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30) {
+    function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30)
+    {
         $this->privateKey = CtpApiClientUtil::readPrivateKeyFile($privateKeyFile);
         $this->hmacSecret = CtpApiClientUtil::hmacSecretFromEncryptedFile($encryptedHmacSecretFile, $this->privateKey);
         $this->consumerName = $consumerName;
@@ -25,24 +29,24 @@ abstract class CtpApiRestTemplateSupport {
      * @param string $content [optional]
      * @return \HttpMessage
      */
-    protected function SendWithToken($method, $url, $content = null) {
-        $request = new \HttpRequest($url, $method);
-        $request->setBody($content);
+    protected function SendWithToken($method, $url, $content = null)
+    {
+        $client = new Client();
         $hmacHeaders = CtpApiClientUtil::getHmacHeaders($content);
-        $request->addHeaders($hmacHeaders);
-
-        $methodName = http_request_method_name($method);
+        $methodName = $method;
         $localPath = parse_url($url, PHP_URL_PATH);
         $requestLine = "$methodName $localPath HTTP/1.1";
         $hmac = CtpApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
-
         $jwt = CtpApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
+        return $client->request($method, $url, [
+            'body' => $content,
+            'headers' => array_merge($hmacHeaders, array(
+                "authorization" => $hmac,
+                "User-Agent" => "coin-sdk-php-v0.0.0",
+                'content-type' => 'application/json',
+                "Cookie" => "jwt=$jwt")
+            )
+        ]);
 
-        $request->addHeaders(array(
-            "authorization" => $hmac,
-            "User-Agent" => "coin-sdk-php-v0.0.0",
-            "Cookie" => "jwt=$jwt"
-        ));
-        return $request->send();
     }
 }

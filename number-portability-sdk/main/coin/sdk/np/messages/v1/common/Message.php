@@ -1,6 +1,8 @@
 <?php
 
-use np\messages\v1\cancel\CancelMessage;
+namespace coin\sdk\np\messages\v1\common;
+
+use Swagger\Client\ObjectSerializer;
 
 abstract class MessageType
 {
@@ -105,7 +107,7 @@ class Message {
      */
     public function __toString()
     {
-        return json_encode(\Swagger\Client\ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 
 }

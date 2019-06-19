@@ -1,6 +1,6 @@
 <?php
 
-namespace np\messages\v1\common;
+namespace coin\sdk\np\messages\v1\common;
 
 interface IMessageBuilder extends IHeaderBuilder {
 

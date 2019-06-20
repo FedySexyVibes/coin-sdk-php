@@ -11,6 +11,6 @@ class NumberPortabilityServiceTest extends TestCase
         $encryptedHmacSecretFile = "../../../../../sharedkey.encrypted";
 
         $service = new NumberPortabilityService($consumerName, $privateKeyFile, $encryptedHmacSecretFile);
-        $promise = $service->postMessage('{"message":{"header":{"receiver":{"networkoperator":"LOADB","serviceprovider":"LOADB"},"sender":{"networkoperator":"LOADA","serviceprovider":"LOADA"},"timestamp":"20190619093853"},"body":{"cancel":{"dossierid":"123456","note":"Just a note!"}}}}', "cancel");
+        $service->postMessage('{"message":{"header":{"receiver":{"networkoperator":"LOADB","serviceprovider":"LOADB"},"sender":{"networkoperator":"LOADA","serviceprovider":"LOADA"},"timestamp":"20190619093853"},"body":{"cancel":{"dossierid":"123456","note":"Just a note!"}}}}', "cancel");
     }
 }

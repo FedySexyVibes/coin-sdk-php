@@ -3,14 +3,17 @@
 namespace coin\sdk\np\service\impl;
 
 use coin\sdk\common\client\CtpApiRestTemplateSupport;
+use coin\sdk\np\messages\v1;
+use function coin\sdk\np\messages\v1\common\deserialize;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\service\sse\Client;
 use GuzzleHttp;
 use GuzzleHttp\Exception\ConnectException;
 
+
 /**
  * @property IOffsetPersister offsetPersister
- * @property INumberPortabilityMessageListener messageListener
+ * @property \coin\sdk\np\service\sse\Event[] events
  * @method int recoverOffset(int $int)
  */
 class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
@@ -21,13 +24,13 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
     private $numberOfRetries;
 
     private $retriesLeft;
-    private $listener;
     private $confirmationStatus;
-    private $messageListener;
     private $offsetPersister;
     private $recoverOffset;
     private $messageTypes;
     private $offset;
+
+    private $events;
 
     /**
      * NumberPortabilityMessageConsumer constructor.
@@ -55,30 +58,36 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
      * @param IOffsetPersister $offsetPersister
      * @param callable $recoverOffset
      * @param string ...$messageTypes
+     * @return \Generator
      */
-    function startConsuming(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,
+    function getMessages(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,
                             $initialOffset = -1, IOffsetPersister $offsetPersister = null, $recoverOffset = null, array $messageTypes = []) {
-        $this->messageListener = $listener;
         $this->confirmationStatus = $confirmationStatus ?: ConfirmationStatus::UNCONFIRMED();
-        $this->offsetPersister = $offsetPersister;
         $this->recoverOffset = $recoverOffset;
         $this->messageTypes = $messageTypes;
         $this->offset = $initialOffset;
-        $this->listener = $listener;
-
         $this->startReading();
+        foreach ($this->events as $event) {
+            try {
+                $rawMessage = json_decode($event->getData(), true)->message;
+                $message = deserialize($event->getEventType(), $rawMessage)->getMessage();
+                $id = $event->getId();
+                $listener->onMessage($id, $message);
+                if ($offsetPersister) {
+                    $offsetPersister->setOffset($id);
+                }
+                yield $message;
+            } catch(\Exception $exception) {
+                $event->exception = $exception;
+                yield $event;
+            }
+        }
     }
 
     private function startReading() {
         $client = new Client($this->createUrl(), []);
         $this->retriesLeft = $this->numberOfRetries;
-        $events = $client->getEvents(function() { $this->onDisconnect(); });
-        foreach ($events as $event) {
-            $data = $event->getData();
-            // TODO: extract id $id and message $message
-            // $this->messageListener->onMessage($id, $message);
-            $this->retriesLeft = $this->numberOfRetries;
-        }
+        $this->events = $client->getEvents(function() { $this->onDisconnect(); });
     }
 
     private function onDisconnect() {

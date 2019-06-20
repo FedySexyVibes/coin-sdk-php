@@ -29,6 +29,9 @@ class Event {
     private $id;
     /** @var int */
     private $retry;
+
+    public $exception;
+
     /**
      * @param string $data
      * @param string $eventType

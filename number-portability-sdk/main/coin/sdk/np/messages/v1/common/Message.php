@@ -2,7 +2,7 @@
 
 namespace coin\sdk\np\messages\v1\common;
 
-use Swagger\Client\ObjectSerializer;
+use coin\sdk\np\ObjectSerializer;
 
 abstract class MessageType
 {
@@ -92,6 +92,11 @@ class Message {
         $this->message = $message;
 
         return $this;
+    }
+
+    public function getMessageType()
+    {
+        return $this->messageType;
     }
 
 

@@ -1,25 +1,29 @@
 <?php
 
 use coin\sdk\common\client\CtpApiRestTemplateSupport;
+use coin\sdk\np\messages\v1\common\Message;
 
 class NumberPortabilityService extends CtpApiRestTemplateSupport
 {
 
     private $apiUrl;
 
-    public function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30) {
+    public function __construct($apiUrl, $consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30) {
         parent::__construct(
             $consumerName,
             $privateKeyFile,
             $encryptedHmacSecretFile,
             $validPeriodInSeconds
         );
-
-        $this->apiUrl = "http://localhost:9010/number-portability/v1";
+        $this->apiUrl = $apiUrl;
     }
 
+    /**
+     * @param Message $message
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
     public function sendMessage($message) {
-        $this->postMessage($message, $message->getMessageType());
+        return $this->postMessage($message, $message->getMessageType());
     }
 
     public function sendConfirmation($id) {
@@ -29,9 +33,9 @@ class NumberPortabilityService extends CtpApiRestTemplateSupport
 //        sendWithToken(String.class, HttpMethod.PUT, url, confirmationMessage);
     }
 
-    public function postMessage($message, $messageType) {
+    private function postMessage($message, $messageType) {
         $url = $this->apiUrl . "/dossiers/" . $messageType;
-        $repsonseBody = parent::sendWithToken("POST", $url, $message);
+        return parent::sendWithToken("POST", $url, $message);
 
         //TODO Error checking
     }

@@ -3,7 +3,6 @@
 namespace coin\sdk\np\service\impl;
 
 use coin\sdk\common\client\CtpApiRestTemplateSupport;
-use coin\sdk\np\messages\v1;
 use function coin\sdk\np\messages\v1\common\deserialize;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\service\sse\Client;
@@ -18,7 +17,6 @@ use GuzzleHttp\Exception\ConnectException;
  */
 class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
 
-    private $consumerName;
     private $sseUri;
     private $backOffPeriod;
     private $numberOfRetries;
@@ -45,7 +43,6 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
     function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $sseUri,
                          $backOffPeriod = 1, $numberOfRetries = 3, $validPeriodInSeconds = 30) {
         parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds);
-        $this->consumerName = $consumerName;
         $this->sseUri = $sseUri;
         $this->backOffPeriod = $backOffPeriod;
         $this->numberOfRetries = $numberOfRetries;

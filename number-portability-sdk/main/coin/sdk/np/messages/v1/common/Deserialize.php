@@ -3,7 +3,13 @@
 namespace coin\sdk\np\messages\v1\common;
 
 use coin\sdk\np\messages\v1;
+use coin\sdk\np\messages\v1\common\Message;
 
+/**
+ * @param $type
+ * @param $message
+ * @return Message
+ */
 function deserialize($type, $message) {
     switch ($type) {
         case "activationsn-v1": return new v1\ActivationServiceNumberEnvelope($message);

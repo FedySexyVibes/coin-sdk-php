@@ -8,10 +8,10 @@ use GuzzleHttp\Client;
 abstract class CtpApiRestTemplateSupport
 {
 
-    var $hmacSecret;
-    var $privateKey;
-    var $consumerName;
-    var $validPeriodInSeconds;
+    protected $hmacSecret;
+    protected $privateKey;
+    protected $consumerName;
+    protected $validPeriodInSeconds;
 
     function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30)
     {

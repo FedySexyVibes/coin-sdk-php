@@ -2,6 +2,10 @@
 
 namespace coin\sdk\np\messages\v1\common;
 
+use coin\sdk\np\messages\v1\Header;
+use coin\sdk\np\messages\v1\Receiver;
+use coin\sdk\np\messages\v1\Sender;
+
 interface IMessageBuilder extends IHeaderBuilder {
 
     public function build();

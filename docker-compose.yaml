@@ -5,7 +5,7 @@ services:
     image: alpine/socat
     command: -u udp-recv:8125 -
     networks:
-      - coin-sdk-php
+      - kong-network
 
   kong-database:
     image: postgres:10-alpine
@@ -18,7 +18,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - coin-sdk-php
+      - kong-network
 
   kong-migration:
     image: 280925583500.dkr.ecr.eu-central-1.amazonaws.com/kong:latest
@@ -37,7 +37,7 @@ services:
       timeout: 5s
       retries: 900
     networks:
-      - coin-sdk-php
+      - kong-network
 
   kong:
     image: 280925583500.dkr.ecr.eu-central-1.amazonaws.com/kong:latest
@@ -55,32 +55,43 @@ services:
     ports:
       - "8000:8000"
       - "8001:8001"
-      - "8444:8444"
     healthcheck:
       test: ["CMD-SHELL", "curl -I -s -L http://127.0.0.1:8000 || exit 1"]
       interval: 5s
       retries: 10
     networks:
-      - coin-sdk-php
+      - kong-network
+
+  api-stub:
+    image: 280925583500.dkr.ecr.eu-central-1.amazonaws.com/crdb/rest-api-stub:latest
+    networks:
+      - kong-network
 
   setup:
-    build: ./test/setup
+    build: ./setup
     volumes:
-      - $PWD/test/setup/:/keys
+      - $PWD/keys:/keys
     environment:
-      - KONG_HOST=kong:8001
+      - KONG_APP_URL=kong:8000
+      - KONG_ADMIN_URL=kong:8001
       - KEYS_LOCATION=/keys
     depends_on:
       kong:
         condition: service_healthy
     networks:
-      - coin-sdk-php
+      - kong-network
 
-  api-stub:
-    image: 280925583500.dkr.ecr.eu-central-1.amazonaws.com/crdb/rest-api-stub:latest
+  coin-sdk:
+    build: .
+    environment:
+      - STUB_HOST_AND_PORT=kong:8000
+    depends_on:
+      kong:
+        condition: service_healthy
+      setup:
+        condition: service_started
     networks:
-      - coin-sdk-php
+      - kong-network
 
 networks:
-  coin-sdk-php:
-
+  kong-network:

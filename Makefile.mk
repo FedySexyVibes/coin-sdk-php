@@ -87,12 +87,5 @@ check-release: .release
 	@. $(RELEASE_SUPPORT) ; tagExists $(TAG) || (echo "ERROR: version not yet tagged in git. make [minor,major,patch]-release." >&2 && exit 1) ;
 	@. $(RELEASE_SUPPORT) ; ! differsFromRelease $(TAG) || (echo "ERROR: current directory differs from tagged $(TAG). make [minor,major,patch]-release." ; exit 1)
 
-clean:
-#	pipenv run python setup.py clean
-	rm -rf build/* dist/*  *.egg-info
-
-clobber: clean
-	rm -rf venv
-
 test:
 

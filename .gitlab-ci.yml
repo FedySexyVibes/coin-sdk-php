@@ -9,10 +9,12 @@ test:
   stage: test
   before_script:
     - aws ecr get-login --no-include-email | sh
+    - ./setup/start-docker-compose
+    - ./setup/setup-kong.sh ./keys
   script:
-    - make test
+    - ./setup/run-tests
   after_script:
-    - make integration-test-clean
+    - ./setup/stop-docker-compose
 
 php publish:
   stage: deploy

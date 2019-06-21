@@ -3,8 +3,9 @@
 namespace coin\sdk\np\service\impl;
 
 use coin\sdk\common\client\CtpApiRestTemplateSupport;
-use function coin\sdk\np\messages\v1\common\deserialize;
+use coin\sdk\common\crypto\CtpApiClientUtil;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
+use coin\sdk\np\ObjectSerializer;
 use coin\sdk\np\service\sse\Client;
 use GuzzleHttp;
 use GuzzleHttp\Exception\ConnectException;
@@ -66,14 +67,18 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
         $this->startReading();
         foreach ($this->events as $event) {
             try {
-                $rawMessage = json_decode($event->getData(), true)->message;
-                $message = deserialize($event->getEventType(), $rawMessage)->getMessage();
-                $id = $event->getId();
-                $listener->onMessage($id, $message);
-                if ($offsetPersister) {
-                    $offsetPersister->setOffset($id);
+                $data = $event->getData();
+                if ($data) {
+                    $class = getClassName($event->getEventType());
+                    $object = json_decode($data)->message;
+                    $message = ObjectSerializer::deserialize($object, $class);
+                    $id = $event->getId();
+                    $listener->onMessage($id, $message);
+                    if ($offsetPersister) {
+                        $offsetPersister->setOffset($id);
+                    }
+                    yield $message;
                 }
-                yield $message;
             } catch(\Exception $exception) {
                 $event->exception = $exception;
                 yield $event;
@@ -82,7 +87,19 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
     }
 
     private function startReading() {
-        $client = new Client($this->createUrl(), []);
+        $url = $this->createUrl();
+        $hmacHeaders = CtpApiClientUtil::getHmacHeaders('');
+        $localPath = parse_url($url, PHP_URL_PATH);
+        $requestLine = "GET $localPath HTTP/1.1";
+        $hmac = CtpApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
+        $jwt = CtpApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
+
+        $client = new Client($url,
+            array_merge($hmacHeaders, array(
+                "Authorization" => $hmac,
+                "User-Agent" => "coin-sdk-php-v0.0.0",
+                'Content-Type' => 'application/json; charset=utf-8',
+                "cookie" => "jwt=$jwt; path=$localPath")));
         $this->retriesLeft = $this->numberOfRetries;
         $this->events = $client->getEvents(function() { $this->onDisconnect(); });
     }
@@ -101,5 +118,32 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
     private function createUrl() {
         return ($this->sseUri)."?offset=$this->offset&confirmationStatus=$this->confirmationStatus".
             (empty($messageTypes) ? "" : "messageTypes=".(implode(",", $messageTypes)));
+    }
+}
+
+
+function getClassName($type) {
+    switch ($type) {
+        case "activationsn-v1": return 'coin\sdk\np\messages\v1\ActivationServiceNumberMessage';
+        case "cancel-v1": return 'coin\sdk\np\messages\v1\CancelMessage';
+        case "deactivation-v1": return 'coin\sdk\np\messages\v1\DeactivationMessage';
+        case "deactivationsn-v1": return 'coin\sdk\np\messages\v1\DeactivationServiceNumberMessage';
+        case "enumactivationnumber-v1": return 'coin\sdk\np\messages\v1\EnumActivationNumberMessage';
+        case "enumactivationoperator-v1": return 'coin\sdk\np\messages\v1\EnumActivationOperatorMessage';
+        case "enumactivationrange-v1": return 'coin\sdk\np\messages\v1\EnumActivationRangeMessage';
+        case "enumdeactivationnumber-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationNumberMessage';
+        case "enumdeactivationoperator-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationOperatorMessage';
+        case "enumdeactivationrange-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationRangeMessage';
+        case "enumprofileactivation-v1": return 'coin\sdk\np\messages\v1\EnumProfileActivationMessage';
+        case "enumprofiledeactivation-v1": return 'coin\sdk\np\messages\v1\EnumProfileDeactivationMessage';
+        case "errorfound-v1": return 'coin\sdk\np\messages\v1\ErrorFoundMessage';
+        case "portingperformed-v1": return 'coin\sdk\np\messages\v1\PortingPerformedMessage';
+        case "portingrequest-v1": return 'coin\sdk\np\messages\v1\PortingRequestMessage';
+        case "portingrequestanswer-v1": return 'coin\sdk\np\messages\v1\PortingRequestAnswerMessage';
+        case "pradelayed-v1": return 'coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage';
+        case "rangeactivation-v1": return 'coin\sdk\np\messages\v1\RangeActivationMessage';
+        case "rangedeactivation-v1": return 'coin\sdk\np\messages\v1\RangeDeactivationMessage';
+        case "tariffchangesn-v1": return 'coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage';
+        default: throw new \UnexpectedValueException("Unknown message type $type");
     }
 }

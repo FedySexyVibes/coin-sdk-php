@@ -33,7 +33,7 @@ class NumberPortabilityService extends CtpApiRestTemplateSupport
 //        sendWithToken(String.class, HttpMethod.PUT, url, confirmationMessage);
     }
 
-    private function postMessage($message, $messageType) {
+    function postMessage($message, $messageType) {
         $url = $this->apiUrl . "/dossiers/" . $messageType;
         return parent::sendWithToken("POST", $url, $message);
 

@@ -2,8 +2,8 @@
 
 namespace coin\sdk\np\service\impl;
 
-use coin\sdk\common\client\CtpApiRestTemplateSupport;
-use coin\sdk\common\crypto\CtpApiClientUtil;
+use coin\sdk\common\client\RestApiClient;
+use coin\sdk\common\crypto\ApiClientUtil;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\ObjectSerializer;
 use coin\sdk\np\service\sse\Client;
@@ -16,7 +16,7 @@ use GuzzleHttp\Exception\ConnectException;
  * @property \coin\sdk\np\service\sse\Event[] events
  * @method int recoverOffset(int $int)
  */
-class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
+class NumberPortabilityMessageConsumer extends RestApiClient {
 
     private $sseUri;
     private $backOffPeriod;
@@ -33,29 +33,29 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
 
     /**
      * NumberPortabilityMessageConsumer constructor.
-     * @param string $consumerName
-     * @param string $privateKeyFile
-     * @param string $encryptedHmacSecretFile
-     * @param string $sseUri
+     * @param string $consumerName [optional]
+     * @param string $privateKeyFile [optional]
+     * @param string $encryptedHmacSecretFile [optional]
+     * @param string $coinBaseUrl [optional]
      * @param int $backOffPeriod [optional]
      * @param int $numberOfRetries [optional]
      * @param int $validPeriodInSeconds [optional]
      */
-    function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $sseUri,
+    function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $coinBaseUrl = null,
                          $backOffPeriod = 1, $numberOfRetries = 3, $validPeriodInSeconds = 30) {
         parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds);
-        $this->sseUri = $sseUri;
+        $this->sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v1/dossiers/events';
         $this->backOffPeriod = $backOffPeriod;
         $this->numberOfRetries = $numberOfRetries;
     }
 
     /**
      * @param INumberPortabilityMessageListener $listener
-     * @param ConfirmationStatus $confirmationStatus
-     * @param int $initialOffset
-     * @param IOffsetPersister $offsetPersister
-     * @param callable $recoverOffset
-     * @param string ...$messageTypes
+     * @param ConfirmationStatus $confirmationStatus [optional]
+     * @param int $initialOffset [optional]
+     * @param IOffsetPersister $offsetPersister [optional]
+     * @param callable $recoverOffset [optional]
+     * @param string ...$messageTypes [optional]
      * @return \Generator
      */
     function getMessages(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,
@@ -64,6 +64,10 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
         $this->recoverOffset = $recoverOffset;
         $this->messageTypes = $messageTypes;
         $this->offset = $initialOffset;
+        /** @noinspection PhpNonStrictObjectEqualityInspection */
+        if ($this->confirmationStatus == ConfirmationStatus::ALL() && $this->offsetPersister == null) {
+            throw new \BadMethodCallException("offsetPersister should be given when confirmationStatus equals ALL");
+        }
         $this->startReading();
         foreach ($this->events as $event) {
             try {
@@ -88,16 +92,16 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
 
     private function startReading() {
         $url = $this->createUrl();
-        $hmacHeaders = CtpApiClientUtil::getHmacHeaders('');
+        $hmacHeaders = ApiClientUtil::getHmacHeaders('');
         $localPath = parse_url($url, PHP_URL_PATH);
         $requestLine = "GET $localPath HTTP/1.1";
-        $hmac = CtpApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
-        $jwt = CtpApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
+        $hmac = ApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
+        $jwt = ApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
 
         $client = new Client($url,
             array_merge($hmacHeaders, array(
                 "Authorization" => $hmac,
-                "User-Agent" => "coin-sdk-php-v0.0.0",
+                "User-Agent" => $this::getFullVersion(),
                 'Content-Type' => 'application/json; charset=utf-8',
                 "cookie" => "jwt=$jwt; path=$localPath")));
         $this->retriesLeft = $this->numberOfRetries;

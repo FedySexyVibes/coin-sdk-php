@@ -7,11 +7,11 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-COPY keys/ ./keys
 COPY composer.json ./
 COPY composer.lock ./
 COPY common-sdk/ ./common-sdk/
 COPY number-portability-sdk/ ./number-portability-sdk/
+COPY keys/ ./keys/
 
 RUN composer install
-CMD ./vendor/bin/phpunit number-portability-sdk/test
+CMD composer run-script test

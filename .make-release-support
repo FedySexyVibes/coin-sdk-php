@@ -39,7 +39,9 @@ function setRelease() {
 	if [ -n "$1" ] ; then
 		sed -i.x -e "s/^tag=.*/tag=$(getTag $1)/" .release
 		sed -i.x -e "s/^release=.*/release=$1/g" .release
+		sed -i.x -e "s/coin-sdk-php-v.\..\../coin-sdk-php-v$1/" $(find common-sdk/coin/sdk/common/client/*.php)
 		rm -f .release.x
+		rm $(find common-sdk/coin/sdk/common/client/*.php.x)
 		runPreTagCommand "$1"
 	else
 		echo "ERROR: missing release version parameter " >&2

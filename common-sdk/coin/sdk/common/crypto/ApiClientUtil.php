@@ -24,7 +24,7 @@ class ApiClientUtil
     public static function getHmacHeaders($body) {
         $hash = base64_encode((new Hash('sha256'))->hash($body ?: ''));
         return array(
-            "x-date" => date(\DateTime::RFC1123),
+            "x-date" => gmdate('D, d M Y H:i:s').' GMT',
             "digest" => "SHA-256=$hash"
         );
     }

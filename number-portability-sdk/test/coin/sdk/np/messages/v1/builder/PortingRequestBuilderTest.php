@@ -20,7 +20,7 @@ class PortingRequestBuilderTest extends TestCase
             ->setDossierId("123456")
             ->setNote("Just a note!")
             ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456")
-            ->addPortingRequestSeq(new PortingRequestSeq([
+            /*->addPortingRequestSeq(new PortingRequestSeq([
                 'numberseries' => new NumberSeries([
                     'start' => '0223456789',
                     'end' => '0987654322'
@@ -42,7 +42,7 @@ class PortingRequestBuilderTest extends TestCase
                     'start' => '0223456789',
                     'end' => '0987654322'
                 ])
-            ]));
+            ]))*/;
         $portingrequest = $builder->build();
 
         echo($portingrequest);

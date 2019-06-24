@@ -25,11 +25,11 @@ class ActivationServiceNumberBuilderTest extends TestCase
                 ->setTariffinfo("2023,50", "1023,50", "0", "2", "1")
                 ->setPop("pop")
                 ->finish()
-            ->addActivationServiceNumberSequence()
+            /*->addActivationServiceNumberSequence()
                 ->setNumberseries("0123456789", "0987654321")
                 ->setTariffinfo("2043,50", "1043,50", "0", "1", "2")
                 ->setPop("pop")
-                ->finish();
+                ->finish()*/;
 
         $activationServiceNumber = $builder->build();
 
@@ -38,12 +38,7 @@ class ActivationServiceNumberBuilderTest extends TestCase
         $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"activationsn"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
 
-        $baseUrl = "http://localhost:9010/number-portability/v1";
-        $consumerName = "loadtest-loada";
-        $privateKeyFile = "../../../../../../../../keys/private-key.pem";
-        $encryptedHmacSecretFile = "../../../../../../../../keys/sharedkey.encrypted";
-
-        $service = new NumberPortabilityService($baseUrl, $consumerName, $privateKeyFile, $encryptedHmacSecretFile);
-        $service->postMessage($activationServiceNumber->getMessage(), $activationServiceNumber->getMessageType());
+        /*$service = new NumberPortabilityService();
+        $service->sendMessage($activationServiceNumber->getMessage());*/
     }
 }

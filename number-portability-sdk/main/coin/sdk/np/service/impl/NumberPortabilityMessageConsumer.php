@@ -2,8 +2,8 @@
 
 namespace coin\sdk\np\service\impl;
 
-use coin\sdk\common\client\CtpApiRestTemplateSupport;
-use coin\sdk\common\crypto\CtpApiClientUtil;
+use coin\sdk\common\client\RestApiClient;
+use coin\sdk\common\crypto\ApiClientUtil;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\ObjectSerializer;
 use coin\sdk\np\service\sse\Client;
@@ -16,7 +16,7 @@ use GuzzleHttp\Exception\ConnectException;
  * @property \coin\sdk\np\service\sse\Event[] events
  * @method int recoverOffset(int $int)
  */
-class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
+class NumberPortabilityMessageConsumer extends RestApiClient {
 
     private $sseUri;
     private $backOffPeriod;
@@ -92,16 +92,16 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
 
     private function startReading() {
         $url = $this->createUrl();
-        $hmacHeaders = CtpApiClientUtil::getHmacHeaders('');
+        $hmacHeaders = ApiClientUtil::getHmacHeaders('');
         $localPath = parse_url($url, PHP_URL_PATH);
         $requestLine = "GET $localPath HTTP/1.1";
-        $hmac = CtpApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
-        $jwt = CtpApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
+        $hmac = ApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
+        $jwt = ApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
 
         $client = new Client($url,
             array_merge($hmacHeaders, array(
                 "Authorization" => $hmac,
-                "User-Agent" => "coin-sdk-php-v0.0.0",
+                "User-Agent" => $this::getFullVersion(),
                 'Content-Type' => 'application/json; charset=utf-8',
                 "cookie" => "jwt=$jwt; path=$localPath")));
         $this->retriesLeft = $this->numberOfRetries;

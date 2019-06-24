@@ -13,7 +13,7 @@ For secure access credentials are required.
     - a consumer name
     - a private key file
     - a file containing the encrypted Hmac secret
-- These can be used to create an instance of (a child class of) `CtpApiRestTemplateSupport`.
+- These can be used to create an instance of (a child class of) the `RestApiClient`.
 If you instantiate it without consumer name etc., the required values will be searched in `$_ENV` and subsequently in `$GLOBALS`
 under the following names:
 

@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 use phpseclib\Crypt\Hash;
 use phpseclib\Crypt\RSA;
 
-class CtpApiClientUtil
+class ApiClientUtil
 {
     public static function readPrivateKeyFile($fileName) {
         $privateKey = file_get_contents($fileName);

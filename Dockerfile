@@ -10,9 +10,8 @@ WORKDIR /app
 COPY composer.json ./
 COPY composer.lock ./
 COPY common-sdk/ ./common-sdk/
-COPY phpunit.xml.dist ./
 COPY number-portability-sdk/ ./number-portability-sdk/
-COPY keys/ ./keys
+COPY keys/ ./keys/
 
 RUN composer install
-CMD ./vendor/bin/phpunit number-portability-sdk/test
+CMD composer run-script test

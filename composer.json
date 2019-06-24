@@ -21,8 +21,11 @@
     "phpunit/phpunit": "^8.0"
   },
   "scripts": {
-      "test": [
-          "./vendor/bin/phpunit test --bootstrap test/bootstrap.php"
-      ]
+    "test": [
+      "./vendor/bin/phpunit number-portability-sdk/test --bootstrap number-portability-sdk/test/bootstrap.php"
+    ],
+    "samples": [
+      "./vendor/bin/phpunit number-portability-sdk-samples/test --bootstrap number-portability-sdk-samples/bootstrap.php"
+    ]
   }
 }

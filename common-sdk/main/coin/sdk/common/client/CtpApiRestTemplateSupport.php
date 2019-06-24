@@ -13,11 +13,11 @@ abstract class CtpApiRestTemplateSupport
     protected $consumerName;
     protected $validPeriodInSeconds;
 
-    function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30)
+    function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $validPeriodInSeconds = 30)
     {
-        $this->privateKey = CtpApiClientUtil::readPrivateKeyFile($privateKeyFile);
-        $this->hmacSecret = CtpApiClientUtil::hmacSecretFromEncryptedFile($encryptedHmacSecretFile, $this->privateKey);
-        $this->consumerName = $consumerName;
+        $this->privateKey = CtpApiClientUtil::readPrivateKeyFile($privateKeyFile ?: @$_ENV['PRIVATE_KEY_FILE'] ?: $GLOBALS['PrivateKeyFile']);
+        $this->hmacSecret = CtpApiClientUtil::hmacSecretFromEncryptedFile($encryptedHmacSecretFile ?: @$_ENV['ENCRYPTED_HMAC_SECRET_FILE'] ?: $GLOBALS['EncryptedHmacSecretFile'], $this->privateKey);
+        $this->consumerName = $consumerName ?: @$_ENV['CONSUMER_NAME'] ?: $GLOBALS['ConsumerName'];
         $this->validPeriodInSeconds = $validPeriodInSeconds;
     }
 

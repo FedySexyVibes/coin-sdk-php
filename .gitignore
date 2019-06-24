@@ -5,3 +5,4 @@ vendor/*
 *.pem
 *.encrypted
 *.pem.pub
+.phpunit.*

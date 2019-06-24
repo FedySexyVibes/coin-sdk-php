@@ -33,29 +33,29 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
 
     /**
      * NumberPortabilityMessageConsumer constructor.
-     * @param string $consumerName
-     * @param string $privateKeyFile
-     * @param string $encryptedHmacSecretFile
-     * @param string $sseUri
+     * @param string $consumerName [optional]
+     * @param string $privateKeyFile [optional]
+     * @param string $encryptedHmacSecretFile [optional]
+     * @param string $coinBaseUrl [optional]
      * @param int $backOffPeriod [optional]
      * @param int $numberOfRetries [optional]
      * @param int $validPeriodInSeconds [optional]
      */
-    function __construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $sseUri,
+    function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $coinBaseUrl = null,
                          $backOffPeriod = 1, $numberOfRetries = 3, $validPeriodInSeconds = 30) {
         parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds);
-        $this->sseUri = $sseUri;
+        $this->sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v1/dossiers/events';
         $this->backOffPeriod = $backOffPeriod;
         $this->numberOfRetries = $numberOfRetries;
     }
 
     /**
      * @param INumberPortabilityMessageListener $listener
-     * @param ConfirmationStatus $confirmationStatus
-     * @param int $initialOffset
-     * @param IOffsetPersister $offsetPersister
-     * @param callable $recoverOffset
-     * @param string ...$messageTypes
+     * @param ConfirmationStatus $confirmationStatus [optional]
+     * @param int $initialOffset [optional]
+     * @param IOffsetPersister $offsetPersister [optional]
+     * @param callable $recoverOffset [optional]
+     * @param string ...$messageTypes [optional]
      * @return \Generator
      */
     function getMessages(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,

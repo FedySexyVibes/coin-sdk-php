@@ -8,14 +8,14 @@ class NumberPortabilityService extends CtpApiRestTemplateSupport
 
     private $apiUrl;
 
-    public function __construct($apiUrl, $consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds = 30) {
+    public function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $validPeriodInSeconds = 30, $coinBaseUrl = null) {
         parent::__construct(
             $consumerName,
             $privateKeyFile,
             $encryptedHmacSecretFile,
             $validPeriodInSeconds
         );
-        $this->apiUrl = $apiUrl;
+        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v1';
     }
 
     /**

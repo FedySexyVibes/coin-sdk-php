@@ -1,12 +1,15 @@
 <?php
 
 
-namespace coin\sdk\np\messages\v1\cancel;
+namespace coin\sdk\np\messages\v1\builder;
 
-use Message;
-use MessageType;
-use np\messages\v1\common\Header;
-use np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\Cancel;
+use coin\sdk\np\messages\v1\CancelBody;
+use coin\sdk\np\messages\v1\CancelMessage;
+use coin\sdk\np\messages\v1\common\Message;
+use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\MessageType;
+use coin\sdk\np\messages\v1\Header;
 
 class CancelBuilder extends MessageBuilder
 {

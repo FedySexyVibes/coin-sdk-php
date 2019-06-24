@@ -6,9 +6,27 @@ use coin\sdk\np\ObjectSerializer;
 
 abstract class MessageType
 {
+    const ACTIVATION_SERVICE_NUMBER = "activationsn";
     const CANCEL = "cancel";
-    const PORTINGREQUEST = "portingrequest";
-    // etc.
+    const CONFIRMATION = "confirmations";
+    const DEACTIVATION = "deactivation";
+    const DEACTIVATION_SERVICE_NUMBER = "deactivationsn";
+    const ENUM_ACTIVATION_NUMBER = "enumactivationnumber";
+    const ENUM_ACTIVATION_OPERATOR = "enumactivationoperator";
+    const ENUM_ACTIVATION_RANGE = "enumactivationrange";
+    const ENUM_DEACTIVATION_NUMBER = "enumdeactivationnumber";
+    const ENUM_DEACTIVATION_OPERATOR = "enumdeactivationoperator";
+    const ENUM_DEACTIVATION_RANGE = "enumdeactivationrange";
+    const ENUM_PROFILE_ACTIVATION = "enumprofileactivation";
+    const ENUM_PROFILE_DEACTIVATION = "enumprofiledeactivation";
+    const ERROR_FOUND = "errorfound";
+    const PORTING_PERFORMED = "portingperformed";
+    const PORTING_REQUEST = "portingrequest";
+    const PORTING_REQUEST_ANSWER = "portingrequestanswer";
+    const PORTING_REQUEST_ANSWER_DELAYED = "pradelayed";
+    const RANGE_ACTIVATION = "rangeactivation";
+    const RANGE_DEACTIVATION = "rangedeactivation";
+    const TARIFF_CHANGE_SERVICE_NUMNER = "tariffchangesn";
 }
 
 class Message {

@@ -1,6 +1,6 @@
 {
-  "name": "coin/common-sdk",
-  "description": "",
+  "name": "coin/sdk",
+  "description": "sdk for coin's rest apis",
   "minimum-stability": "stable",
   "license": "proprietary",
   "autoload": {
@@ -10,6 +10,7 @@
     ]
   },
   "require": {
+    "php": ">=5.6",
     "phpseclib/phpseclib": "2.0.18",
     "ext-mbstring": "^7.2",
     "firebase/php-jwt": "^5.0",

@@ -21,6 +21,6 @@ class TestListener implements INumberPortabilityMessageListener
 
     function onMessage($messageId, $message)
     {
-        echo $message;
+        echo "\nTestListener received the following message:\n$message\n";
     }
 }

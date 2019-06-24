@@ -28,7 +28,7 @@ abstract class CtpApiRestTemplateSupport
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function SendWithToken($method, $url, $content = null)
+    protected function sendWithToken($method, $url, $content = null)
     {
         $client = new Client();
         $hmacHeaders = CtpApiClientUtil::getHmacHeaders($content);

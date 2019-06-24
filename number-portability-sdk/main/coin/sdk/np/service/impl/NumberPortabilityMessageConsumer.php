@@ -64,6 +64,10 @@ class NumberPortabilityMessageConsumer extends CtpApiRestTemplateSupport {
         $this->recoverOffset = $recoverOffset;
         $this->messageTypes = $messageTypes;
         $this->offset = $initialOffset;
+        /** @noinspection PhpNonStrictObjectEqualityInspection */
+        if ($this->confirmationStatus == ConfirmationStatus::ALL() && $this->offsetPersister == null) {
+            throw new \BadMethodCallException("offsetPersister should be given when confirmationStatus equals ALL");
+        }
         $this->startReading();
         foreach ($this->events as $event) {
             try {

@@ -2,6 +2,7 @@
 
 use coin\sdk\common\client\CtpApiRestTemplateSupport;
 use coin\sdk\np\messages\v1\common\Message;
+use coin\sdk\np\messages\v1\ConfirmationMessage;
 
 class NumberPortabilityService extends CtpApiRestTemplateSupport
 {
@@ -21,22 +22,30 @@ class NumberPortabilityService extends CtpApiRestTemplateSupport
     /**
      * @param Message $message
      * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function sendMessage($message) {
-        return $this->postMessage($message, $message->getMessageType());
+        return $this->postMessage($message->__toString(), $message->getMessageType());
     }
 
+    /** @param int $id
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function sendConfirmation($id) {
-        // TODO Enable the sendConfirmation message!
-//        $confirmationMessage = new ConfirmationMessage().transactionId(id);
-//        $url = this$apiUrl + "/dossiers/" + MessageType.CONFIRMATION_V1.getType() + "/" + id;
-//        sendWithToken(String.class, HttpMethod.PUT, url, confirmationMessage);
+        $confirmationMessage = (new ConfirmationMessage())->setTransactionId(strval($id));
+        $url = "$this->apiUrl/dossiers/confirmations/$id";
+        return $this->sendWithToken('PUT', $url, $confirmationMessage->__toString());
     }
 
-    function postMessage($message, $messageType) {
+    /**
+     * @param $message
+     * @param $messageType
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    private function postMessage($message, $messageType) {
         $url = $this->apiUrl . "/dossiers/" . $messageType;
-        return parent::sendWithToken("POST", $url, $message);
-
-        //TODO Error checking
+        return $this->sendWithToken("POST", $url, '{"message":'.$message.'}');
     }
 }

@@ -1,11 +1,11 @@
 {
   "name": "coin/sdk",
-  "description": "sdk for coin's rest apis",
+  "description": "SDK for Vereniging COIN's REST APIs",
   "minimum-stability": "stable",
   "license": "proprietary",
   "autoload": {
     "classmap": [
-      "common-sdk/",
+      "common-sdk",
       "number-portability-sdk"
     ]
   },

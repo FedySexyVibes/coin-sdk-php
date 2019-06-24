@@ -3,7 +3,8 @@
 ## Introduction
 
 The PHP Common SDK contains the basics for secured access to all COIN APIs.
-It contains no specific API implementation.
+It contains no specific API implementation. Together with all other SDKs in this git repository it is published on
+[packagist](https://packagist.org/packages/coin/sdk).
 
 ## Configure Credentials
 

@@ -40,10 +40,10 @@ abstract class CtpApiRestTemplateSupport
         return $client->request($method, $url, [
             'body' => $content,
             'headers' => array_merge($hmacHeaders, array(
-                "authorization" => $hmac,
+                "Authorization" => $hmac,
                 "User-Agent" => "coin-sdk-php-v0.0.0",
-                'content-type' => 'application/json',
-                "Cookie" => "jwt=$jwt")
+                'Content-Type' => 'application/json; charset=utf-8',
+                "cookie" => "jwt=$jwt; path=$localPath")
             )
         ]);
 

@@ -8,14 +8,15 @@ class NumberPortabilityMessageConsumerTest extends TestCase
 {
     public function test()
     {
-        $baseUrl = "http://kong:8000/number-portability/v1";
+        $sseUrl = "http://kong:8000/number-portability/v1/dossiers/events";
         $consumerName = "loadtest-loada";
         $privateKeyFile = "keys/private-key.pem";
         $encryptedHmacSecretFile = "keys/sharedkey.encrypted";
 
-        $consumer = new NumberPortabilityMessageConsumer($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $baseUrl);
+        $consumer = new NumberPortabilityMessageConsumer($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $sseUrl);
         $listener = new TestListener();
         $messages = $consumer->getMessages($listener);
+        sleep(1);
         $messages->next();
     }
 }

@@ -41,8 +41,27 @@ under the following names:
 
 ## Send Messages
 
-The `NumberPortabilityService` has a `sendMessage` method to send any number portability message to the API.
+The `NumberPortabilityService` has a `sendMessage` method to send any number portability message to the API. The Number Portability SDK contains Builders to construct the various messages. If there are sequnences in the message
+than there is an add method to add an instance. Each instance should be ended with the finish() method.
 
+```php
+        $builder = PortingRequestBuilder::create();
+        $builder
+            ->setFullHeader("LOADA", "LOADA", "LOADB", "LOADB")
+            ->setTimestamp(date("Ymdhis", time()))
+            ->setDossierId("123456")
+            ->setNote("Just a note!")
+            ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456")
+            ->addActivationServiceNumberSequence()
+                ->setNumberSeries("0611111111", "0611111112")
+                ->setProfileIds(["PROF1", "PROF2"]) // optional
+                ->finish()
+            ->addActivationServiceNumberSequence()
+                ->setNumberSeries("0622222222", "0622222223")
+                ->setProfileIds(["PROF1", "PROF2"]) // optional
+                ->finish();
+        $portingrequest = $builder->build();
+```
 
 ## Consume Messages
 

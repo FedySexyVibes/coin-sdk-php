@@ -32,9 +32,7 @@ class ApiClientUtil
     public static function CalculateHttpRequestHmac($hmacSecret, $consumerName, array $hmacHeaders, $requestLine) {
         $headerKeys = array_keys($hmacHeaders);
         $message = implode("\n", array_map(function($key, $val) {return "$key: $val";}, $headerKeys, $hmacHeaders))."\n".$requestLine;
-        $hasher = new Hash('sha256');
-        $hasher->setKey($hmacSecret);
-        $signature = utf8_decode(base64_encode($hasher->hash($message)));
+        $signature = utf8_decode(base64_encode(hash_hmac('sha256', $message, $hmacSecret, true)));
         $joinedHeaders = implode(" ", $headerKeys);
         return "hmac username=\"$consumerName\", algorithm=\"hmac-sha256\", headers=\"$joinedHeaders request-line\", signature=\"$signature\"";
     }

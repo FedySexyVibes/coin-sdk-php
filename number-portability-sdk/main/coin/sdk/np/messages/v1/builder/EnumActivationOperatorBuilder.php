@@ -10,11 +10,14 @@ use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\EnumActivationOperatorBody;
 use coin\sdk\np\messages\v1\EnumActivationOperatorMessage;
 use coin\sdk\np\messages\v1\EnumContent;
+use coin\sdk\np\messages\v1\EnumOperatorContent;
+use coin\sdk\np\messages\v1\EnumOperatorRepeats;
 use coin\sdk\np\messages\v1\Header;
 
 class EnumActivationOperatorBuilder extends MessageBuilder
 {
-    private $enumContent;
+    private $enumOperatorContent;
+    private $repeats;
 
     public function getThis()
     {
@@ -23,8 +26,9 @@ class EnumActivationOperatorBuilder extends MessageBuilder
 
     protected function __construct() {
         parent::__construct();
-        $this->enumContent = new EnumContent();
+        $this->enumOperatorContent = new EnumOperatorContent();
         $this->header = new Header();
+        $this->repeats = array();
     }
 
     public static function create()
@@ -35,27 +39,36 @@ class EnumActivationOperatorBuilder extends MessageBuilder
 
 
     public function setCurrentNetworkOperator($currentNetworkOperator) {
-        $this->enumContent->setCurrentnetworkoperator($currentNetworkOperator);
+        $this->enumOperatorContent->setCurrentnetworkoperator($currentNetworkOperator);
         return $this;
     }
 
     public function setDossierId($dossierId) {
-        $this->enumContent->setDossierId($dossierId);
+        $this->enumOperatorContent->setDossierId($dossierId);
         return $this;
     }
 
     public function setTypeOfNumber($typeOfNumber) {
-        $this->enumContent->setTypeofnumber($typeOfNumber);
+        $this->enumOperatorContent->setTypeofnumber($typeOfNumber);
         return $this;
     }
 
-    // TODO Add Repeats
+    public function addEnumOperatorSequence() {
+        return new EnumOperatorContentBuilder($this);
+    }
+
+    public function addRepeatsItem($repeatsItem) {
+        array_push($this->repeats, new EnumOperatorRepeats(["seq" => $repeatsItem]));
+    }
 
     public function build() {
+        if (sizeof($this->repeats, 0) > 0) {
+            $this->enumOperatorContent->setRepeats($this->repeats);
+        }
         $enumActivationOperatorMessage = new EnumActivationOperatorMessage();
         $enumActivationOperatorMessage->setHeader($this->header);
         $enumActivationOperatorBody = new EnumActivationOperatorBody();
-        $enumActivationOperatorMessage->setBody($enumActivationOperatorBody->setEnumactivationoperator($this->enumContent));
+        $enumActivationOperatorMessage->setBody($enumActivationOperatorBody->setEnumactivationoperator($this->enumOperatorContent));
         return new Message($enumActivationOperatorMessage, MessageType::ENUM_ACTIVATION_OPERATOR);
     }
 }

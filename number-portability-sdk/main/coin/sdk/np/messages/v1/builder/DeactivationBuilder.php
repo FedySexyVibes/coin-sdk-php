@@ -10,11 +10,13 @@ use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Deactivation;
 use coin\sdk\np\messages\v1\DeactivationBody;
 use coin\sdk\np\messages\v1\DeactivationMessage;
+use coin\sdk\np\messages\v1\DeactivationRepeats;
 use coin\sdk\np\messages\v1\Header;
 
 class DeactivationBuilder extends MessageBuilder
 {
     private $deactivation;
+    private $repeats;
 
     public function getThis()
     {
@@ -25,6 +27,7 @@ class DeactivationBuilder extends MessageBuilder
         parent::__construct();
         $this->deactivation = new Deactivation();
         $this->header = new Header();
+        $this->repeats = array();
     }
 
     public static function create()
@@ -48,9 +51,19 @@ class DeactivationBuilder extends MessageBuilder
         return $this;
     }
 
-    // TODO Add Repeats
+    public function addDeactivationSequence() {
+        return new DeactivationSequenceBuilder($this);
+    }
+
+    public function addRepeatsItem($repeatsItem) {
+        array_push($this->repeats, new DeactivationRepeats(["seq" => $repeatsItem]));
+    }
+
 
     public function build() {
+        if (count($this->repeats) > 0) {
+            $this->deactivation->setRepeats($this->repeats);
+        }
         $deactivationMessage = new DeactivationMessage();
         $deactivationMessage->setHeader($this->header);
         $deactivationBody = new DeactivationBody();

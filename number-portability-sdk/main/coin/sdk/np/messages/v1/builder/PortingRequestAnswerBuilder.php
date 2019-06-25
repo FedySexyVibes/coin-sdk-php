@@ -33,11 +33,28 @@ class PortingRequestAnswerSequenceBuilder {
         return $this;
     }
 
-    public function setProfileIds($profileIds) {
-        $enumRepeats = new EnumRepeatsBuilder();
-        $enumRepeats->setProfileIds($profileIds);
-        $this->portingRequestAnswerSequence->setRepeats($enumRepeats->build());
+    public function setNote($note) {
+        $this->portingRequestAnswerSequence->setNote($note);
+        return $this;
+    }
 
+    public function setFirstPossibleDate($firstPossibleDate) {
+        $this->portingRequestAnswerSequence->setFirstpossibledate($firstPossibleDate);
+        return $this;
+    }
+
+    public function setBlockingCode($blockingCode) {
+        $this->portingRequestAnswerSequence->setBlockingcode($blockingCode);
+        return $this;
+    }
+
+    public function setDonorNetworkOperator($donorNetworkOperator) {
+        $this->portingRequestAnswerSequence->setDonornetworkoperator($donorNetworkOperator);
+        return $this;
+    }
+
+    public function setDonorServiceProvider($donorServiceProvider) {
+        $this->portingRequestAnswerSequence->setDonorserviceprovider($donorServiceProvider);
         return $this;
     }
 
@@ -80,7 +97,7 @@ class PortingRequestAnswerBuilder extends MessageBuilder
         return $this;
     }
 
-    public function addActivationServiceNumberSequence() {
+    public function addPortingRequestAnswerSequence() {
         return new PortingRequestAnswerSequenceBuilder($this);
     }
 
@@ -90,6 +107,9 @@ class PortingRequestAnswerBuilder extends MessageBuilder
 
 
     public function build() {
+        if (sizeof($this->repeats, 0) > 0) {
+            $this->portingRequestAnswer->setRepeats($this->repeats);
+        }
         $portingRequestAnswerMessage = new PortingRequestAnswerMessage();
         $portingRequestAnswerMessage->setHeader($this->header);
         $portingRequestAnswerBody = new PortingRequestAnswerBody();

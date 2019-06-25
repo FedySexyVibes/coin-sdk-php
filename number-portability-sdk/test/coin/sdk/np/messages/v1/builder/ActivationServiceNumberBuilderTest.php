@@ -24,12 +24,7 @@ class ActivationServiceNumberBuilderTest extends TestCase
                 ->setNumberseries("0123456789", "0987654321")
                 ->setTariffinfo("2023,50", "1023,50", "0", "2", "1")
                 ->setPop("pop")
-                ->finish()
-            /*->addActivationServiceNumberSequence()
-                ->setNumberseries("0123456789", "0987654321")
-                ->setTariffinfo("2043,50", "1043,50", "0", "1", "2")
-                ->setPop("pop")
-                ->finish()*/;
+                ->finish();
 
         $activationServiceNumber = $builder->build();
 
@@ -37,8 +32,5 @@ class ActivationServiceNumberBuilderTest extends TestCase
 
         $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"activationsn"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
-
-        /*$service = new NumberPortabilityService();
-        $service->sendMessage($activationServiceNumber->getMessage());*/
     }
 }

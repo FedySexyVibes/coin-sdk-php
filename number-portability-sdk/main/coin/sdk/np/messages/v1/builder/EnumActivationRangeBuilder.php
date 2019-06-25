@@ -10,11 +10,13 @@ use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\EnumActivationRangeBody;
 use coin\sdk\np\messages\v1\EnumActivationRangeMessage;
 use coin\sdk\np\messages\v1\EnumContent;
+use coin\sdk\np\messages\v1\EnumNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
 class EnumActivationRangeBuilder extends MessageBuilder
 {
     private $enumContent;
+    private $repeats;
 
     public function getThis()
     {
@@ -25,6 +27,7 @@ class EnumActivationRangeBuilder extends MessageBuilder
         parent::__construct();
         $this->enumContent = new EnumContent();
         $this->header = new Header();
+        $this->repeats = array();
     }
 
     public static function create()
@@ -49,9 +52,18 @@ class EnumActivationRangeBuilder extends MessageBuilder
         return $this;
     }
 
-    // TODO Add Repeats
+    public function addEnumNumberSequence() {
+        return new EnumContentBuilder($this);
+    }
+
+    public function addRepeatsItem($repeatsItem) {
+        array_push($this->repeats, new EnumNumberRepeats(["seq" => $repeatsItem]));
+    }
 
     public function build() {
+        if (sizeof($this->repeats, 0) > 0) {
+            $this->enumContent->setRepeats($this->repeats);
+        }
         $enumActivationRangeMessage = new EnumActivationRangeMessage();
         $enumActivationRangeMessage->setHeader($this->header);
         $enumActivationRangeBody = new EnumActivationRangeBody();

@@ -6,8 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class PortingRequestAnswerDelayedBuilderTest extends TestCase
 {
-
-    public function testBuildPortingRequestAnswerDelayedMessage()
+    public function testBuild()
     {
         date_default_timezone_set('Europe/Amsterdam');
         $builder = PortingRequestAnswerDelayedBuilder::create();

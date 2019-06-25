@@ -16,11 +16,16 @@ class DeactivationBuilderTest extends TestCase
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
             ->setCurrentNetworkOperator("TEST02")
-            ->setOriginalNetworkOperator("TEST01");
+            ->setOriginalNetworkOperator("TEST01")
+            ->addDeactivationSequence()
+                ->setNumberSeries("0123456789", "0987654321")
+                ->finish();
 
-        $activationServiceNumber = $builder->build();
+        $deactivation = $builder->build();
 
-        $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
-        $this->assertStringContainsString('"body":{"deactivation"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
+        echo($deactivation);
+
+        $this->assertStringStartsWith("{\"message\"", $deactivation->__toString(), "Message should start with message declaration");
+        $this->assertStringContainsString('"body":{"deactivation"', $deactivation->__toString(), "Message should contain a body with a pradelayed declaration");
     }
 }

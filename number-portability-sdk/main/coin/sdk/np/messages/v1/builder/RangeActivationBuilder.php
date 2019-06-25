@@ -4,6 +4,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 
+use coin\sdk\np\messages\v1\ActivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
@@ -15,6 +16,7 @@ use coin\sdk\np\messages\v1\RangeContent;
 class RangeActivationBuilder extends MessageBuilder
 {
     private $rangeContent;
+    private $repeats;
 
     public function getThis()
     {
@@ -25,6 +27,7 @@ class RangeActivationBuilder extends MessageBuilder
         parent::__construct();
         $this->rangeContent = new RangeContent();
         $this->header = new Header();
+        $this->repeats = array();
     }
 
     public static function create()
@@ -53,10 +56,20 @@ class RangeActivationBuilder extends MessageBuilder
         return $this;
     }
 
-    // TODO Add Repeats
+    public function addActivationServiceNumberSequence() {
+        return new ActivationServiceNumberSequenceBuilder($this);
+    }
+
+    public function addRepeatsItem($repeatsItem) {
+        array_push($this->repeats, new ActivationServiceNumberRepeats(["seq" => $repeatsItem]));
+    }
 
     public function build()
     {
+        if (count($this->repeats) > 0) {
+            $this->rangeContent->setRepeats($this->repeats);
+        }
+
         $rangeActivationMessage = new RangeActivationMessage();
         $rangeActivationMessage->setHeader($this->header);
         $rangeActivationBody = new RangeActivationBody();

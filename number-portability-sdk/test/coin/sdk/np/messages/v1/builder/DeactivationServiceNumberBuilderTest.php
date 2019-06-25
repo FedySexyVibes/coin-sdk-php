@@ -16,12 +16,17 @@ class DeactivationServiceNumberBuilderTest extends TestCase
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
             ->setPlannedDateTime(date("Ymdhis", time()))
-            ->setPlatformProvider("TEST01");
+            ->setPlatformProvider("TEST02")
+            ->addDeactivationServiceNumberSequence()
+                ->setNumberseries("0123456789", "0987654321")
+                ->setPop("pop")
+                ->finish();
 
-        $activationServiceNumber = $builder->build();
+        $deactivationServiceNumber = $builder->build();
 
-        $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
-        $this->assertStringContainsString('"body":{"deactivationsn"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
+        echo($deactivationServiceNumber);
+
+        $this->assertStringStartsWith("{\"message\"", $deactivationServiceNumber->__toString(), "Message should start with message declaration");
+        $this->assertStringContainsString('"body":{"deactivationsn"', $deactivationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
     }
-
 }

@@ -10,11 +10,13 @@ use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\DeactivationServiceNumber;
 use coin\sdk\np\messages\v1\DeactivationServiceNumberBody;
 use coin\sdk\np\messages\v1\DeactivationServiceNumberMessage;
+use coin\sdk\np\messages\v1\DeactivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
 class DeactivationServiceNumberBuilder extends MessageBuilder
 {
     private $deactivationServiceNumber;
+    private $repeats;
 
     public function getThis()
     {
@@ -25,6 +27,7 @@ class DeactivationServiceNumberBuilder extends MessageBuilder
         parent::__construct();
         $this->deactivationServiceNumber = new DeactivationServiceNumber();
         $this->header = new Header();
+        $this->repeats = array();
     }
 
     public static function create()
@@ -48,9 +51,18 @@ class DeactivationServiceNumberBuilder extends MessageBuilder
         return $this;
     }
 
-    // TODO Add Repeats
+    public function addDeactivationServiceNumberSequence() {
+        return new DeactivationServiceNumberSequenceBuilder($this);
+    }
+
+    public function addRepeatsItem($repeatsItem) {
+        array_push($this->repeats, new DeactivationServiceNumberRepeats(["seq" => $repeatsItem]));
+    }
 
     public function build() {
+        if (count($this->repeats) > 0) {
+            $this->deactivationServiceNumber->setRepeats($this->repeats);
+        }
         $deactivationServiceNumberMessage = new DeactivationServiceNumberMessage();
         $deactivationServiceNumberMessage->setHeader($this->header);
         $deactivationServiceNumberBody = new DeactivationServiceNumberBody();

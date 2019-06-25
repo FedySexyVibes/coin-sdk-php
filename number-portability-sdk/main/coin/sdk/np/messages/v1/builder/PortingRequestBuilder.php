@@ -70,7 +70,6 @@ class PortingRequestSequenceBuilder {
 class PortingRequestBuilder extends MessageBuilder
 {
     private $portingrequest;
-    private $portingrequestrepeats;
     private $repeats;
 
     public function getThis()
@@ -135,7 +134,6 @@ class PortingRequestBuilder extends MessageBuilder
         return $this;
     }
 
-    // TODO Refactor the sequence
     public function addActivationServiceNumberSequence() {
         return new PortingRequestSequenceBuilder($this);
     }

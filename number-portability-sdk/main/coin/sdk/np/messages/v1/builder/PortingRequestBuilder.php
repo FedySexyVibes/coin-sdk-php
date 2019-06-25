@@ -16,12 +16,15 @@ use coin\sdk\np\messages\v1\PortingRequestMessage;
 use coin\sdk\np\messages\v1\PortingRequestRepeats;
 use coin\sdk\np\messages\v1\PortingRequestSeq;
 
+/**
+ * @property PortingRequestBuilder parent
+ */
 class PortingRequestSequenceBuilder {
 
     private $portingRequestSequence;
     private $parent;
 
-    public function __construct($parent) {
+    public function __construct(PortingRequestBuilder $parent) {
         $this->parent = $parent;
         $this->portingRequestSequence = new PortingRequestSeq();
     }
@@ -115,7 +118,7 @@ class PortingRequestBuilder extends MessageBuilder
         return $this;
     }
 
-    public function addActivationServiceNumberSequence() {
+    public function addPortingRequestSequence() {
         return new PortingRequestSequenceBuilder($this);
     }
 

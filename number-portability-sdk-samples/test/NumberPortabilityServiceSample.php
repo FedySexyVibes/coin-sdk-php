@@ -1,14 +1,6 @@
 <?php
 
-use coin\sdk\np\messages\v1\Header;
-use coin\sdk\np\messages\v1\NumberSeries;
-use coin\sdk\np\messages\v1\PortingRequest;
-use coin\sdk\np\messages\v1\PortingRequestBody;
-use coin\sdk\np\messages\v1\PortingRequestMessage;
-use coin\sdk\np\messages\v1\PortingRequestRepeats;
-use coin\sdk\np\messages\v1\PortingRequestSeq;
-use coin\sdk\np\messages\v1\Receiver;
-use coin\sdk\np\messages\v1\Sender;
+use coin\sdk\np\messages\v1\builder\PortingRequestBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,25 +23,14 @@ class NumberPortabilityServiceSample extends TestCase
     public function testSendMessage()
     {
         $randomId = rand(1000, 9999);
-        $message =
-            (new tempMessage())
-                ->setHeader((new Header())
-                    ->setSender((new Sender())
-                        ->setNetworkoperator($this->operator))
-                    ->setReceiver((new Receiver())
-                        ->setNetworkoperator('CRDB'))
-                    ->setTimestamp('20190624090101'))
-                ->setBody((new PortingRequestBody())
-                    ->setPortingrequest((new PortingRequest())
-                        ->setDossierid("$this->operator-$randomId")
-                        ->setRecipientnetworkoperator($this->operator)
-                        ->setRepeats([
-                            (new PortingRequestRepeats())
-                                ->setSeq((new PortingRequestSeq())
-                                    ->setNumberseries((new NumberSeries())
-                                        ->setStart('0612345678')
-                                        ->setEnd('0612345678')))
-                        ])));
+        $message = PortingRequestBuilder::create()
+                ->setHeader($this->operator, 'CRDB')
+                ->setDossierId("$this->operator-$randomId")
+                ->setRecipientnetworkoperator($this->operator)
+                ->addPortingRequestSequence()
+                    ->setNumberSeries('0612345678', '0612345678')
+                    ->finish()
+                ->build();
         echo "\n\nsending message:\n".$message->__toString();
         $response = $this->service->sendMessage($message);
         echo "\n\nresponse status code: ".$response->getStatusCode();
@@ -63,11 +44,5 @@ class NumberPortabilityServiceSample extends TestCase
         $response = $this->service->sendConfirmation($randomId);
         echo "\n\nresponse status code: ".$response->getStatusCode();
         echo "\nresponse body: ".$response->getBody();
-    }
-}
-
-class tempMessage extends PortingRequestMessage {
-    function getMessageType() {
-        return 'portingrequest';
     }
 }

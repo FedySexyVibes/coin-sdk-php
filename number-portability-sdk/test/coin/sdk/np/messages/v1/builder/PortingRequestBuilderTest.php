@@ -20,7 +20,7 @@ class PortingRequestBuilderTest extends TestCase
             ->setDossierId("123456")
             ->setNote("Just a note!")
             ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456")
-            ->addActivationServiceNumberSequence()
+            ->addPortingRequestSequence()
                 ->setNumberSeries("01234567789", "01234567789")
                 ->setProfileIds(["PROF1", "PROF2"])
                 ->finish()

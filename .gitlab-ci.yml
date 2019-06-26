@@ -3,7 +3,6 @@ variables:
 
 stages:
   - test
-  - deploy
 
 test:
   stage: test
@@ -15,14 +14,3 @@ test:
     - ./setup/run-tests
   after_script:
     - ./setup/stop-docker-compose
-
-php publish:
-  stage: deploy
-  before_script:
-    - aws ecr get-login --no-include-email | sh
-  only:
-    - nowhere
-  except:
-    - schedules
-  script:
-    - make snapshot

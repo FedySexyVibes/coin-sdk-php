@@ -1,5 +1,7 @@
 <?php
 
+namespace coin\sdk\np\service\impl;
+
 use coin\sdk\common\client\RestApiClient;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\ConfirmationMessage;

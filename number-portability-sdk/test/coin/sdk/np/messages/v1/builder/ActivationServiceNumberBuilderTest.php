@@ -28,8 +28,6 @@ class ActivationServiceNumberBuilderTest extends TestCase
 
         $activationServiceNumber = $builder->build();
 
-        echo($activationServiceNumber);
-
         $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"activationsn"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
     }

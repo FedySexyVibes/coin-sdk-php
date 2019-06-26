@@ -30,8 +30,6 @@ class PortingRequestBuilderTest extends TestCase
                 ->finish();
         $portingrequest = $builder->build();
 
-        echo($portingrequest);
-
         $this->assertStringStartsWith("{\"message\"", $portingrequest->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"portingrequest"', $portingrequest->__toString(), "Message should contain a body with a cancel declaration");
     }

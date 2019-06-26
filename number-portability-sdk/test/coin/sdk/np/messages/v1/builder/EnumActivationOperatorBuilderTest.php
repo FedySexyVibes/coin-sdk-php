@@ -24,8 +24,6 @@ class EnumActivationOperatorBuilderTest extends TestCase
 
         $enumactivationoperator = $builder->build();
 
-        echo($enumactivationoperator);
-
         $this->assertStringStartsWith("{\"message\"", $enumactivationoperator->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumactivationoperator"', $enumactivationoperator->__toString(), "Message should contain a body with a pradelayed declaration");
     }

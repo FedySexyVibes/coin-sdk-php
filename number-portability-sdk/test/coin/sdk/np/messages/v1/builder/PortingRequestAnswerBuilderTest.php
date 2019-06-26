@@ -27,8 +27,6 @@ class PortingRequestAnswerBuilderTest extends TestCase
 
         $portingRequestAnswer = $builder->build();
 
-        echo($portingRequestAnswer);
-
         $this->assertStringStartsWith("{\"message\"", $portingRequestAnswer->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"portingrequestanswer"', $portingRequestAnswer->__toString(), "Message should contain a body with a pradelayed declaration");
     }

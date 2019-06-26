@@ -25,8 +25,6 @@ class EnumActivationRangeBuilderTest extends TestCase
 
         $enumactivationrange = $builder->build();
 
-        echo($enumactivationrange);
-
         $this->assertStringStartsWith("{\"message\"", $enumactivationrange->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumactivationrange"', $enumactivationrange->__toString(), "Message should contain a body with a pradelayed declaration");
     }

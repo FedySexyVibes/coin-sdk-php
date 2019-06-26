@@ -80,7 +80,7 @@ class Event {
                     break;
                 default:
                     // The field is ignored.
-                    continue;
+                    break;
             }
         }
         return $event;

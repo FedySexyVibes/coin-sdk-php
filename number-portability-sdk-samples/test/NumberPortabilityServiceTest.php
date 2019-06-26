@@ -19,7 +19,6 @@ class NumberPortabilityServiceSample extends TestCase
         $this->service = new NumberPortabilityService();
     }
 
-
     public function testSendMessage()
     {
         $randomId = rand(1000, 9999);

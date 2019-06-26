@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class NumberPortabilityMessageConsumerSample extends TestCase
 {
-    public function consumeMessages()
+    public function testConsumeMessages()
     {
         $consumer = new NumberPortabilityMessageConsumer();
         $listener = new SampleListener();

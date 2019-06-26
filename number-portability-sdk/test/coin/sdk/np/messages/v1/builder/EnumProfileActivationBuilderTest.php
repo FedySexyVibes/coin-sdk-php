@@ -22,8 +22,6 @@ class EnumProfileActivationBuilderTest extends TestCase
 
         $enumprofileactivation = $builder->build();
 
-        echo($enumprofileactivation);
-
         $this->assertStringStartsWith("{\"message\"", $enumprofileactivation->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumprofileactivation"', $enumprofileactivation->__toString(), "Message should contain a body with a pradelayed declaration");
     }

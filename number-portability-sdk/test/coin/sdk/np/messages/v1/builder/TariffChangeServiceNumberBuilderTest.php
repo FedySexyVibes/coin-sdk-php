@@ -26,8 +26,6 @@ class TariffChangeServiceNumberBuilderTest extends TestCase
 
         $tariffchangesn = $builder->build();
 
-        echo($tariffchangesn);
-
         $this->assertStringStartsWith("{\"message\"", $tariffchangesn->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"tariffchangesn"', $tariffchangesn->__toString(), "Message should contain a body with a cancel declaration");
     }

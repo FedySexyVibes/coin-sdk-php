@@ -23,8 +23,6 @@ class DeactivationBuilderTest extends TestCase
 
         $deactivation = $builder->build();
 
-        echo($deactivation);
-
         $this->assertStringStartsWith("{\"message\"", $deactivation->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"deactivation"', $deactivation->__toString(), "Message should contain a body with a pradelayed declaration");
     }

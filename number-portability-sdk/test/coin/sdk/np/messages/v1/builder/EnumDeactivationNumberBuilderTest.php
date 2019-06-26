@@ -25,8 +25,6 @@ class EnumDeactivationNumberBuilderTest extends TestCase
 
         $enumdeactivationnumber = $builder->build();
 
-        echo($enumdeactivationnumber);
-
         $this->assertStringStartsWith("{\"message\"", $enumdeactivationnumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumdeactivationnumber"', $enumdeactivationnumber->__toString(), "Message should contain a body with a pradelayed declaration");
     }

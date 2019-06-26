@@ -36,7 +36,7 @@ These scripts generate the private and public keys: `public-key.pem` and `privat
 ### Store keys in COIN's IAM (Identity and Access Manager)
 
 - Go to: https://test-portal.coin.nl/iam#/
-    - Access to this site requires a user account that can be requested at [Coin Servicedesk](mailto:servicedesk@coin.nl)
+    - Access to this site requires a user account that can be requested at [Coin Servicedesk](mailto:servicedesk@coin.nl).
 
 - Select ***consumer name***
 ![alt text](./img/coin_iam_select_consumer.png "Select Consumer")
@@ -59,7 +59,7 @@ Once the public key has been registered, the following private and public keys a
 ## Choose an API
 
 ### PHP SDKs for the APIs
-- The PHP SDK documentation for the Number Portability API can be found [here](number-portability-sdk/README.md)
+- The PHP SDK documentation for the Number Portability API can be found [here](https://gitlab.com/verenigingcoin-public/coin-sdk-php/blob/master/number-portability-sdk/README.md).
 
 ## Additional Resources
 

@@ -41,8 +41,9 @@ under the following names:
 
 ## Send Messages
 
-The `NumberPortabilityService` has a `sendMessage` method to send any number portability message to the API. The Number Portability SDK contains Builders to construct the various messages. If there are sequnences in the message
-than there is an add method to add an instance. Each instance should be ended with the finish() method.
+The `NumberPortabilityService` has a `sendMessage` method to send any number portability message to the API.
+The Number Portability SDK contains Builders to construct the various messages. If there are sequences in the message,
+there is an 'add' method to add an instance. Each instance should be ended with the finish() method.
 
 ```php
         $builder = PortingRequestBuilder::create();

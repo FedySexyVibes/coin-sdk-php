@@ -14,8 +14,11 @@ For a quick start, follow the steps below:
 
 ## Setup
 
-### Sample Project for the Number Portability API
-- A sample project is provided in the `number-portability-sdk-samples` directory.
+#### Usage
+Run `composer require coin/sdk` in your own project to use this SDK.
+
+#### Sample Project for the Number Portability API
+A sample project is provided in the [number-portability-sdk-samples](https://gitlab.com/verenigingcoin-public/coin-sdk-php/tree/master/number-portability-sdk-samples) directory.
 
 
 ## Configure Credentials
@@ -45,24 +48,43 @@ For populating the `$_ENV` variable, [PHP dotenv](https://github.com/vlucas/phpd
 The `NumberPortabilityService` has a `sendMessage` method to send any number portability message to the API.
 The Number Portability SDK contains Builders to construct the various messages. If there are sequences in the message,
 there is an 'add' method to add an instance. Each instance should be ended with the finish() method.
+A simple class for sending porting messages could look something like this:
 
 ```php
-        $builder = PortingRequestBuilder::create();
-        $builder
-            ->setFullHeader("LOADA", "LOADA", "LOADB", "LOADB")
-            ->setTimestamp(date("Ymdhis", time()))
-            ->setDossierId("123456")
-            ->setNote("Just a note!")
-            ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456")
-            ->addPortingRequestNumberSequence()
-                ->setNumberSeries("0611111111", "0611111112")
-                ->setProfileIds(["PROF1", "PROF2"]) // optional
-                ->finish()
-            ->addPortingRequestNumberSequence()
-                ->setNumberSeries("0622222222", "0622222223")
-                ->setProfileIds(["PROF1", "PROF2"]) // optional
-                ->finish();
-        $portingrequest = $builder->build();
+<?php
+
+use coin\sdk\np\messages\v1\builder\PortingRequestBuilder;
+use coin\sdk\np\service\impl\NumberPortabilityService;
+
+class MySender
+{
+    private $operator;
+    private $service;
+
+    public function __construct()
+    {
+        $this->service = new NumberPortabilityService();
+        $this->operator = 'Your OperatorCode';
+    }
+
+    public function SendPortingRequest($id, $begin, $end)
+    {
+        $message = PortingRequestBuilder::create()
+                ->setHeader($this->operator, 'CRDB')
+                ->setTimestamp(date("Ymdhis", time()))
+                ->setDossierId("$this->operator-$id")
+                ->setNote("Just a note!") // optional
+                ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456") // optional
+                ->setRecipientnetworkoperator($this->operator)
+                ->addPortingRequestSequence()
+                    ->setNumberSeries($begin, $end)
+                    ->setProfileIds(["PROF1", "PROF2"]) // optional
+                    ->finish()
+                // you can add more sequences if you want
+                ->build();
+        return $this->service->sendMessage($message);
+    }
+}
 ```
 
 ## Consume Messages

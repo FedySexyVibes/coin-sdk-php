@@ -1,6 +1,7 @@
 <?php
 
 use coin\sdk\np\messages\v1\builder\PortingRequestBuilder;
+use coin\sdk\np\service\impl\NumberPortabilityService;
 use PHPUnit\Framework\TestCase;
 
 /**

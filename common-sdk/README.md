@@ -18,8 +18,10 @@ For secure access credentials are required.
 If you instantiate it without consumer name etc., the required values will be searched in `$_ENV` and subsequently in `$GLOBALS`
 under the following names:
 
-| $ENV | $GLOBALS |
+| $_ENV | $GLOBALS |
 |---|---|
 | CONSUMER_NAME | ConsumerName |
 | PRIVATE_KEY_FILE | PrivateKeyFile |
 | ENCRYPTED_HMAC_SECRET_FILE | EncryptedHmacSecretFile |
+
+For populating the `$_ENV` variable, [PHP dotenv](https://github.com/vlucas/phpdotenv) could be used.

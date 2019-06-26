@@ -1,0 +1,17 @@
+.gitattributes export-ignore
+*/test export-ignore
+*/test/* export-ignore
+number-portability-sdk-samples export-ignore
+keys export-ignore
+keys/* export-ignore
+setup export-ignore
+setup/* export-ignore
+.gitignore export-ignore
+gitlab-ci.yml export-ignore
+.make-release-support export-ignore
+.release export-ignore
+composer.lock export-ignore
+docker-compose.* export-ignore
+Dockerfile export-ignore
+Makefile.* export-ignore
+

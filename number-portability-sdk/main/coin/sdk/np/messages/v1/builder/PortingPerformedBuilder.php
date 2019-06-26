@@ -1,8 +1,6 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
-
 
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
@@ -20,7 +18,7 @@ class PortingPerformedSequenceBuilder {
     private $portingPerformedSequence;
     private $parent;
 
-    public function __construct($parent) {
+    public function __construct(PortingPerformedBuilder $parent) {
         $this->parent = $parent;
         $this->portingPerformedSequence = new PortingPerformedSeq();
     }

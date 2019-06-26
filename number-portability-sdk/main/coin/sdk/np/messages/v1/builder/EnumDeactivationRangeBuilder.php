@@ -4,6 +4,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 
+use coin\sdk\np\messages\v1\common\EnumBuilder;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
@@ -13,7 +14,7 @@ use coin\sdk\np\messages\v1\EnumDeactivationRangeMessage;
 use coin\sdk\np\messages\v1\EnumNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class EnumDeactivationRangeBuilder extends MessageBuilder
+class EnumDeactivationRangeBuilder extends MessageBuilder implements EnumBuilder
 {
     private $enumContent;
     private $repeats;

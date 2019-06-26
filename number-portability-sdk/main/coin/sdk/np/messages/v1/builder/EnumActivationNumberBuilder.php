@@ -1,9 +1,8 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
 
-
+use coin\sdk\np\messages\v1\common\EnumBuilder;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
@@ -13,7 +12,7 @@ use coin\sdk\np\messages\v1\EnumContent;
 use coin\sdk\np\messages\v1\EnumNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class EnumActivationNumberBuilder extends MessageBuilder
+class EnumActivationNumberBuilder extends MessageBuilder implements EnumBuilder
 {
     private $enumContent;
     private $repeats;
@@ -35,7 +34,6 @@ class EnumActivationNumberBuilder extends MessageBuilder
         $builder = new self;
         return $builder;
     }
-
 
     public function setCurrentNetworkOperator($currentNetworkOperator) {
         $this->enumContent->setCurrentnetworkoperator($currentNetworkOperator);

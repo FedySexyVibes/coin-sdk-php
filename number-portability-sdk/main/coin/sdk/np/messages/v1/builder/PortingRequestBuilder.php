@@ -16,9 +16,6 @@ use coin\sdk\np\messages\v1\PortingRequestMessage;
 use coin\sdk\np\messages\v1\PortingRequestRepeats;
 use coin\sdk\np\messages\v1\PortingRequestSeq;
 
-/**
- * @property PortingRequestBuilder parent
- */
 class PortingRequestSequenceBuilder {
 
     private $portingRequestSequence;

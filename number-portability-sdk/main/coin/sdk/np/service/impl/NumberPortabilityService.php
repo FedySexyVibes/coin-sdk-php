@@ -46,6 +46,6 @@ class NumberPortabilityService extends RestApiClient
      */
     private function postMessage($message, $messageType) {
         $url = $this->apiUrl . "/dossiers/" . $messageType;
-        return $this->sendWithToken("POST", $url, '{"message":'.$message.'}');
+        return $this->sendWithToken("POST", $url, $message);
     }
 }

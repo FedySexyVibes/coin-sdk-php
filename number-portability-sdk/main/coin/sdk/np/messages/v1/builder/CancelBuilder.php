@@ -1,6 +1,5 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\Cancel;

@@ -52,11 +52,11 @@ than there is an add method to add an instance. Each instance should be ended wi
             ->setDossierId("123456")
             ->setNote("Just a note!")
             ->setCustomerInfo("Test", "Vereniging COIN", "10", "a", "1111AA", "123456")
-            ->addActivationServiceNumberSequence()
+            ->addPortingRequestNumberSequence()
                 ->setNumberSeries("0611111111", "0611111112")
                 ->setProfileIds(["PROF1", "PROF2"]) // optional
                 ->finish()
-            ->addActivationServiceNumberSequence()
+            ->addPortingRequestNumberSequence()
                 ->setNumberSeries("0622222222", "0622222223")
                 ->setProfileIds(["PROF1", "PROF2"]) // optional
                 ->finish();

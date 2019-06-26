@@ -1,21 +1,16 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
 
-
-use coin\sdk\np\messages\v1\EnumContent;
-use coin\sdk\np\messages\v1\EnumNumberRepeats;
-use coin\sdk\np\messages\v1\EnumNumberSeq;
+use coin\sdk\np\messages\v1\common\EnumBuilder;
 use coin\sdk\np\messages\v1\EnumOperatorSeq;
-use coin\sdk\np\messages\v1\NumberSeries;
 
 class EnumOperatorContentBuilder
 {
     private $enumOperatorSequence;
     private $parent;
 
-    public function __construct($parent) {
+    public function __construct(EnumBuilder $parent) {
         $this->parent = $parent;
         $this->enumOperatorSequence = new EnumOperatorSeq();
     }

@@ -18,10 +18,9 @@ class TariffChangeServiceNumberBuilderTest extends TestCase
             ->setDossierId("123456")
             ->setPlatformProvider("TEST01")
             ->setPlannedDateTime(date("Ymdhis", time()))
-            ->addActivationServiceNumberSequence()
+            ->addTariffChangeServiceNumberSequence()
                 ->setNumberSeries("0123456789", "0987654321")
-                ->setPop("pop")
-                ->setTariffinfo("2023,50", "1023,50", "0", "2", "1")
+                ->setTariffInfoNew("2023,50", "1023,50", "0", "2", "1")
                 ->finish();
 
         $tariffchangesn = $builder->build();

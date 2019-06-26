@@ -8,7 +8,11 @@ use coin\sdk\np\messages\v1\Sender;
 
 interface IMessageBuilder extends IHeaderBuilder {
 
+    /**
+     * @return Message
+     */
     public function build();
+
     public static function create();
 }
 
@@ -40,4 +44,8 @@ abstract class MessageBuilder implements IMessageBuilder {
         $this->header->setTimestamp($timestamp);
         return $this;
     }
+}
+
+interface EnumBuilder extends IMessageBuilder {
+    public function addRepeatsItem($repeatsItem);
 }

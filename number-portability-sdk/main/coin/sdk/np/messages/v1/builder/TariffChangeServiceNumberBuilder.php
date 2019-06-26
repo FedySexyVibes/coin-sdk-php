@@ -1,8 +1,6 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
-
 
 use coin\sdk\np\messages\v1\ActivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\common\Message;
@@ -51,8 +49,8 @@ class TariffChangeServiceNumberBuilder extends MessageBuilder
         return $this;
     }
 
-    public function addActivationServiceNumberSequence() {
-        return new ActivationServiceNumberSequenceBuilder($this);
+    public function addTariffChangeServiceNumberSequence() {
+        return new TariffChangeServiceNumberSequenceBuilder($this);
     }
 
     public function addRepeatsItem($repeatsItem) {

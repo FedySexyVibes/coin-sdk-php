@@ -1,9 +1,8 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
 
-
+use coin\sdk\np\messages\v1\common\EnumBuilder;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
@@ -13,7 +12,7 @@ use coin\sdk\np\messages\v1\EnumContent;
 use coin\sdk\np\messages\v1\EnumNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class EnumActivationRangeBuilder extends MessageBuilder
+class EnumActivationRangeBuilder extends MessageBuilder implements EnumBuilder
 {
     private $enumContent;
     private $repeats;

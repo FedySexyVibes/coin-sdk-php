@@ -1,8 +1,6 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
-
 
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
@@ -11,7 +9,6 @@ use coin\sdk\np\messages\v1\Header;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayed;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayedBody;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage;
-use coin\sdk\np\messages\v1\RangeContent;
 
 class PortingRequestAnswerDelayedBuilder extends MessageBuilder
 {

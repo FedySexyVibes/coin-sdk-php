@@ -24,7 +24,7 @@ class PortingRequestBuilderTest extends TestCase
                 ->setNumberSeries("01234567789", "01234567789")
                 ->setProfileIds(["PROF1", "PROF2"])
                 ->finish()
-            ->addActivationServiceNumberSequence()
+            ->addPortingRequestSequence()
                 ->setNumberSeries("01234567789", "01234567789")
                 ->setProfileIds(["PROF1", "PROF2"])
                 ->finish();

@@ -1,12 +1,9 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
-
 
 use coin\sdk\np\messages\v1\ActivationServiceNumberSeq;
 use coin\sdk\np\messages\v1\NumberSeries;
-use coin\sdk\np\messages\v1\TariffInfo;
 
 class DeactivationServiceNumberSequenceBuilder
 {
@@ -14,7 +11,7 @@ class DeactivationServiceNumberSequenceBuilder
     private $deactivationServiceNumberSequence;
     private $parent;
 
-    public function __construct($parent) {
+    public function __construct(DeactivationServiceNumberBuilder $parent) {
         $this->parent = $parent;
         $this->deactivationServiceNumberSequence = new ActivationServiceNumberSeq();
     }

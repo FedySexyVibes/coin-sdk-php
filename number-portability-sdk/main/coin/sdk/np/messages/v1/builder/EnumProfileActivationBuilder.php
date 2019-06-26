@@ -3,7 +3,6 @@
 
 namespace coin\sdk\np\messages\v1\builder;
 
-
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\common\MessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;

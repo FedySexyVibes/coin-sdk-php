@@ -1,8 +1,6 @@
 <?php
 
-
 namespace coin\sdk\np\messages\v1\builder;
-
 
 use coin\sdk\np\messages\v1\ActivationServiceNumberSeq;
 use coin\sdk\np\messages\v1\NumberSeries;
@@ -14,7 +12,7 @@ class ActivationServiceNumberSequenceBuilder
     private $activationServiceNumberSequence;
     private $parent;
 
-    public function __construct($parent) {
+    public function __construct(ActivationServiceNumberBuilder $parent) {
         $this->parent = $parent;
         $this->activationServiceNumberSequence = new ActivationServiceNumberSeq();
     }

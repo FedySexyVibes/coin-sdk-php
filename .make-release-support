@@ -40,7 +40,7 @@ function setRelease() {
 		sed -i.x -e "s/^tag=.*/tag=$(getTag $1)/" .release
 		sed -i.x -e "s/^release=.*/release=$1/g" .release
 		sed -i.x -e "s/coin-sdk-php-v.\..\../coin-sdk-php-v$1/" $(find common-sdk/coin/sdk/common/client/*.php)
-		sed -i.x -e "s/\"version\": \".*\"/\"version\":\"$1\"/" composer.json
+		sed -i.x -e "s/\"version\": \".*\"/\"version\": \"$1\"/" composer.json
 		rm -f .release.x
 		rm -f composer.json.x
 		rm -f $(find common-sdk/coin/sdk/common/client/*.php.x)

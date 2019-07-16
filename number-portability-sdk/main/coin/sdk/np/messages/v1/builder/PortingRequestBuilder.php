@@ -96,7 +96,7 @@ class PortingRequestBuilder extends MessageBuilder
     }
 
     public function setDonorserviceprovider($donorserviceprovider) {
-        $this->portingrequest->setRecipientnetworkoperator($donorserviceprovider);
+        $this->portingrequest->setDonorserviceprovider($donorserviceprovider);
         return $this;
     }
 

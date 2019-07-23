@@ -8,7 +8,8 @@ use GuzzleHttp\Client;
 abstract class RestApiClient
 {
     public static function getFullVersion() {
-        return 'coin-sdk-php-v0.1.0';
+        // NOTE: automatically updated by pre_tag_command
+        return 'coin-sdk-php-0.1.0';
     }
 
     protected $hmacSecret;

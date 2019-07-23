@@ -1,1 +1,2 @@
 release=0.1.0
+pre_tag_command=jq '.version = "'"${VERSION}"'"' composer.json > composer.new.json && mv composer.new.json composer.json && sed -i.sedtmp -E "s/(coin-sdk-php-).*(';)/\1$VERSION\2/" common-sdk/coin/sdk/common/client/RestApiClient.php && find . -name "*.sedtmp" | xargs rm

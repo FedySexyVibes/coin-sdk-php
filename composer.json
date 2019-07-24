@@ -3,7 +3,7 @@
   "description": "SDK for Vereniging COIN's REST APIs",
   "minimum-stability": "stable",
   "license": "proprietary",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "autoload": {
     "classmap": [
       "common-sdk",

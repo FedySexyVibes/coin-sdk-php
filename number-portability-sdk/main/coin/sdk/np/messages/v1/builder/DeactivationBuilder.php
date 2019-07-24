@@ -45,7 +45,7 @@ class DeactivationBuilder extends MessageBuilder
     }
 
     public function setOriginalNetworkOperator($originalNetworkOperator) {
-        $this->deactivation->setDossierId($originalNetworkOperator);
+        $this->deactivation->setOriginalnetworkoperator($originalNetworkOperator);
         return $this;
     }
 

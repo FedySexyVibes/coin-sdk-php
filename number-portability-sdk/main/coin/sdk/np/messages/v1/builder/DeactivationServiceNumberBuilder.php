@@ -65,6 +65,6 @@ class DeactivationServiceNumberBuilder extends MessageBuilder
         $deactivationServiceNumberMessage->setHeader($this->header);
         $deactivationServiceNumberBody = new DeactivationServiceNumberBody();
         $deactivationServiceNumberMessage->setBody($deactivationServiceNumberBody->setDeactivationsn($this->deactivationServiceNumber));
-        return new Message($deactivationServiceNumberMessage, MessageType::DEACTIVATION);
+        return new Message($deactivationServiceNumberMessage, MessageType::DEACTIVATION_SERVICE_NUMBER);
     }
 }

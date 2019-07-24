@@ -1,10 +1,10 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 namespace coin\sdk\np\messages\v1\builder;
 
-use PHPUnit\Framework\TestCase;
+use coin\sdk\np\ObjectSerializer;
 
-class PortingPerformedBuilderTest extends TestCase
+class PortingPerformedBuilderTest extends SendMessageBaseTest
 {
 
     public function testBuild()
@@ -18,12 +18,12 @@ class PortingPerformedBuilderTest extends TestCase
             ->setDossierId("TEST01-12345")
             ->setDonorNetworkOperator("TEST01")
             ->setRecipientNetworkOperator("TEST02")
-            ->setBatchporting("N")
+            ->setBatchporting("Y")
             ->setActualDateTime(date("Ymdhis", time()))
             ->addPortingPerformedSequence()
                 ->setNumberSeries("0123456789", "0987654321")
                 ->setPop("pop")
-                ->setBackPorting("N")
+                ->setBackPorting("Y")
                 ->setProfileIds(["PROF1", "PROF2"])
                 ->finish();
 
@@ -31,5 +31,10 @@ class PortingPerformedBuilderTest extends TestCase
 
         $this->assertStringStartsWith("{\"message\"", $portingPerformed->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"portingperformed"', $portingPerformed->__toString(), "Message should contain a body with a pradelayed declaration");
+
+        $response = $this->service->sendMessage($portingPerformed);
+        $object = json_decode($response->getBody());
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\MessageResponse');
+        $this->assertRegExp('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
     }
 }

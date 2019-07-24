@@ -1,13 +1,12 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 namespace coin\sdk\np\messages\v1\builder;
 
+use coin\sdk\np\ObjectSerializer;
 use NumberPortabilityService;
-use PHPUnit\Framework\TestCase;
 
-class ActivationServiceNumberBuilderTest extends TestCase
+class ActivationServiceNumberBuilderTest extends SendMessageBaseTest
 {
-
     public function testBuild()
     {
         date_default_timezone_set('Europe/Amsterdam');
@@ -30,5 +29,11 @@ class ActivationServiceNumberBuilderTest extends TestCase
 
         $this->assertStringStartsWith("{\"message\"", $activationServiceNumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"activationsn"', $activationServiceNumber->__toString(), "Message should contain a body with a pradelayed declaration");
+
+        $response = $this->service->sendMessage($activationServiceNumber);
+        $this->assertEquals(200, $response->getStatusCode(), "Statuscode should equal 200 OK");
+        $object = json_decode($response->getBody());
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\MessageResponse');
+        $this->assertRegExp('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
     }
 }

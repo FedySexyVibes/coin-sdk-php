@@ -1,10 +1,10 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 namespace coin\sdk\np\messages\v1\builder;
 
-use PHPUnit\Framework\TestCase;
+use coin\sdk\np\ObjectSerializer;
 
-class EnumProfileActivationBuilderTest extends TestCase
+class EnumProfileActivationBuilderTest extends SendMessageBaseTest
 {
 
     public function testBuild()
@@ -17,12 +17,27 @@ class EnumProfileActivationBuilderTest extends TestCase
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
             ->setCurrentNetworkOperator("TEST01")
-            ->setProfileId("PROF1")
-            ->setTypeOfNumber("mobile");
+            ->setProfileId("PROF1-12345")
+            ->setTypeOfNumber("3")
+            ->setReplacement("Test")
+            ->setService("Test")
+            ->setPreference("13")
+            ->setOrder("13")
+            ->setScope("SCOPE-123")
+            ->setGateway("Test")
+            ->setFlags("Test")
+            ->setDnsClass("Test")
+            ->setTtl("7")
+            ->setRecType("Test");
 
         $enumprofileactivation = $builder->build();
 
         $this->assertStringStartsWith("{\"message\"", $enumprofileactivation->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumprofileactivation"', $enumprofileactivation->__toString(), "Message should contain a body with a pradelayed declaration");
+
+        $response = $this->service->sendMessage($enumprofileactivation);
+        $object = json_decode($response->getBody());
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\MessageResponse');
+        $this->assertRegExp('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
     }
 }

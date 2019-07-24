@@ -117,7 +117,7 @@ class EnumProfileActivationBuilder extends MessageBuilder
     }
 
     public function setTtl($ttl) {
-        $this->enumProfileActivation->setScope($ttl);
+        $this->enumProfileActivation->setTtl($ttl);
         return $this;
     }
 

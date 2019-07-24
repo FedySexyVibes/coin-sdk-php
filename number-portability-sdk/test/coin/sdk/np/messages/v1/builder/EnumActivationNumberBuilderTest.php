@@ -1,10 +1,11 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 namespace coin\sdk\np\messages\v1\builder;
 
+use coin\sdk\np\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class EnumActivationNumberBuilderTest extends TestCase
+class EnumActivationNumberBuilderTest extends SendMessageBaseTest
 {
 
     public function testBuild()
@@ -27,5 +28,10 @@ class EnumActivationNumberBuilderTest extends TestCase
 
         $this->assertStringStartsWith("{\"message\"", $enumactivationnumber->__toString(), "Message should start with message declaration");
         $this->assertStringContainsString('"body":{"enumactivationnumber"', $enumactivationnumber->__toString(), "Message should contain a body with a pradelayed declaration");
+
+        $response = $this->service->sendMessage($enumactivationnumber);
+        $object = json_decode($response->getBody());
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\MessageResponse');
+        $this->assertRegExp('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
     }
 }

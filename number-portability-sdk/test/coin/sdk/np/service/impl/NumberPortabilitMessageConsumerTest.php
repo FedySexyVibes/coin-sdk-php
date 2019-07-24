@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpParamsInspection */
 
 use coin\sdk\np\service\impl\INumberPortabilityMessageListener;
 use coin\sdk\np\service\impl\NumberPortabilityMessageConsumer;
@@ -9,161 +9,228 @@ class NumberPortabilityMessageConsumerTest extends TestCase
     public function test()
     {
         $consumer = new NumberPortabilityMessageConsumer();
-        $listener = new TestListener();
+        $result = new TestResult();
+        $listener = new TestListener($result);
         $messages = $consumer->getMessages($listener);
         foreach(range(1,20) as $i) {
             $messages->next();
             sleep(0.5);
         }
 
-        $this->assertTrue($listener->activationServiceNumberReceived, "Consumer should handle a ActivationServiceNumber message");
-        $this->assertTrue($listener->cancelReceived, "Consumer should handle a Cancel message");
-        $this->assertTrue($listener->deactivationReceived, "Consumer should handle a Deactivation message");
-        $this->assertTrue($listener->deactivationServiceNumberReceived, "Consumer should handle a DeactivationServiceNumber message");
-        $this->assertTrue($listener->enumActivationNumberReceived, "Consumer should handle a EnumActivationNumber message");
-        $this->assertTrue($listener->enumActivationOperatorReceived, "Consumer should handle a EnumActivationOperator message");
-        $this->assertTrue($listener->enumActivationRangeReceived, "Consumer should handle a EnumActivationRange message");
-        $this->assertTrue($listener->enumDeactivationNumberReceived, "Consumer should handle a EnumDeactivationNumber message");
-        $this->assertTrue($listener->enumDeactivationOperatorReceived, "Consumer should handle a EnumDeactivationOperator message");
-        $this->assertTrue($listener->enumDeactivationRangeReceived, "Consumer should handle a EnumDeactivationRange message");
-        $this->assertTrue($listener->enumProfileActivationReceived, "Consumer should handle a EnumProfileActivation message");
-        $this->assertTrue($listener->enumProfileDeactivationReceived, "Consumer should handle a EnumProfileDeactivation message");
-        $this->assertTrue($listener->errorFoundReceived, "Consumer should handle a ErrorFound message");
-        $this->assertTrue($listener->portingPerformedReceived, "Consumer should handle a PortingPerformed message");
-        $this->assertTrue($listener->portingRequestReceived, "Consumer should handle a PortingRequest message");
-        $this->assertTrue($listener->portingRequestAnswerReceived, "Consumer should handle a PortingRequestAnswer message");
-        $this->assertTrue($listener->portingRequestAnswerDelayedReceived, "Consumer should handle a PortingRequestAnswerDelayed message");
-        $this->assertTrue($listener->rangeActivationReceived, "Consumer should handle a RangeActivation message");
-        $this->assertTrue($listener->rangeDeactivationReceived, "Consumer should handle a RangeDeactivation message");
-        $this->assertTrue($listener->tariffChangedServiceNumberReceived, "Consumer should handle a TariffChangedServiceNumber message");
+        $this->assertTrue($result->activationServiceNumberReceived, "Consumer should handle a ActivationServiceNumber message");
+        $this->assertTrue($result->activationServiceNumberMessageType, "Message should contain body of type activationsn");
+        $this->assertTrue($result->cancelReceived, "Consumer should handle a Cancel message");
+        $this->assertTrue($result->cancelMessageType, "Message should contain body of type cancel");
+        $this->assertTrue($result->deactivationReceived, "Consumer should handle a Deactivation message");
+        $this->assertTrue($result->deactivationMessageType, "Message should contain body of type deactivation");
+        $this->assertTrue($result->deactivationServiceNumberReceived, "Consumer should handle a DeactivationServiceNumber message");
+        $this->assertTrue($result->deactivationServiceNumberMessageType, "Message should contain body of type deactivationsn");
+        $this->assertTrue($result->enumActivationNumberReceived, "Consumer should handle a EnumActivationNumber message");
+        $this->assertTrue($result->enumActivationNumberMessageType, "Message should contain body of type enumactivationnumber");
+        $this->assertTrue($result->enumActivationOperatorReceived, "Consumer should handle a EnumActivationOperator message");
+        $this->assertTrue($result->enumActivationOperatorMessageType, "Message should contain body of type enumactivationoperator");
+        $this->assertTrue($result->enumActivationRangeReceived, "Consumer should handle a EnumActivationRange message");
+        $this->assertTrue($result->enumActivationRangeMessageType, "Message should contain body of type enumactivationrange");
+        $this->assertTrue($result->enumDeactivationNumberReceived, "Consumer should handle a EnumDeactivationNumber message");
+        $this->assertTrue($result->enumDeactivationNumberMessageType, "Message should contain body of type enumdeactivationnumber");
+        $this->assertTrue($result->enumDeactivationOperatorReceived, "Consumer should handle a EnumDeactivationOperator message");
+        $this->assertTrue($result->enumDeactivationOperatorMessageType, "Message should contain body of type enumdeactivationoperator");
+        $this->assertTrue($result->enumDeactivationRangeReceived, "Consumer should handle a EnumDeactivationRange message");
+        $this->assertTrue($result->enumDeactivationRangeMessageType, "Message should contain body of type enumdeactivationrange");
+        $this->assertTrue($result->enumProfileActivationReceived, "Consumer should handle a EnumProfileActivation message");
+        $this->assertTrue($result->enumProfileActivationMessageType, "Message should contain body of type enumprofileactivation");
+        $this->assertTrue($result->enumProfileDeactivationReceived, "Consumer should handle a EnumProfileDeactivation message");
+        $this->assertTrue($result->enumProfileDeactivationMessageType, "Message should contain body of type enumprofiledeactivation");
+        $this->assertTrue($result->errorFoundReceived, "Consumer should handle a ErrorFound message");
+        $this->assertTrue($result->errorFoundMessageType, "Message should contain body of type errorfound");
+        $this->assertTrue($result->portingPerformedReceived, "Consumer should handle a PortingPerformed message");
+        $this->assertTrue($result->portingPerformedMessageType, "Message should contain body of type portingperformed");
+        $this->assertTrue($result->portingRequestReceived, "Consumer should handle a PortingRequest message");
+        $this->assertTrue($result->portingRequestMessageType, "Message should contain body of type portingrequest");
+        $this->assertTrue($result->portingRequestAnswerReceived, "Consumer should handle a PortingRequestAnswer message");
+        $this->assertTrue($result->portingRequestAnswerMessageType, "Message should contain body of type portingrequestanswer");
+        $this->assertTrue($result->portingRequestAnswerDelayedReceived, "Consumer should handle a PortingRequestAnswerDelayed message");
+        $this->assertTrue($result->portingRequestAnswerDelayedMessageType, "Message should contain body of type pradelayed");
+        $this->assertTrue($result->rangeActivationReceived, "Consumer should handle a RangeActivation message");
+        $this->assertTrue($result->rangeActivationMessageType, "Message should contain body of type rangeactivation");
+        $this->assertTrue($result->rangeDeactivationReceived, "Consumer should handle a RangeDeactivation message");
+        $this->assertTrue($result->rangeDeactivationMessageType, "Message should contain body of type rangedactivation");
+        $this->assertTrue($result->tariffChangeServiceNumberReceived, "Consumer should handle a TariffChangedServiceNumber message");
+        $this->assertTrue($result->tariffChangeServiceNumberMessageType, "Message should contain body of type tariffchangesn");
     }
+}
+
+/**
+ * @property bool activationServiceNumberReceived
+ * @property bool activationServiceNumberMessageType
+ * @property bool cancelReceived
+ * @property bool cancelMessageType
+ * @property bool deactivationReceived
+ * @property bool deactivationServiceNumberReceived
+ * @property bool enumActivationNumberReceived
+ * @property bool enumActivationOperatorReceived
+ * @property bool enumActivationRangeReceived
+ * @property bool enumDeactivationNumberReceived
+ * @property bool enumDeactivationOperatorReceived
+ * @property bool enumDeactivationRangeReceived
+ * @property bool enumProfileActivationReceived
+ * @property bool enumProfileDeactivationReceived
+ * @property bool errorFoundReceived
+ * @property bool portingPerformedReceived
+ * @property bool portingRequestReceived
+ * @property bool portingRequestAnswerReceived
+ * @property bool portingRequestAnswerDelayedReceived
+ * @property bool rangeDeactivationReceived
+ * @property bool rangeActivationReceived
+ * @property bool $tariffChangeServiceNumberReceived
+ * @property bool portingRequestAnswerMessageType
+ * @property bool portingRequestAnswerDelayedMessageType
+ * @property bool portingPerformedMessageType
+ * @property bool deactivationMessageType
+ * @property bool errorFoundMessageType
+ * @property bool deactivationServiceNumberMessageType
+ * @property bool tariffChangeServiceNumberMessageType
+ * @property bool enumActivationNumberMessageType
+ * @property bool enumActivationOperatorMessageType
+ * @property bool enumActivationRangeMessageType
+ * @property bool enumDeactivationNumberMessageType
+ * @property bool enumDeactivationOperatorMessageType
+ * @property bool enumDeactivationRangeMessageType
+ * @property bool enumProfileActivationMessageType
+ * @property bool enumProfileDeactivationMessageType
+ * @property bool rangeActivationMessageType
+ * @property bool rangeDeactivationMessageType
+ * @property bool portingRequestMessageType
+ */
+class TestResult {
 }
 
 class TestListener implements INumberPortabilityMessageListener
 {
-    public $activationServiceNumberReceived = false;
-    public $cancelReceived = false;
-    public $deactivationReceived = false;
-    public $deactivationServiceNumberReceived = false;
-    public $enumActivationNumberReceived = false;
-    public $enumActivationOperatorReceived = false;
-    public $enumActivationRangeReceived = false;
-    public $enumDeactivationNumberReceived = false;
-    public $enumDeactivationOperatorReceived = false;
-    public $enumDeactivationRangeReceived = false;
-    public $enumProfileActivationReceived = false;
-    public $enumProfileDeactivationReceived = false;
-    public $errorFoundReceived = false;
-    public $portingPerformedReceived = false;
-    public $portingRequestReceived = false;
-    public $portingRequestAnswerReceived = false;
-    public $portingRequestAnswerDelayedReceived = false;
-    public $rangeDeactivationReceived = false;
-    public $rangeActivationReceived = false;
-    public $tariffChangedServiceNumberReceived = false;
+    private $result;
 
-    function onMessage($messageId, $message)
+    public function __construct(TestResult $result)
     {
-        echo "\nTestListener received a message with id $messageId";
+        $this->result = $result;
     }
 
     function onPortingRequest($messageId, $message)
     {
-        $this->portingRequestReceived = true;
+        $this->result->portingRequestReceived = true;
+        $this->result->portingRequestMessageType = $message->getBody()->getPortingrequest() != null;
     }
 
     function onPortingRequestAnswer($messageId, $message)
     {
-        $this->portingRequestAnswerReceived = true;
+        $this->result->portingRequestAnswerReceived = true;
+        $this->result->portingRequestAnswerMessageType  = $message->getBody()->getPortingrequestanswer() != null;
     }
 
     function onPortingRequestAnswerDelayed($messageId, $message)
     {
-        $this->portingRequestAnswerDelayedReceived = true;
+        $this->result->portingRequestAnswerDelayedReceived = true;
+        $this->result->portingRequestAnswerDelayedMessageType = $message->getBody()->getPradelayed() != null;
     }
 
     function onPortingPerformed($messageId, $message)
     {
-        $this->portingPerformedReceived = true;
+        $this->result->portingPerformedReceived = true;
+        $this->result->portingPerformedMessageType = $message->getBody()->getPortingperformed() != null;
     }
 
     function onDeactivation($messageId, $message)
     {
-        $this->deactivationReceived = true;
+        $this->result->deactivationReceived = true;
+        $this->result->deactivationMessageType = $message->getBody()->getDeactivation() != null;
     }
 
     function onCancel($messageId, $message)
     {
-        $this->cancelReceived = true;
+        $this->result->cancelReceived = true;
+        $this->result->cancelMessageType = $message->getBody()->getCancel() != null;
     }
 
     function onErrorFound($messageId, $message)
     {
-        $this->errorFoundReceived = true;
+        $this->result->errorFoundReceived = true;
+        $this->result->errorFoundMessageType = $message->getBody()->getErrorFound() != null;
     }
 
     function onActivationServiceNumber($messageId, $message)
     {
-        $this->activationServiceNumberReceived = true;
+        $this->result->activationServiceNumberReceived = true;
+        $this->result->activationServiceNumberMessageType = $message->getBody()->getActivationsn() != null;
     }
 
     function onDeactivationServiceNumber($messageId, $message)
     {
-        $this->deactivationServiceNumberReceived = true;
+        $this->result->deactivationServiceNumberReceived = true;
+        $this->result->deactivationServiceNumberMessageType = $message->getBody()->getDeactivationsn() != null;
     }
 
     function onTariffChangeServiceNumber($messageId, $message)
     {
-        $this->tariffChangedServiceNumberReceived = true;
+        $this->result->tariffChangeServiceNumberReceived = true;
+        $this->result->tariffChangeServiceNumberMessageType = $message->getBody()->getTariffchangesn() != null;
     }
 
     function onEnumActivationNumber($messageId, $message)
     {
-        $this->enumActivationNumberReceived = true;
+        $this->result->enumActivationNumberReceived = true;
+        $this->result->enumActivationNumberMessageType = $message->getBody()->getEnumactivationnumber() != null;
     }
 
     function onEnumActivationOperator($messageId, $message)
     {
-        $this->enumActivationOperatorReceived = true;
+        $this->result->enumActivationOperatorReceived = true;
+        $this->result->enumActivationOperatorMessageType = $message->getBody()->getEnumactivationoperator() != null;
     }
 
     function onEnumActivationRange($messageId, $message)
     {
-        $this->enumActivationRangeReceived = true;
+        $this->result->enumActivationRangeReceived = true;
+        $this->result->enumActivationRangeMessageType = $message->getBody()->getEnumactivationrange() != null;
     }
 
     function onEnumDeactivationNumber($messageId, $message)
     {
-        $this->enumDeactivationNumberReceived = true;
+        $this->result->enumDeactivationNumberReceived = true;
+        $this->result->enumDeactivationNumberMessageType = $message->getBody()->getEnumdeactivationnumber() != null;
     }
 
     function onEnumDeactivationOperator($messageId, $message)
     {
-        $this->enumDeactivationOperatorReceived = true;
+        $this->result->enumDeactivationOperatorReceived = true;
+        $this->result->enumDeactivationOperatorMessageType = $message->getBody()->getEnumdeactivationoperator() != null;
     }
 
     function onEnumDeactivationRange($messageId, $message)
     {
-        $this->enumDeactivationRangeReceived = true;
+        $this->result->enumDeactivationRangeReceived = true;
+        $this->result->enumDeactivationRangeMessageType = $message->getBody()->getEnumdeactivationrange() != null;
     }
 
     function onEnumProfileActivation($messageId, $message)
     {
-        $this->enumProfileActivationReceived = true;
+        $this->result->enumProfileActivationReceived = true;
+        $this->result->enumProfileActivationMessageType = $message->getBody()->getEnumprofileactivation() != null;
     }
 
     function onEnumProfileDeactivation($messageId, $message)
     {
-        $this->enumProfileDeactivationReceived = true;
+        $this->result->enumProfileDeactivationReceived = true;
+        $this->result->enumProfileDeactivationMessageType = $message->getBody()->getEnumprofiledeactivation() != null;
     }
 
     function onRangeActivation($messageId, $message)
     {
-        $this->rangeActivationReceived = true;
+        $this->result->rangeActivationReceived = true;
+        $this->result->rangeActivationMessageType = $message->getBody()->getRangeactivation() != null;
     }
 
     function onRangeDeactivation($messageId, $message)
     {
-        $this->rangeDeactivationReceived = true;
+        $this->result->rangeDeactivationReceived = true;
+        $this->result->rangeDeactivationMessageType = $message->getBody()->getRangedeactivation() != null;
     }
 }

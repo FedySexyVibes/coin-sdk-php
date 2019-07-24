@@ -66,24 +66,21 @@ class NumberPortabilityMessageConsumer extends RestApiClient {
         $this->offset = $initialOffset;
         /** @noinspection PhpNonStrictObjectEqualityInspection */
         if ($this->confirmationStatus == ConfirmationStatus::ALL() && $this->offsetPersister == null) {
-            throw new \BadMethodCallException("offsetPersister should be given when confirmationStatus equals ALL");
+            throw new BadMethodCallException("offsetPersister should be given when confirmationStatus equals ALL");
         }
         $this->startReading();
         foreach ($this->events as $event) {
             try {
                 $data = $event->getData();
                 if ($data) {
-                    $class = getClassName($event->getEventType());
-                    $object = json_decode($data)->message;
-                    $message = ObjectSerializer::deserialize($object, $class);
+                    $this->handleMessage($event, $listener);
                     $id = $event->getId();
-                    $listener->onMessage($id, $message);
                     if ($offsetPersister) {
                         $offsetPersister->setOffset($id);
                     }
-                    yield $message;
+                    yield $data;
                 }
-            } catch(\Exception $exception) {
+            } catch(Exception $exception) {
                 $event->exception = $exception;
                 yield $event;
             }
@@ -123,31 +120,95 @@ class NumberPortabilityMessageConsumer extends RestApiClient {
         return ($this->sseUri)."?offset=$this->offset&confirmationStatus=$this->confirmationStatus".
             (empty($messageTypes) ? "" : "messageTypes=".(implode(",", $messageTypes)));
     }
-}
 
+    private function handleMessage($event, INumberPortabilityMessageListener $listener) {
+        $data = $event->getData();
+        $type = $event->getEventType();
+        $object = json_decode($data)->message;
+        $id = $event->getId();
 
-function getClassName($type) {
-    switch ($type) {
-        case "activationsn-v1": return 'coin\sdk\np\messages\v1\ActivationServiceNumberMessage';
-        case "cancel-v1": return 'coin\sdk\np\messages\v1\CancelMessage';
-        case "deactivation-v1": return 'coin\sdk\np\messages\v1\DeactivationMessage';
-        case "deactivationsn-v1": return 'coin\sdk\np\messages\v1\DeactivationServiceNumberMessage';
-        case "enumactivationnumber-v1": return 'coin\sdk\np\messages\v1\EnumActivationNumberMessage';
-        case "enumactivationoperator-v1": return 'coin\sdk\np\messages\v1\EnumActivationOperatorMessage';
-        case "enumactivationrange-v1": return 'coin\sdk\np\messages\v1\EnumActivationRangeMessage';
-        case "enumdeactivationnumber-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationNumberMessage';
-        case "enumdeactivationoperator-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationOperatorMessage';
-        case "enumdeactivationrange-v1": return 'coin\sdk\np\messages\v1\EnumDeactivationRangeMessage';
-        case "enumprofileactivation-v1": return 'coin\sdk\np\messages\v1\EnumProfileActivationMessage';
-        case "enumprofiledeactivation-v1": return 'coin\sdk\np\messages\v1\EnumProfileDeactivationMessage';
-        case "errorfound-v1": return 'coin\sdk\np\messages\v1\ErrorFoundMessage';
-        case "portingperformed-v1": return 'coin\sdk\np\messages\v1\PortingPerformedMessage';
-        case "portingrequest-v1": return 'coin\sdk\np\messages\v1\PortingRequestMessage';
-        case "portingrequestanswer-v1": return 'coin\sdk\np\messages\v1\PortingRequestAnswerMessage';
-        case "pradelayed-v1": return 'coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage';
-        case "rangeactivation-v1": return 'coin\sdk\np\messages\v1\RangeActivationMessage';
-        case "rangedeactivation-v1": return 'coin\sdk\np\messages\v1\RangeDeactivationMessage';
-        case "tariffchangesn-v1": return 'coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage';
-        default: throw new \UnexpectedValueException("Unknown message type $type");
+        switch ($type) {
+            case "activationsn-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\ActivationServiceNumberMessage');
+                $listener->onActivationServiceNumber($id, $message);
+                break;
+            case "cancel-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\CancelMessage');
+                $listener->onCancel($id, $message);
+                break;
+            case "deactivation-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\DeactivationMessage');
+                $listener->onDeactivation($id, $message);
+                break;
+            case "deactivationsn-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\DeactivationServiceNumberMessage');
+                $listener->onDeactivationServiceNumber($id, $message);
+                break;
+            case "enumactivationnumber-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumActivationNumberMessage');
+                $listener->onEnumActivationNumber($id, $message);
+                break;
+            case "enumactivationoperator-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumActivationOperatorMessage');
+                $listener->onEnumActivationOperator($id, $message);
+                break;
+            case "enumactivationrange-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumActivationRangeMessage');
+                $listener->onEnumActivationRange($id, $message);
+                break;
+            case "enumdeactivationnumber-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumDeactivationNumberMessage');
+                $listener->onEnumDeactivationNumber($id, $message);
+                break;
+            case "enumdeactivationoperator-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumDeactivationOperatorMessage');
+                $listener->onEnumDeactivationOperator($id, $message);
+                break;
+            case "enumdeactivationrange-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumDeactivationRangeMessage');
+                $listener->onEnumDeactivationRange($id, $message);
+                break;
+            case "enumprofileactivation-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumProfileActivationMessage');
+                $listener->onEnumProfileActivation($id, $message);
+                break;
+            case "enumprofiledeactivation-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\EnumProfileDeactivationMessage');
+                $listener->onEnumProfileDeactivation($id, $message);
+                break;
+            case "errorfound-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\ErrorFoundMessage');
+                $listener->onErrorFound($id, $message);
+                break;
+            case "portingperformed-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\PortingPerformedMessage');
+                $listener->onPortingPerformed($id, $message);
+                break;
+            case "portingrequest-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\PortingRequestMessage');
+                $listener->onPortingRequest($id, $message);
+                break;
+            case "portingrequestanswer-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\PortingRequestAnswerMessage');
+                $listener->onPortingRequestAnswer($id, $message);
+                break;
+            case "pradelayed-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage');
+                $listener->onPortingRequestAnswerDelayed($id, $message);
+                break;
+            case "rangeactivation-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\RangeActivationMessage');
+                $listener->onRangeActivation($id, $message);
+                break;
+            case "rangedeactivation-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\RangeDeactivationMessage');
+                $listener->onRangeDeactivation($id, $message);
+                break;
+            case "tariffchangesn-v1":
+                $message = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage');
+                $listener->onTariffChangeServiceNumber($id, $message);
+                break;
+            default: throw new UnexpectedValueException("Unknown message type $type");
+        }
     }
 }

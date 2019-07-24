@@ -1,6 +1,7 @@
 <?php
 
 use coin\sdk\np\messages\v1\builder\PortingRequestBuilder;
+use coin\sdk\np\ObjectSerializer;
 use coin\sdk\np\service\impl\NumberPortabilityService;
 use PHPUnit\Framework\TestCase;
 
@@ -33,18 +34,16 @@ class NumberPortabilityServiceTest extends TestCase
             ->setNumberSeries('0612345678', '0612345678')
             ->finish()
             ->build();
-        echo "\n\nsending message:\n".$message->__toString();
         $response = $this->service->sendMessage($message);
-        echo "\n\nresponse status code: ".$response->getStatusCode();
-        echo "\nresponse body: ".$response->getBody();
+        $object = json_decode($response->getBody());
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v1\MessageResponse');
+        $this->assertRegExp('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
     }
 
     public function testSendConfirmation()
     {
         $randomId = rand(100, 999);
-        echo "\n\nsending confirmation with id $randomId";
         $response = $this->service->sendConfirmation($randomId);
-        echo "\n\nresponse status code: ".$response->getStatusCode();
-        echo "\nresponse body: ".$response->getBody();
+        $this->assertRegExp('/OK/i', $response->getBody(), "A transactionId with the correct pattern should be received");
     }
 }

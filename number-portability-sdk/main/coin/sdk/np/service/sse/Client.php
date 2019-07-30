@@ -24,6 +24,7 @@ class Client
 {
     const RETRY_DEFAULT_MS = 3000;
     const END_OF_MESSAGE = "/\r\n\r\n|\n\n|\r\r/";
+    const TIMED_OUT = "timed_out";
 
     /** @var  GuzzleHttp\Client */
     private $client;
@@ -59,6 +60,7 @@ class Client
     {
         $this->response = $this->client->request('GET', $this->url, [
             'stream' => true,
+            'read_timeout' => 30, // Time out in seconds, time-out > keep-alive interval
         ]);
     }
 
@@ -68,7 +70,7 @@ class Client
      * @param callable $onDisconnect
      * @return Event[]
      */
-    public function getEvents($onDisconnect)
+    public function getEvents()
     {
         $this->connect();
         $buffer = '';
@@ -76,12 +78,15 @@ class Client
         while (true) {
             // if server closes connection - try to reconnect
             if ($body->eof()) {
-                // clear buffer since there is no sense in partial message
-                $buffer = '';
-                $onDisconnect();
+                break;
             }
 
             $buffer .= $body->read(1);
+
+            if ($body->getMetadata(self::TIMED_OUT)) {
+                break;
+            }
+
             if (preg_match(self::END_OF_MESSAGE, $buffer)) {
                 $parts = preg_split(self::END_OF_MESSAGE, $buffer, 2);
 

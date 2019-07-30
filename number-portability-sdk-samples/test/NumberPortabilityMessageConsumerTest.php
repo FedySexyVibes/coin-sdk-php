@@ -10,7 +10,7 @@ class NumberPortabilityMessageConsumerSample extends TestCase
     {
         $consumer = new NumberPortabilityMessageConsumer();
         $listener = new SampleListener();
-        $messages = $consumer->getMessages($listener);
+        $messages = $consumer->startConsuming($listener);
         foreach(range(1,20) as $i) {
             echo "\n".$messages->current();
             $messages->next();
@@ -21,11 +21,6 @@ class NumberPortabilityMessageConsumerSample extends TestCase
 
 class SampleListener implements INumberPortabilityMessageListener
 {
-    function onMessage($messageId, $message)
-    {
-        echo "\nTestListener received a message with id $messageId";
-    }
-
     function onPortingRequest($messageId, $message)
     {
         echo "\nTestListener received a message with id $messageId";
@@ -124,5 +119,20 @@ class SampleListener implements INumberPortabilityMessageListener
     function onRangeDeactivation($messageId, $message)
     {
         echo "\nTestListener received a message with id $messageId";
+    }
+
+    function onKeepAlive()
+    {
+        echo "\nTestListener received a keepalive message";
+    }
+
+    function onException($exception)
+    {
+        echo "\nTestListener received an exception";
+    }
+
+    function onUnknownMessage($messageId, $message)
+    {
+        echo "\nTestListener received a message with an unknown type with id $messageId";
     }
 }

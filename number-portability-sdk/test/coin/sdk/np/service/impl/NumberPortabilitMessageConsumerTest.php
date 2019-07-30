@@ -10,12 +10,8 @@ class NumberPortabilityMessageConsumerTest extends TestCase
     {
         $consumer = new NumberPortabilityMessageConsumer();
         $result = new TestResult();
-        $listener = new TestListener($result);
-        $messages = $consumer->getMessages($listener);
-        foreach(range(1,20) as $i) {
-            $messages->next();
-            sleep(0.5);
-        }
+        $listener = new TestListener($result, $consumer);
+        $consumer->startConsuming($listener);
 
         $this->assertTrue($result->activationServiceNumberReceived, "Consumer should handle a ActivationServiceNumber message");
         $this->assertTrue($result->activationServiceNumberMessageType, "Message should contain body of type activationsn");
@@ -108,16 +104,25 @@ class TestResult {
 class TestListener implements INumberPortabilityMessageListener
 {
     private $result;
+    private $consumer;
+    private $stop = false;
 
-    public function __construct(TestResult $result)
+    public function __construct(TestResult $result, NumberPortabilityMessageConsumer $consumer)
     {
+        $this->consumer = $consumer;
         $this->result = $result;
     }
 
     function onPortingRequest($messageId, $message)
     {
+        // Make sure we stop when the second porting request is received (all messages are sent
+        if ($this->stop) {
+            $this->consumer->stopConsuming();
+        }
         $this->result->portingRequestReceived = true;
         $this->result->portingRequestMessageType = $message->getBody()->getPortingrequest() != null;
+
+        $this->stop = true;
     }
 
     function onPortingRequestAnswer($messageId, $message)
@@ -232,5 +237,18 @@ class TestListener implements INumberPortabilityMessageListener
     {
         $this->result->rangeDeactivationReceived = true;
         $this->result->rangeDeactivationMessageType = $message->getBody()->getRangedeactivation() != null;
+    }
+
+    function onKeepAlive()
+    {
+        $this->consumer->stopConsuming();
+    }
+
+    function onException($exception)
+    {
+    }
+
+    function onUnknownMessage($messageId, $message)
+    {
     }
 }

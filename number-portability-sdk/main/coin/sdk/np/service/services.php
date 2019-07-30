@@ -3,6 +3,13 @@
 namespace coin\sdk\np\service\impl;
 
 interface INumberPortabilityMessageListener {
+
+    // Handling of keepalive messages en exceptions
+    function onKeepAlive();
+    function onException($exception);
+    function onUnknownMessage($messageId, $message);
+
+    // Handling of the number-portability message types
     function onActivationServiceNumber($messageId, $message);
     function onCancel($messageId, $message);
     function onDeactivation($messageId, $message);

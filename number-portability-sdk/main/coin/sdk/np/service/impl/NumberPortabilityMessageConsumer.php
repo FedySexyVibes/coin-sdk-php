@@ -168,7 +168,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
     private function createUrl()
     {
         return ($this->sseUri) . "?offset=$this->offset&confirmationStatus=$this->confirmationStatus" .
-            (empty($messageTypes) ? "" : "messageTypes=" . (implode(",", $messageTypes)));
+            (empty($this->messageTypes) ? "" : "&messageTypes=" . (implode(",", $this->messageTypes)));
     }
 
     private function handleMessage($event, INumberPortabilityMessageListener $listener)

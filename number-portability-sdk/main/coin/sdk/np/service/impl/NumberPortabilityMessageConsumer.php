@@ -6,16 +6,16 @@ use BadMethodCallException;
 use coin\sdk\common\client\RestApiClient;
 use coin\sdk\common\crypto\ApiClientUtil;
 use coin\sdk\np\messages\v1\ConfirmationStatus;
-use coin\sdk\np\messages\v1\ServerSentEvent;
 use coin\sdk\np\ObjectSerializer;
 use coin\sdk\np\service\sse\Client;
+use coin\sdk\np\service\sse\Event;
 use Exception;
 use GuzzleHttp;
 use GuzzleHttp\Exception\ConnectException;
 
 /**
  * @property IOffsetPersister offsetPersister
- * @property \coin\sdk\np\service\sse\Event[] events
+ * @property Event[] events
  * @method int recoverOffset(int $int)
  */
 class NumberPortabilityMessageConsumer extends RestApiClient
@@ -93,6 +93,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
         $this->recoverOffset = $recoverOffset;
         $this->messageTypes = $messageTypes;
         $this->offset = $initialOffset;
+        $this->offsetPersister = $offsetPersister;
 
         /** @noinspection PhpNonStrictObjectEqualityInspection */
         if ($this->confirmationStatus == ConfirmationStatus::ALL() && $this->offsetPersister == null) {
@@ -110,8 +111,8 @@ class NumberPortabilityMessageConsumer extends RestApiClient
                     if ($data) {
                         $this->handleMessage($event, $listener);
                         $id = $event->getId();
-                        if ($offsetPersister) {
-                            $offsetPersister->setOffset($id);
+                        if ($this->offsetPersister) {
+                            $this->offsetPersister->setOffset($id);
                         }
                     } else {
                         $listener->onKeepAlive($this);

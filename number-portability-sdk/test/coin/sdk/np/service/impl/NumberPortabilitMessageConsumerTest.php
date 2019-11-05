@@ -1,6 +1,8 @@
 <?php /** @noinspection PhpParamsInspection */
 
+use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\service\impl\INumberPortabilityMessageListener;
+use coin\sdk\np\service\impl\IOffsetPersister;
 use coin\sdk\np\service\impl\NumberPortabilityMessageConsumer;
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +13,11 @@ class NumberPortabilityMessageConsumerTest extends TestCase
         $consumer = new NumberPortabilityMessageConsumer();
         $result = new TestResult();
         $listener = new TestListener($result, $consumer);
-        $consumer->startConsuming($listener);
+        $offsetPersister = new TestOffsetPersister();
+        $recoverOffset = function($value) {
+            return $value;
+        };
+        $consumer->startConsuming($listener, ConfirmationStatus::UNCONFIRMED(),  -1, $offsetPersister, $recoverOffset, []);
 
         $this->assertTrue($result->activationServiceNumberReceived, "Consumer should handle a ActivationServiceNumber message");
         $this->assertTrue($result->activationServiceNumberMessageType, "Message should contain body of type activationsn");
@@ -250,5 +256,25 @@ class TestListener implements INumberPortabilityMessageListener
 
     function onUnknownMessage($messageId, $message)
     {
+    }
+}
+
+class TestOffsetPersister implements IOffsetPersister
+{
+    private $offset;
+
+    public function __construct()
+    {
+        $this->offset = -1;
+    }
+
+    function getOffset()
+    {
+        return $this->offset;
+    }
+
+    function setOffset($offset)
+    {
+        $this->offset = $offset;
     }
 }

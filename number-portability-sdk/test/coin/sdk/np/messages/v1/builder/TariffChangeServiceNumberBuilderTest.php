@@ -13,7 +13,7 @@ class TariffChangeServiceNumberBuilderTest extends SendMessageBaseTest
 
         $builder = TariffChangeServiceNumberBuilder::create();
         $builder
-            ->setFullHeader("LOADA", "LOADA", "LOADB", "LOADB")
+            ->setHeader("LOADA", "LOADB", "LOADA", "LOADB")
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("123456")
             ->setPlatformProvider("TEST01")

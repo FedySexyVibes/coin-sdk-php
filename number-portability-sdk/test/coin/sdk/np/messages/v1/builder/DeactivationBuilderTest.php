@@ -12,7 +12,7 @@ class DeactivationBuilderTest extends SendMessageBaseTest
         $builder = DeactivationBuilder::create();
 
         $builder
-            ->setFullHeader("TEST01", "TEST01", "TEST02", "TEST02")
+            ->setHeader("TEST01", "TEST02", "TEST01", "TEST02")
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
             ->setCurrentNetworkOperator("TEST02")

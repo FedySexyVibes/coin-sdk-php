@@ -26,14 +26,7 @@ abstract class MessageBuilder implements IMessageBuilder {
         $this->header = new Header();
     }
 
-    public function setHeader($sender, $receiver)
-    {
-        $this->header->setSender(new Sender(array('networkoperator' => $sender, 'serviceprovider' => $sender)));
-        $this->header->setReceiver(new Receiver(array('networkoperator' => $receiver, 'serviceprovider' => $receiver)));
-        return $this;
-    }
-
-    public function setFullHeader($senderNetworkOperator, $senderServiceProvider, $receiverNetworkOperator, $receiverServiceProvider)
+    public function setHeader($senderNetworkOperator, $receiverNetworkOperator, $senderServiceProvider = null, $receiverServiceProvider = null)
     {
         $this->header->setSender(new Sender(array('networkoperator' => $senderNetworkOperator, 'serviceprovider' => $senderServiceProvider)));
         $this->header->setReceiver(new Receiver(array('networkoperator' => $receiverNetworkOperator, 'serviceprovider' => $receiverServiceProvider)));

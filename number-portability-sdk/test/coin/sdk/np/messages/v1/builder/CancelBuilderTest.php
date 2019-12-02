@@ -19,7 +19,7 @@ class CancelBuilderTest extends SendMessageBaseTest
         date_default_timezone_set('Europe/Amsterdam');
         $builder = CancelBuilder::create();
         $builder
-            ->setFullHeader("LOADA", "LOADA", "LOADB", "LOADB")
+            ->setHeader("LOADA", "LOADB", "LOADA", "LOADB")
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("LOADA-123456")
             ->setNote("Message in notefield");

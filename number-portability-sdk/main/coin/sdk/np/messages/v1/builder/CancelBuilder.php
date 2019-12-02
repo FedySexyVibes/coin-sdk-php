@@ -25,10 +25,6 @@ class CancelBuilder extends MessageBuilder
         $this->header = new Header();
     }
 
-    public function setHeader($sender, $receiver) {
-        return parent::setFullHeader($sender, null, $receiver, null);
-    }
-
     public static function create() {
         $builder = new self;
         return $builder;

@@ -70,7 +70,7 @@ class MySender
     public function SendPortingRequest($id, $begin, $end)
     {
         $message = PortingRequestBuilder::create()
-                ->setHeader($this->operator, 'CRDB')
+                ->setHeader($this->operator)
                 ->setTimestamp(date("Ymdhis", time()))
                 ->setDossierId("$this->operator-$id")
                 ->setNote("Just a note!") // optional

@@ -73,6 +73,10 @@ class PortingPerformedBuilder extends MessageBuilder
         $this->repeats = array();
     }
 
+    public function setHeader($sender, $receiver = 'ALLO') {
+        return parent::setFullHeader($sender, null, $receiver, null);
+    }
+
     public static function create()
     {
         $builder = new self;

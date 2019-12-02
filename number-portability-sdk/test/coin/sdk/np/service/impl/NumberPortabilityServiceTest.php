@@ -26,7 +26,7 @@ class NumberPortabilityServiceTest extends TestCase
     {
         $randomId = rand(1000, 9999);
         $message = PortingRequestBuilder::create()
-            ->setHeader($this->operator, 'CRDB')
+            ->setHeader($this->operator)
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("$this->operator-$randomId")
             ->setRecipientnetworkoperator($this->operator)

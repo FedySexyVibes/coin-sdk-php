@@ -65,6 +65,10 @@ class PortingRequestBuilder extends MessageBuilder
         $this->repeats = array();
     }
 
+    public function setHeader($sender, $receiver = 'CRDB') {
+        return parent::setFullHeader($sender, $sender, $receiver, null);
+    }
+
     public static function create() {
         $builder = new self;
         return $builder;

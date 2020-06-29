@@ -84,7 +84,6 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      * @param IOffsetPersister $offsetPersister [optional]
      * @param callable $recoverOffset [optional]
      * @param string ...$messageTypes [optional]
-     * @return \Generator
      */
     function startConsuming(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,
                             $initialOffset = -1, IOffsetPersister $offsetPersister = null, $recoverOffset = null, array $messageTypes = [])
@@ -172,7 +171,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
             (empty($this->messageTypes) ? "" : "&messageTypes=" . (implode(",", $this->messageTypes)));
     }
 
-    private function handleMessage($event, INumberPortabilityMessageListener $listener)
+    private function handleMessage(Event $event, INumberPortabilityMessageListener $listener)
     {
         $type = $event->getEventType();
 
@@ -238,7 +237,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
                 executeOnMessage($event, 'TariffChangeServiceNumberMessage', $listener, 'onTariffChangeServiceNumber');
                 break;
             default:
-                $listener->onUnknownMessage();
+                $listener->onUnknownMessage($event->getId(), $event->getData());
         }
     }
 }

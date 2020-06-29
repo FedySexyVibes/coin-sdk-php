@@ -90,9 +90,7 @@ class MySender
 ## Consume Messages
 
 An instance of the `INumberPortabilityMessageListener` needs to be passed to the `NumberPortabilityMessageConsumer`'s `getMessages` method.
-This method connects to the SSE stream and returns a generator of messages. Before yielding each message, this generator calls the
-`INumberPortabilityMessageListener`'s `onMessage` function and, if present, the `$offsetPersister`'s `setOffset` method. Whenever something goes wrong in processing a message, it yields the original
-server-sent event with an additional `exception` field.
+This method calls the `INumberPortabilityMessageListener`'s `onMessage` function on each message and, if present, the `$offsetPersister`'s `setOffset` method.
 
 By default, the `NumberPortabilityMessageConsumer` consumes all ***Unconfirmed*** messages. 
 

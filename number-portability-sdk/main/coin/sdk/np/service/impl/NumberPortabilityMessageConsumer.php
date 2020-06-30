@@ -2,38 +2,20 @@
 
 namespace coin\sdk\np\service\impl;
 
-use BadMethodCallException;
 use coin\sdk\common\client\RestApiClient;
-use coin\sdk\common\crypto\ApiClientUtil;
-use coin\sdk\np\messages\v1\ConfirmationStatus;
+use coin\sdk\common\client\sse\Event;
+use coin\sdk\common\client\sse\IOffsetPersister;
+use coin\sdk\common\client\sse\SseConsumer;
 use coin\sdk\np\ObjectSerializer;
-use coin\sdk\np\service\sse\Client;
-use coin\sdk\np\service\sse\Event;
 use Exception;
-use GuzzleHttp;
-use GuzzleHttp\Exception\ConnectException;
+use Generator;
 
 /**
- * @property IOffsetPersister offsetPersister
- * @property Event[] events
- * @method int recoverOffset(int $int)
+ * @property SseConsumer sseConsumer
  */
 class NumberPortabilityMessageConsumer extends RestApiClient
 {
-    private $sseUri;
-    private $backOffPeriod;
-    private $numberOfRetries;
-
-    private $retriesLeft;
-    private $currentBackOffValue;
-    private $confirmationStatus;
-    private $offsetPersister;
-    private $recoverOffset;
-    private $messageTypes;
-    private $offset;
-
-    private $events;
-    private $running;
+    private $sseConsumer;
 
     /**
      * NumberPortabilityMessageConsumer constructor.
@@ -43,29 +25,13 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      * @param string $coinBaseUrl [optional]
      * @param int $backOffPeriod [optional]
      * @param int $numberOfRetries [optional]
-     * @param int $validPeriodInSeconds [optional]
      */
     function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $coinBaseUrl = null,
-                         $backOffPeriod = 1, $numberOfRetries = 20, $validPeriodInSeconds = 30)
+                         $backOffPeriod = 1, $numberOfRetries = 20)
     {
-        parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile, $validPeriodInSeconds);
-        $this->sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']) . '/number-portability/v1/dossiers/events';
-        $this->backOffPeriod = $backOffPeriod;
-        $this->numberOfRetries = $numberOfRetries;
-        $this->running = true;
-    }
-
-    private function isRunning() {
-        return $this->running;
-    }
-
-    private function isInterrupted() {
-        return !$this->isRunning();
-    }
-
-    private function setDefaultRetryValues() {
-        $this->retriesLeft = $this->numberOfRetries;
-        $this->currentBackOffValue = $this->backOffPeriod;
+        parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile);
+        $sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']) . '/number-portability/v1/dossiers/events';
+        $this->sseConsumer = new SseConsumer($sseUri, $consumerName, $privateKeyFile, $encryptedHmacSecretFile, $backOffPeriod, $numberOfRetries);
     }
 
     /**
@@ -74,101 +40,68 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      */
     public function stopConsuming()
     {
-        $this->running = false;
+        ($this->sseConsumer)->stopConsuming();
     }
 
     /**
+     * Recommended method for consuming messages. On connect or reconnect it will consume all unconfirmed messages.
      * @param INumberPortabilityMessageListener $listener
-     * @param ConfirmationStatus $confirmationStatus [optional]
-     * @param int $initialOffset [optional]
-     * @param IOffsetPersister $offsetPersister [optional]
-     * @param callable $recoverOffset [optional]
      * @param string ...$messageTypes [optional]
+     * @return Generator
      */
-    function startConsuming(INumberPortabilityMessageListener $listener, ConfirmationStatus $confirmationStatus = null,
-                            $initialOffset = -1, IOffsetPersister $offsetPersister = null, $recoverOffset = null, array $messageTypes = [])
+    function consumeUnconfirmed(INumberPortabilityMessageListener $listener, array $messageTypes = [])
     {
-        $this->confirmationStatus = $confirmationStatus ?: ConfirmationStatus::UNCONFIRMED();
-        $this->recoverOffset = $recoverOffset;
-        $this->messageTypes = $messageTypes;
-        $this->offset = $initialOffset;
-        $this->offsetPersister = $offsetPersister;
-
-        /** @noinspection PhpNonStrictObjectEqualityInspection */
-        if ($this->confirmationStatus == ConfirmationStatus::ALL() && $this->offsetPersister == null) {
-            throw new BadMethodCallException("offsetPersister should be given when confirmationStatus equals ALL");
-        }
-
-        while ($this->isRunning()) {
-            try {
-                $events = $this->startReading();
-                foreach ($events as $event) {
-                    // Connection succeeded and receiving events, reset reconnect values to the default
-                    $this->setDefaultRetryValues();
-
-                    $data = $event->getData();
-                    if ($data) {
-                        $this->handleMessage($event, $listener);
-                        $id = $event->getId();
-                        if ($this->offsetPersister) {
-                            $this->offsetPersister->setOffset($id);
-                        }
-                    } else {
-                        $listener->onKeepAlive($this);
-                    }
-
-                    if ($this->isInterrupted()) {
-                        break;
-                    }
-                }
-            } catch (Exception $exception) {
-                $listener->onException($exception);
-            }
-
-            // Consumer lost connection to the event stream, trying a reconnect unless signalled from outside
-            // the consumer should stop
-            if ($this->isRunning()) {
-                $this->backOff();
-            }
-        }
+        $handleSse = function (Event $event) use ($listener) {
+            $this->handleMessage($event, $listener);
+        };
+        $onException = function(Exception $exception) use ($listener) {
+            $listener->onException($exception);
+        };
+        return $this->sseConsumer->consumeUnconfirmed($handleSse, $onException, $messageTypes);
     }
 
-    private function startReading()
+    /**
+     * Consume all messages, both confirmed and unconfirmed, from a certain offset.
+     * Only use for special cases if {@link consumeUnconfirmed} does not meet needs.
+     * @param INumberPortabilityMessageListener $listener
+     * @param IOffsetPersister $offsetPersister
+     * @param int $offset [optional]
+     * @param string ...$messageTypes [optional]
+     * @return Generator
+     */
+    function consumeAll(INumberPortabilityMessageListener $listener, IOffsetPersister $offsetPersister,
+                               $offset = -1, array $messageTypes = [])
     {
-        $url = $this->createUrl();
-        $hmacHeaders = ApiClientUtil::getHmacHeaders('');
-        $localPath = parse_url($url, PHP_URL_PATH);
-        $requestLine = "GET $localPath HTTP/1.1";
-        $hmac = ApiClientUtil::CalculateHttpRequestHmac($this->hmacSecret, $this->consumerName, $hmacHeaders, $requestLine);
-        $jwt = ApiClientUtil::createJwt($this->privateKey, $this->consumerName, $this->validPeriodInSeconds);
-
-        $client = new Client($url,
-            array_merge($hmacHeaders, array(
-                "Authorization" => $hmac,
-                "User-Agent" => $this::getFullVersion(),
-                'Content-Type' => 'application/json; charset=utf-8',
-                "cookie" => "jwt=$jwt; path=$localPath")));
-        return $client->getEvents();
+        $handleSse = function (Event $event) use ($listener) {
+            $this->handleMessage($event, $listener);
+        };
+        $onException = function(Exception $exception) use ($listener) {
+            $listener->onException($exception);
+        };
+        return $this->sseConsumer->consumeAll($handleSse, $onException, $offsetPersister, $offset, $messageTypes);
     }
 
-    private function backOff()
+    /**
+     * Only use this method for receiving unconfirmed messages if you make sure that all messages that are received
+     * through this method will be confirmed otherwise, ideally in the stream opened by
+     * {@link consumeUnconfirmed}. So this method should only be used for a secondary
+     * stream (e.g. backoffice process) that needs to consume unconfirmed messages for administrative purposes.
+     * @param INumberPortabilityMessageListener $listener
+     * @param IOffsetPersister $offsetPersister
+     * @param int $offset [optional]
+     * @param string ...$messageTypes [optional]
+     * @return Generator
+     */
+    function consumeUnconfirmedWithOffsetPersistence(INumberPortabilityMessageListener $listener, IOffsetPersister $offsetPersister,
+                                                            $offset = -1, array $messageTypes = [])
     {
-        if ($this->retriesLeft-- == 0) {
-            throw new ConnectException("sse stream disconnected", new GuzzleHttp\Psr7\Request("GET", $this->sseUri));
-        }
-        $persistedOffset = $this->offsetPersister ? $this->offsetPersister->getOffset() : $this->offset;
-        $this->offset = $this->recoverOffset ? $this->recoverOffset($persistedOffset) : $persistedOffset;
-
-        sleep($this->currentBackOffValue);
-
-        if ($this->currentBackOffValue < 60)
-            $this->currentBackOffValue *= 2;
-    }
-
-    private function createUrl()
-    {
-        return ($this->sseUri) . "?offset=$this->offset&confirmationStatus=$this->confirmationStatus" .
-            (empty($this->messageTypes) ? "" : "&messageTypes=" . (implode(",", $this->messageTypes)));
+        $handleSse = function (Event $event) use ($listener) {
+            $this->handleMessage($event, $listener);
+        };
+        $onException = function(Exception $exception) use ($listener) {
+            $listener->onException($exception);
+        };
+        return $this->sseConsumer->consumeUnconfirmedWithOffsetPersistence($handleSse, $onException, $offsetPersister, $offset, $messageTypes);
     }
 
     private function handleMessage(Event $event, INumberPortabilityMessageListener $listener)

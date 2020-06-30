@@ -4,6 +4,8 @@ namespace coin\sdk\common\client\sse;
 
 use coin\sdk\common\client\RestApiClient;
 use coin\sdk\common\crypto\ApiClientUtil;
+use Exception;
+use Generator;
 use GuzzleHttp;
 use GuzzleHttp\Exception\ConnectException;
 use Spatie\Enum\Enum;
@@ -66,68 +68,80 @@ class SseConsumer extends RestApiClient
 
     /**
      * @param callable $handleSSE
+     * @param callable $onException
      * @param string[] $messageTypes [optional]
      * @param array $params [optional]
+     * @return Generator
      */
-    public function startConsumingUnconfirmed($handleSSE, $messageTypes = [], $params = [])
+    public function consumeUnconfirmed($handleSSE, $onException, $messageTypes = [], $params = [])
     {
-        $this->startConsuming($handleSSE, ConfirmationStatus::UNCONFIRMED(), -1, null, $messageTypes, $params);
+        return $this->consume($handleSSE, $onException, ConfirmationStatus::UNCONFIRMED(), -1, null, $messageTypes, $params);
     }
 
     /**
      * @param callable $handleSSE
+     * @param callable $onException
      * @param IOffsetPersister $offsetPersister
      * @param int $offset [optional]
      * @param string[] $messageTypes [optional]
      * @param array $params [optional]
+     * @return Generator
      */
-    public function startConsumingUnconfirmedWithOffsetPersistence($handleSSE, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
+    public function consumeUnconfirmedWithOffsetPersistence($handleSSE, $onException, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
     {
-        $this->startConsuming($handleSSE, ConfirmationStatus::UNCONFIRMED(), $offset, $offsetPersister, $messageTypes, $params);
+        return $this->consume($handleSSE, $onException, ConfirmationStatus::UNCONFIRMED(), $offset, $offsetPersister, $messageTypes, $params);
     }
 
     /**
      * @param callable $handleSSE
+     * @param callable $onException
      * @param IOffsetPersister $offsetPersister
      * @param int $offset
      * @param string[] $messageTypes
      * @param string[][] $params
+     * @return Generator|Event[]
      */
-    public function startConsumingAll($handleSSE, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
+    public function consumeAll($handleSSE, $onException, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
     {
-        $this->startConsuming($handleSSE, ConfirmationStatus::ALL(), $offset, $offsetPersister, $messageTypes, $params);
+        return $this->consume($handleSSE, $onException, ConfirmationStatus::ALL(), $offset, $offsetPersister, $messageTypes, $params);
     }
 
     /**
      * @param callable $handleSse
+     * @param callable $onException
      * @param ConfirmationStatus $confirmationStatus [optional]
      * @param int $initialOffset [optional]
      * @param IOffsetPersister $offsetPersister [optional]
      * @param string[] $messageTypes [optional]
      * @param string[][] $params [optional]
+     * @return Generator
      */
-    private function startConsuming($handleSse, ConfirmationStatus $confirmationStatus = null, $initialOffset = -1,
-                                    IOffsetPersister $offsetPersister = null, $messageTypes = [], $params = [])
+    private function consume($handleSse, $onException, ConfirmationStatus $confirmationStatus = null, $initialOffset = -1,
+                             IOffsetPersister $offsetPersister = null, $messageTypes = [], $params = [])
     {
         $confirmationStatus = $confirmationStatus ?: ConfirmationStatus::UNCONFIRMED();
         $this->offset = $initialOffset;
 
         while ($this->isRunning()) {
-            $events = $this->startReading($confirmationStatus, $messageTypes, $params);
-            foreach ($events as $event) {
-                // Connection succeeded and receiving events, reset reconnect values to the default
-                $this->setDefaultRetryValues();
+            try {
+                $events = $this->readEvents($confirmationStatus, $messageTypes, $params);
+                foreach ($events as $event) {
+                    // Connection succeeded and receiving events, reset reconnect values to the default
+                    $this->setDefaultRetryValues();
 
-                $id = $this->$handleSse($event);
-                if ($id && $offsetPersister) {
-                    $offsetPersister->setOffset($id);
+                    $handleSse($event);
+                    $id = $event->getId();
+                    if ($id && $offsetPersister) {
+                        $offsetPersister->setOffset($id);
+                    }
+                    yield $id;
+                    if ($this->isInterrupted()) {
+                        break;
+                    }
                 }
-
-                if ($this->isInterrupted()) {
-                    break;
-                }
+            } catch (Exception $exception) {
+                $onException($exception);
             }
-
             // Consumer lost connection to the event stream, trying a reconnect unless signalled from outside
             // the consumer should stop
             if ($this->isRunning()) {
@@ -142,7 +156,7 @@ class SseConsumer extends RestApiClient
      * @param $params
      * @return Event[]
      */
-    private function startReading($confirmationStatus, $messageTypes, $params)
+    private function readEvents($confirmationStatus, $messageTypes, $params)
     {
         $url = $this->createUrl($confirmationStatus, $messageTypes, $params);
         $hmacHeaders = ApiClientUtil::getHmacHeaders('');

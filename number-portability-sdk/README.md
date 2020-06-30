@@ -89,25 +89,24 @@ class MySender
 
 ## Consume Messages
 
-An instance of the `INumberPortabilityMessageListener` needs to be passed to the `NumberPortabilityMessageConsumer`'s `getMessages` method.
-This method calls the `INumberPortabilityMessageListener`'s `onMessage` function on each message and, if present, the `$offsetPersister`'s `setOffset` method.
+### Create Message Listener
+For message consumption, the number portability API makes use of HTTP's [ServerSentEvents](https://en.wikipedia.org/wiki/Server-sent_events).
+The SDK offers a Listener interface `INumberPortabilityMessageListener` which is triggered upon reception of a message payload.
 
-By default, the `NumberPortabilityMessageConsumer` consumes all ***Unconfirmed*** messages. 
+### Start consuming messages 
+The `NumberPortabilityMessageConsumer` has three `consume...()` methods for consuming messages, of which `consumeUnconfirmed()` is most useful.
+All these methods need an instance of the `INumberPortabilityMessageListener`. These methods return a Generator of `message-id`s; iterating over this
+Generator causes the messages to be consumed.
 
-
-#### Consume specific messages using filters
+### Consume specific messages using filters
 The `NumberPortabilityMessageConsumer` provides various filters for message consumption. The filters are:
 - `MessageType`: All possible message types, including errors. Use the `MessageType`-enumeration to indicate which messages have to be consumed.
-- ConfirmationStatus: 
-    - `ConfirmationStatus.Unconfirmed`: consumes all unconfirmed messages. Upon (re)-connection all unconfirmed messages are served.
-    - `ConfirmationStatus.All`: consumes confirmed and unconfirmed messages.  
-    **Note:** this filter enables the consumption of the *whole message history*.
-    Therefore, this filter requires you to supply an implementation of the `IOffsetPersister` interface.
-    The purpose of this interface is to track the `messageId` of the last received and processed message.
+- confirmation status: By using `consumeAll()`, all messages will be received, both confirmed and unconfirmed.   
+    **Note:** this enables the consumption of the *whole message history*.
+    Therefore, this requires you to supply an implementation of the `IOffsetPersister` interface.
+    The purpose of this interface is to track the `message-id` of the last received and processed message.
     In case of a reconnect, message consumption will then resume where it left off.
-- `offset`: starts consuming messages based on the given `messageId` offset.
-When using `ConfirmationStatus.Unconfirmed`, the `offset` is in most cases not very useful. The `ConfirmationStatus.All` filter is better.
-***Note:*** it is the responsibility of the client to keep track of the `offset`.
+- `offset`: starts consuming messages based on the given `message-id` offset. ***Note:*** it is the responsibility of the client to keep track of the `offset`.
 
 #### Confirm Messages
 Once a consumed message is processed it needs to be confirmed.

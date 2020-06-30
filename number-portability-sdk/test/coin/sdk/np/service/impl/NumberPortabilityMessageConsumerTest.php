@@ -1,8 +1,6 @@
 <?php /** @noinspection PhpParamsInspection */
 
-use coin\sdk\np\messages\v1\ConfirmationStatus;
 use coin\sdk\np\service\impl\INumberPortabilityMessageListener;
-use coin\sdk\np\service\impl\IOffsetPersister;
 use coin\sdk\np\service\impl\NumberPortabilityMessageConsumer;
 use PHPUnit\Framework\TestCase;
 
@@ -13,11 +11,10 @@ class NumberPortabilityMessageConsumerTest extends TestCase
         $consumer = new NumberPortabilityMessageConsumer();
         $result = new TestResult();
         $listener = new TestListener($result, $consumer);
-        $offsetPersister = new TestOffsetPersister();
-        $recoverOffset = function($value) {
-            return $value;
-        };
-        $consumer->startConsuming($listener, ConfirmationStatus::UNCONFIRMED(),  -1, $offsetPersister, $recoverOffset, []);
+        $generator = $consumer->consumeUnconfirmed($listener);
+        foreach(range(1,30) as $i) {
+            $generator->next();
+        }
 
         $this->assertTrue($result->activationServiceNumberReceived, "Consumer should handle a ActivationServiceNumber message");
         $this->assertTrue($result->activationServiceNumberMessageType, "Message should contain body of type activationsn");
@@ -111,7 +108,6 @@ class TestListener implements INumberPortabilityMessageListener
 {
     private $result;
     private $consumer;
-    private $stop = false;
 
     public function __construct(TestResult $result, NumberPortabilityMessageConsumer $consumer)
     {
@@ -121,14 +117,8 @@ class TestListener implements INumberPortabilityMessageListener
 
     function onPortingRequest($messageId, $message)
     {
-        // Make sure we stop when the second porting request is received (all messages are sent
-        if ($this->stop) {
-            $this->consumer->stopConsuming();
-        }
         $this->result->portingRequestReceived = true;
         $this->result->portingRequestMessageType = $message->getBody()->getPortingrequest() != null;
-
-        $this->stop = true;
     }
 
     function onPortingRequestAnswer($messageId, $message)
@@ -256,25 +246,5 @@ class TestListener implements INumberPortabilityMessageListener
 
     function onUnknownMessage($messageId, $message)
     {
-    }
-}
-
-class TestOffsetPersister implements IOffsetPersister
-{
-    private $offset;
-
-    public function __construct()
-    {
-        $this->offset = -1;
-    }
-
-    function getOffset()
-    {
-        return $this->offset;
-    }
-
-    function setOffset($offset)
-    {
-        $this->offset = $offset;
     }
 }

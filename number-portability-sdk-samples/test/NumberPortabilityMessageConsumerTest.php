@@ -2,6 +2,7 @@
 
 use coin\sdk\np\service\impl\INumberPortabilityMessageListener;
 use coin\sdk\np\service\impl\NumberPortabilityMessageConsumer;
+use coin\sdk\np\service\impl\NumberPortabilityService;
 use PHPUnit\Framework\TestCase;
 
 class NumberPortabilityMessageConsumerSample extends TestCase
@@ -10,12 +11,14 @@ class NumberPortabilityMessageConsumerSample extends TestCase
     {
         $consumer = new NumberPortabilityMessageConsumer();
         $listener = new SampleListener();
-        $messages = $consumer->startConsuming($listener);
-        foreach(range(1,20) as $i) {
-            echo "\n".$messages->current();
-            $messages->next();
-            sleep(1);
+        // $service = new NumberPortabilityService();
+        $consumer->consumeUnconfirmed($listener);
+        $messageIds = $consumer->consumeUnconfirmed($listener);
+        // runs forever (until connection drops and all retries fail)
+        foreach($messageIds as $id) {
+            // $service->sendConfirmation($id);
         }
+        // alternatively, consume a single message by calling $messageIds->next().
     }
 }
 

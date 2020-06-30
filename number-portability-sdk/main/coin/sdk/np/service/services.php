@@ -36,8 +36,3 @@ interface INumberPortabilityService {
     function sendConfirmation($id);
     function sendMessage($message);
 }
-
-interface IOffsetPersister {
-    function getOffset();
-    function setOffset($offset);
-}

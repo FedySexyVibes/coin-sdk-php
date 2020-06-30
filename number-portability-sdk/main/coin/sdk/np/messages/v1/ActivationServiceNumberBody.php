@@ -202,7 +202,7 @@ class ActivationServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Gets activationsn
      *
-     * @return \coin\sdk\np\messages\v1\ActivationServiceNumber
+     * @return ActivationServiceNumber
      */
     public function getActivationsn()
     {
@@ -212,7 +212,7 @@ class ActivationServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Sets activationsn
      *
-     * @param \coin\sdk\np\messages\v1\ActivationServiceNumber $activationsn activationsn
+     * @param ActivationServiceNumber $activationsn activationsn
      *
      * @return $this
      */

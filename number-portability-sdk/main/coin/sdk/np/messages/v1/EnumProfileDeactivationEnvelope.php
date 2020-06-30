@@ -202,7 +202,7 @@ class EnumProfileDeactivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\EnumProfileDeactivationMessage
+     * @return EnumProfileDeactivationMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class EnumProfileDeactivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\EnumProfileDeactivationMessage $message message
+     * @param EnumProfileDeactivationMessage $message message
      *
      * @return $this
      */

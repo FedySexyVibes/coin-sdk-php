@@ -202,7 +202,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\CancelMessage
+     * @return CancelMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\CancelMessage $message message
+     * @param CancelMessage $message message
      *
      * @return $this
      */

@@ -202,7 +202,7 @@ class PortingRequestBody implements ModelInterface, ArrayAccess
     /**
      * Gets portingrequest
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequest
+     * @return PortingRequest
      */
     public function getPortingrequest()
     {
@@ -212,7 +212,7 @@ class PortingRequestBody implements ModelInterface, ArrayAccess
     /**
      * Sets portingrequest
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequest $portingrequest portingrequest
+     * @param PortingRequest $portingrequest portingrequest
      *
      * @return $this
      */

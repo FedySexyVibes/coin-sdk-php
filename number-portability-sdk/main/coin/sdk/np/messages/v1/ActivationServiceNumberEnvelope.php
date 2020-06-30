@@ -202,7 +202,7 @@ class ActivationServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\ActivationServiceNumberMessage
+     * @return ActivationServiceNumberMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class ActivationServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\ActivationServiceNumberMessage $message message
+     * @param ActivationServiceNumberMessage $message message
      *
      * @return $this
      */

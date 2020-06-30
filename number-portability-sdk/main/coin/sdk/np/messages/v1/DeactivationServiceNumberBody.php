@@ -202,7 +202,7 @@ class DeactivationServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Gets deactivationsn
      *
-     * @return \coin\sdk\np\messages\v1\DeactivationServiceNumber
+     * @return DeactivationServiceNumber
      */
     public function getDeactivationsn()
     {
@@ -212,7 +212,7 @@ class DeactivationServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Sets deactivationsn
      *
-     * @param \coin\sdk\np\messages\v1\DeactivationServiceNumber $deactivationsn deactivationsn
+     * @param DeactivationServiceNumber $deactivationsn deactivationsn
      *
      * @return $this
      */

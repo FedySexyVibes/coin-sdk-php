@@ -202,7 +202,7 @@ class EnumActivationOperatorBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumactivationoperator
      *
-     * @return \coin\sdk\np\messages\v1\EnumOperatorContent
+     * @return EnumOperatorContent
      */
     public function getEnumactivationoperator()
     {
@@ -212,7 +212,7 @@ class EnumActivationOperatorBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumactivationoperator
      *
-     * @param \coin\sdk\np\messages\v1\EnumOperatorContent $enumactivationoperator enumactivationoperator
+     * @param EnumOperatorContent $enumactivationoperator enumactivationoperator
      *
      * @return $this
      */

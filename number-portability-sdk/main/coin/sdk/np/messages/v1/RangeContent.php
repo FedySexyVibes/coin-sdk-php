@@ -334,7 +334,7 @@ class RangeContent implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\RangeRepeats[]
+     * @return RangeRepeats[]
      */
     public function getRepeats()
     {
@@ -344,7 +344,7 @@ class RangeContent implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\RangeRepeats[] $repeats repeats
+     * @param RangeRepeats[] $repeats repeats
      *
      * @return $this
      */

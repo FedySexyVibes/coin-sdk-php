@@ -220,7 +220,7 @@ class PortingPerformedSeq implements ModelInterface, ArrayAccess
     /**
      * Gets numberseries
      *
-     * @return \coin\sdk\np\messages\v1\NumberSeries
+     * @return NumberSeries
      */
     public function getNumberseries()
     {
@@ -230,7 +230,7 @@ class PortingPerformedSeq implements ModelInterface, ArrayAccess
     /**
      * Sets numberseries
      *
-     * @param \coin\sdk\np\messages\v1\NumberSeries $numberseries numberseries
+     * @param NumberSeries $numberseries numberseries
      *
      * @return $this
      */
@@ -292,7 +292,7 @@ class PortingPerformedSeq implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\EnumRepeats[]
+     * @return EnumRepeats[]
      */
     public function getRepeats()
     {
@@ -302,7 +302,7 @@ class PortingPerformedSeq implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\EnumRepeats[] $repeats repeats
+     * @param EnumRepeats[] $repeats repeats
      *
      * @return $this
      */

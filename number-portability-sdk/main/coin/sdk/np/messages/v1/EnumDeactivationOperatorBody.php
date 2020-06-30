@@ -202,7 +202,7 @@ class EnumDeactivationOperatorBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumdeactivationoperator
      *
-     * @return \coin\sdk\np\messages\v1\EnumOperatorContent
+     * @return EnumOperatorContent
      */
     public function getEnumdeactivationoperator()
     {
@@ -212,7 +212,7 @@ class EnumDeactivationOperatorBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumdeactivationoperator
      *
-     * @param \coin\sdk\np\messages\v1\EnumOperatorContent $enumdeactivationoperator enumdeactivationoperator
+     * @param EnumOperatorContent $enumdeactivationoperator enumdeactivationoperator
      *
      * @return $this
      */

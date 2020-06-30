@@ -202,7 +202,7 @@ class EnumActivationRangeEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\EnumActivationRangeMessage
+     * @return EnumActivationRangeMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class EnumActivationRangeEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\EnumActivationRangeMessage $message message
+     * @param EnumActivationRangeMessage $message message
      *
      * @return $this
      */

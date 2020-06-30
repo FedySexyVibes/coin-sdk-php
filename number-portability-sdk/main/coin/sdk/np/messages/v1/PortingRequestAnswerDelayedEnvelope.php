@@ -202,7 +202,7 @@ class PortingRequestAnswerDelayedEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage
+     * @return PortingRequestAnswerDelayedMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class PortingRequestAnswerDelayedEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage $message message
+     * @param PortingRequestAnswerDelayedMessage $message message
      *
      * @return $this
      */

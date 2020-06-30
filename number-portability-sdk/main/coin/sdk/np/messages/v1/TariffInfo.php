@@ -30,6 +30,7 @@ namespace coin\sdk\np\messages\v1;
 
 use \ArrayAccess;
 use \coin\sdk\np\ObjectSerializer;
+use InvalidArgumentException;
 
 /**
  * TariffInfo Class Doc Comment
@@ -325,7 +326,7 @@ self::CURRENCY__1,        ];
     {
         $allowedValues = $this->getCurrencyAllowableValues();
         if (!in_array($currency, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value for 'currency', must be one of '%s'",
                     implode("', '", $allowedValues)

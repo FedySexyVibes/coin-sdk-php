@@ -202,7 +202,7 @@ class DeactivationServiceNumberRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\DeactivationServiceNumberSeq
+     * @return DeactivationServiceNumberSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class DeactivationServiceNumberRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\DeactivationServiceNumberSeq $seq seq
+     * @param DeactivationServiceNumberSeq $seq seq
      *
      * @return $this
      */

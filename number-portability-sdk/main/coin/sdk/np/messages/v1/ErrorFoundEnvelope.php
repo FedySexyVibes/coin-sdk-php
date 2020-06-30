@@ -202,7 +202,7 @@ class ErrorFoundEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\ErrorFoundMessage
+     * @return ErrorFoundMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class ErrorFoundEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\ErrorFoundMessage $message message
+     * @param ErrorFoundMessage $message message
      *
      * @return $this
      */

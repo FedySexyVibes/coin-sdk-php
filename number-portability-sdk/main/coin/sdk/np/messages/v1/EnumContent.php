@@ -301,7 +301,7 @@ class EnumContent implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\EnumNumberRepeats[]
+     * @return EnumNumberRepeats[]
      */
     public function getRepeats()
     {
@@ -311,7 +311,7 @@ class EnumContent implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\EnumNumberRepeats[] $repeats repeats
+     * @param EnumNumberRepeats[] $repeats repeats
      *
      * @return $this
      */

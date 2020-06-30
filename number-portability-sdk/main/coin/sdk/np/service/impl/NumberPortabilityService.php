@@ -5,6 +5,8 @@ namespace coin\sdk\np\service\impl;
 use coin\sdk\common\client\RestApiClient;
 use coin\sdk\np\messages\v1\common\Message;
 use coin\sdk\np\messages\v1\ConfirmationMessage;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
 
 class NumberPortabilityService extends RestApiClient
 {
@@ -23,16 +25,16 @@ class NumberPortabilityService extends RestApiClient
 
     /**
      * @param Message $message
-     * @return mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|ResponseInterface
+     * @throws GuzzleException
      */
     public function sendMessage($message) {
         return $this->postMessage($message->__toString(), $message->getMessageType());
     }
 
     /** @param int $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|ResponseInterface
+     * @throws GuzzleException
      */
     public function sendConfirmation($id) {
         $confirmationMessage = (new ConfirmationMessage())->setTransactionId(strval($id));
@@ -43,8 +45,8 @@ class NumberPortabilityService extends RestApiClient
     /**
      * @param $message
      * @param $messageType
-     * @return mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|ResponseInterface
+     * @throws GuzzleException
      */
     private function postMessage($message, $messageType) {
         $url = $this->apiUrl . "/dossiers/" . $messageType;

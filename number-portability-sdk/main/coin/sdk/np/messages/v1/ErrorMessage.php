@@ -211,7 +211,7 @@ class ErrorMessage implements ModelInterface, ArrayAccess
     /**
      * Gets code
      *
-     * @return \coin\sdk\np\messages\v1\ApplicationErrorCode
+     * @return ApplicationErrorCode
      */
     public function getCode()
     {
@@ -221,7 +221,7 @@ class ErrorMessage implements ModelInterface, ArrayAccess
     /**
      * Sets code
      *
-     * @param \coin\sdk\np\messages\v1\ApplicationErrorCode $code code
+     * @param ApplicationErrorCode $code code
      *
      * @return $this
      */

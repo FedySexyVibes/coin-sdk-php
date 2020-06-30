@@ -301,7 +301,7 @@ class Deactivation implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\DeactivationRepeats[]
+     * @return DeactivationRepeats[]
      */
     public function getRepeats()
     {
@@ -311,7 +311,7 @@ class Deactivation implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\DeactivationRepeats[] $repeats repeats
+     * @param DeactivationRepeats[] $repeats repeats
      *
      * @return $this
      */

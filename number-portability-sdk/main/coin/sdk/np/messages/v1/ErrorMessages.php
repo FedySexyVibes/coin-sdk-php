@@ -211,7 +211,7 @@ class ErrorMessages implements ModelInterface, ArrayAccess
     /**
      * Gets errors
      *
-     * @return \coin\sdk\np\messages\v1\ErrorMessage[]
+     * @return ErrorMessage[]
      */
     public function getErrors()
     {
@@ -221,7 +221,7 @@ class ErrorMessages implements ModelInterface, ArrayAccess
     /**
      * Sets errors
      *
-     * @param \coin\sdk\np\messages\v1\ErrorMessage[] $errors errors
+     * @param ErrorMessage[] $errors errors
      *
      * @return $this
      */

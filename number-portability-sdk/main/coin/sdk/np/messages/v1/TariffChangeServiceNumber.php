@@ -301,7 +301,7 @@ class TariffChangeServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\TariffChangeServiceNumberRepeats[]
+     * @return TariffChangeServiceNumberRepeats[]
      */
     public function getRepeats()
     {
@@ -311,7 +311,7 @@ class TariffChangeServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\TariffChangeServiceNumberRepeats[] $repeats repeats
+     * @param TariffChangeServiceNumberRepeats[] $repeats repeats
      *
      * @return $this
      */

@@ -301,7 +301,7 @@ class DeactivationServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\DeactivationServiceNumberRepeats[]
+     * @return DeactivationServiceNumberRepeats[]
      */
     public function getRepeats()
     {
@@ -311,7 +311,7 @@ class DeactivationServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\DeactivationServiceNumberRepeats[] $repeats repeats
+     * @param DeactivationServiceNumberRepeats[] $repeats repeats
      *
      * @return $this
      */

@@ -361,7 +361,7 @@ class PortingPerformed implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\PortingPerformedRepeats[]
+     * @return PortingPerformedRepeats[]
      */
     public function getRepeats()
     {
@@ -371,7 +371,7 @@ class PortingPerformed implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\PortingPerformedRepeats[] $repeats repeats
+     * @param PortingPerformedRepeats[] $repeats repeats
      *
      * @return $this
      */

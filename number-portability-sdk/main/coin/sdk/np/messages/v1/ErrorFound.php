@@ -235,7 +235,7 @@ class ErrorFound implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\ErrorFoundRepeats[]
+     * @return ErrorFoundRepeats[]
      */
     public function getRepeats()
     {
@@ -245,7 +245,7 @@ class ErrorFound implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\ErrorFoundRepeats[] $repeats repeats
+     * @param ErrorFoundRepeats[] $repeats repeats
      *
      * @return $this
      */

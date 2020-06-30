@@ -202,7 +202,7 @@ class EnumActivationRangeBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumactivationrange
      *
-     * @return \coin\sdk\np\messages\v1\EnumContent
+     * @return EnumContent
      */
     public function getEnumactivationrange()
     {
@@ -212,7 +212,7 @@ class EnumActivationRangeBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumactivationrange
      *
-     * @param \coin\sdk\np\messages\v1\EnumContent $enumactivationrange enumactivationrange
+     * @param EnumContent $enumactivationrange enumactivationrange
      *
      * @return $this
      */

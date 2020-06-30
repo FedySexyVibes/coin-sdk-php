@@ -202,7 +202,7 @@ class EnumActivationNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\EnumActivationNumberMessage
+     * @return EnumActivationNumberMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class EnumActivationNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\EnumActivationNumberMessage $message message
+     * @param EnumActivationNumberMessage $message message
      *
      * @return $this
      */

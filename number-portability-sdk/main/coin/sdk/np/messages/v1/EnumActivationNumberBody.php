@@ -202,7 +202,7 @@ class EnumActivationNumberBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumactivationnumber
      *
-     * @return \coin\sdk\np\messages\v1\EnumContent
+     * @return EnumContent
      */
     public function getEnumactivationnumber()
     {
@@ -212,7 +212,7 @@ class EnumActivationNumberBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumactivationnumber
      *
-     * @param \coin\sdk\np\messages\v1\EnumContent $enumactivationnumber enumactivationnumber
+     * @param EnumContent $enumactivationnumber enumactivationnumber
      *
      * @return $this
      */

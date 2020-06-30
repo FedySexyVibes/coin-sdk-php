@@ -211,7 +211,7 @@ class PortingRequestAnswerMessage implements ModelInterface, ArrayAccess
     /**
      * Gets header
      *
-     * @return \coin\sdk\np\messages\v1\Header
+     * @return Header
      */
     public function getHeader()
     {
@@ -221,7 +221,7 @@ class PortingRequestAnswerMessage implements ModelInterface, ArrayAccess
     /**
      * Sets header
      *
-     * @param \coin\sdk\np\messages\v1\Header $header header
+     * @param Header $header header
      *
      * @return $this
      */
@@ -235,7 +235,7 @@ class PortingRequestAnswerMessage implements ModelInterface, ArrayAccess
     /**
      * Gets body
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestAnswerBody
+     * @return PortingRequestAnswerBody
      */
     public function getBody()
     {
@@ -245,7 +245,7 @@ class PortingRequestAnswerMessage implements ModelInterface, ArrayAccess
     /**
      * Sets body
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestAnswerBody $body body
+     * @param PortingRequestAnswerBody $body body
      *
      * @return $this
      */

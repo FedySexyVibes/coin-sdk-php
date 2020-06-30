@@ -27,6 +27,8 @@
 
 namespace coin\sdk\np;
 
+use InvalidArgumentException;
+
 /**
  * Configuration Class Doc Comment
  * PHP version 5
@@ -267,13 +269,13 @@ class Configuration
      *
      * @param string $userAgent the user agent of the api client
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return $this
      */
     public function setUserAgent($userAgent)
     {
         if (!is_string($userAgent)) {
-            throw new \InvalidArgumentException('User-agent must be a string.');
+            throw new InvalidArgumentException('User-agent must be a string.');
         }
 
         $this->userAgent = $userAgent;

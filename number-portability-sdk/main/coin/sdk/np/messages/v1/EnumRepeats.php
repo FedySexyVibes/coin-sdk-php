@@ -202,7 +202,7 @@ class EnumRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\EnumProfileSeq
+     * @return EnumProfileSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class EnumRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\EnumProfileSeq $seq seq
+     * @param EnumProfileSeq $seq seq
      *
      * @return $this
      */

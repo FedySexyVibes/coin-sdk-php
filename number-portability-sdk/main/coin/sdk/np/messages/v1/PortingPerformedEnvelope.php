@@ -202,7 +202,7 @@ class PortingPerformedEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\PortingPerformedMessage
+     * @return PortingPerformedMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class PortingPerformedEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\PortingPerformedMessage $message message
+     * @param PortingPerformedMessage $message message
      *
      * @return $this
      */

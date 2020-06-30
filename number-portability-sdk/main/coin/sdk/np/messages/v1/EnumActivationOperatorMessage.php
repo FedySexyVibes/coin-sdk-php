@@ -211,7 +211,7 @@ class EnumActivationOperatorMessage implements ModelInterface, ArrayAccess
     /**
      * Gets header
      *
-     * @return \coin\sdk\np\messages\v1\Header
+     * @return Header
      */
     public function getHeader()
     {
@@ -221,7 +221,7 @@ class EnumActivationOperatorMessage implements ModelInterface, ArrayAccess
     /**
      * Sets header
      *
-     * @param \coin\sdk\np\messages\v1\Header $header header
+     * @param Header $header header
      *
      * @return $this
      */
@@ -235,7 +235,7 @@ class EnumActivationOperatorMessage implements ModelInterface, ArrayAccess
     /**
      * Gets body
      *
-     * @return \coin\sdk\np\messages\v1\EnumActivationOperatorBody
+     * @return EnumActivationOperatorBody
      */
     public function getBody()
     {
@@ -245,7 +245,7 @@ class EnumActivationOperatorMessage implements ModelInterface, ArrayAccess
     /**
      * Sets body
      *
-     * @param \coin\sdk\np\messages\v1\EnumActivationOperatorBody $body body
+     * @param EnumActivationOperatorBody $body body
      *
      * @return $this
      */

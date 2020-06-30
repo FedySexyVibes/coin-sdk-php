@@ -331,7 +331,7 @@ class ActivationServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\ActivationServiceNumberRepeats[]
+     * @return ActivationServiceNumberRepeats[]
      */
     public function getRepeats()
     {
@@ -341,7 +341,7 @@ class ActivationServiceNumber implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\ActivationServiceNumberRepeats[] $repeats repeats
+     * @param ActivationServiceNumberRepeats[] $repeats repeats
      *
      * @return $this
      */

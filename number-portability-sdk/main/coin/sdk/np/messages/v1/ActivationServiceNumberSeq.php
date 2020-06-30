@@ -220,7 +220,7 @@ class ActivationServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Gets numberseries
      *
-     * @return \coin\sdk\np\messages\v1\NumberSeries
+     * @return NumberSeries
      */
     public function getNumberseries()
     {
@@ -230,7 +230,7 @@ class ActivationServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Sets numberseries
      *
-     * @param \coin\sdk\np\messages\v1\NumberSeries $numberseries numberseries
+     * @param NumberSeries $numberseries numberseries
      *
      * @return $this
      */
@@ -244,7 +244,7 @@ class ActivationServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Gets tariffinfo
      *
-     * @return \coin\sdk\np\messages\v1\TariffInfo
+     * @return TariffInfo
      */
     public function getTariffinfo()
     {
@@ -254,7 +254,7 @@ class ActivationServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Sets tariffinfo
      *
-     * @param \coin\sdk\np\messages\v1\TariffInfo $tariffinfo tariffinfo
+     * @param TariffInfo $tariffinfo tariffinfo
      *
      * @return $this
      */

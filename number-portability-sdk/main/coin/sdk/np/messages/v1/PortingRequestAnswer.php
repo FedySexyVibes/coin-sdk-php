@@ -268,7 +268,7 @@ class PortingRequestAnswer implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestAnswerRepeats[]
+     * @return PortingRequestAnswerRepeats[]
      */
     public function getRepeats()
     {
@@ -278,7 +278,7 @@ class PortingRequestAnswer implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestAnswerRepeats[] $repeats repeats
+     * @param PortingRequestAnswerRepeats[] $repeats repeats
      *
      * @return $this
      */

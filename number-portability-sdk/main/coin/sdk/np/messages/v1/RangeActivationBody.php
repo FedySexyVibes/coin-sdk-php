@@ -202,7 +202,7 @@ class RangeActivationBody implements ModelInterface, ArrayAccess
     /**
      * Gets rangeactivation
      *
-     * @return \coin\sdk\np\messages\v1\RangeContent
+     * @return RangeContent
      */
     public function getRangeactivation()
     {
@@ -212,7 +212,7 @@ class RangeActivationBody implements ModelInterface, ArrayAccess
     /**
      * Sets rangeactivation
      *
-     * @param \coin\sdk\np\messages\v1\RangeContent $rangeactivation rangeactivation
+     * @param RangeContent $rangeactivation rangeactivation
      *
      * @return $this
      */

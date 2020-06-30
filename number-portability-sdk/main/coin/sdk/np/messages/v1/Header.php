@@ -220,7 +220,7 @@ class Header implements ModelInterface, ArrayAccess
     /**
      * Gets receiver
      *
-     * @return \coin\sdk\np\messages\v1\Receiver
+     * @return Receiver
      */
     public function getReceiver()
     {
@@ -230,7 +230,7 @@ class Header implements ModelInterface, ArrayAccess
     /**
      * Sets receiver
      *
-     * @param \coin\sdk\np\messages\v1\Receiver $receiver receiver
+     * @param Receiver $receiver receiver
      *
      * @return $this
      */
@@ -244,7 +244,7 @@ class Header implements ModelInterface, ArrayAccess
     /**
      * Gets sender
      *
-     * @return \coin\sdk\np\messages\v1\Sender
+     * @return Sender
      */
     public function getSender()
     {
@@ -254,7 +254,7 @@ class Header implements ModelInterface, ArrayAccess
     /**
      * Sets sender
      *
-     * @param \coin\sdk\np\messages\v1\Sender $sender sender
+     * @param Sender $sender sender
      *
      * @return $this
      */

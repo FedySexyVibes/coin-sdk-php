@@ -202,7 +202,7 @@ class PortingRequestAnswerDelayedBody implements ModelInterface, ArrayAccess
     /**
      * Gets pradelayed
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestAnswerDelayed
+     * @return PortingRequestAnswerDelayed
      */
     public function getPradelayed()
     {
@@ -212,7 +212,7 @@ class PortingRequestAnswerDelayedBody implements ModelInterface, ArrayAccess
     /**
      * Sets pradelayed
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestAnswerDelayed $pradelayed pradelayed
+     * @param PortingRequestAnswerDelayed $pradelayed pradelayed
      *
      * @return $this
      */

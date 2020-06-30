@@ -202,7 +202,7 @@ class RangeActivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\RangeActivationMessage
+     * @return RangeActivationMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class RangeActivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\RangeActivationMessage $message message
+     * @param RangeActivationMessage $message message
      *
      * @return $this
      */

@@ -202,7 +202,7 @@ class RangeRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\RangeSeq
+     * @return RangeSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class RangeRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\RangeSeq $seq seq
+     * @param RangeSeq $seq seq
      *
      * @return $this
      */

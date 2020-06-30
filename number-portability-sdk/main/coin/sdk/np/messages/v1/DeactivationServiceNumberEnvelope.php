@@ -202,7 +202,7 @@ class DeactivationServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\DeactivationServiceNumberMessage
+     * @return DeactivationServiceNumberMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class DeactivationServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\DeactivationServiceNumberMessage $message message
+     * @param DeactivationServiceNumberMessage $message message
      *
      * @return $this
      */

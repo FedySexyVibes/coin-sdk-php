@@ -370,7 +370,7 @@ class PortingRequest implements ModelInterface, ArrayAccess
     /**
      * Gets customerinfo
      *
-     * @return \coin\sdk\np\messages\v1\CustomerInfo
+     * @return CustomerInfo
      */
     public function getCustomerinfo()
     {
@@ -380,7 +380,7 @@ class PortingRequest implements ModelInterface, ArrayAccess
     /**
      * Sets customerinfo
      *
-     * @param \coin\sdk\np\messages\v1\CustomerInfo $customerinfo customerinfo
+     * @param CustomerInfo $customerinfo customerinfo
      *
      * @return $this
      */
@@ -418,7 +418,7 @@ class PortingRequest implements ModelInterface, ArrayAccess
     /**
      * Gets repeats
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestRepeats[]
+     * @return PortingRequestRepeats[]
      */
     public function getRepeats()
     {
@@ -428,7 +428,7 @@ class PortingRequest implements ModelInterface, ArrayAccess
     /**
      * Sets repeats
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestRepeats[] $repeats repeats
+     * @param PortingRequestRepeats[] $repeats repeats
      *
      * @return $this
      */

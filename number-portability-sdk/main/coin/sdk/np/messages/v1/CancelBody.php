@@ -202,7 +202,7 @@ class CancelBody implements ModelInterface, ArrayAccess
     /**
      * Gets cancel
      *
-     * @return \coin\sdk\np\messages\v1\Cancel
+     * @return Cancel
      */
     public function getCancel()
     {
@@ -212,7 +212,7 @@ class CancelBody implements ModelInterface, ArrayAccess
     /**
      * Sets cancel
      *
-     * @param \coin\sdk\np\messages\v1\Cancel $cancel cancel
+     * @param Cancel $cancel cancel
      *
      * @return $this
      */

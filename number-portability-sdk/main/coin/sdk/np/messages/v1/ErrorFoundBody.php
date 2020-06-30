@@ -202,7 +202,7 @@ class ErrorFoundBody implements ModelInterface, ArrayAccess
     /**
      * Gets errorfound
      *
-     * @return \coin\sdk\np\messages\v1\ErrorFound
+     * @return ErrorFound
      */
     public function getErrorfound()
     {
@@ -212,7 +212,7 @@ class ErrorFoundBody implements ModelInterface, ArrayAccess
     /**
      * Sets errorfound
      *
-     * @param \coin\sdk\np\messages\v1\ErrorFound $errorfound errorfound
+     * @param ErrorFound $errorfound errorfound
      *
      * @return $this
      */

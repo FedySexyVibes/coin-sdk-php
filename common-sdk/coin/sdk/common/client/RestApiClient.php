@@ -4,6 +4,8 @@ namespace coin\sdk\common\client;
 
 use coin\sdk\common\crypto\ApiClientUtil;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class RestApiClient
 {
@@ -29,8 +31,8 @@ abstract class RestApiClient
      * @param int $method
      * @param string $url
      * @param string $content [optional]
-     * @return mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|ResponseInterface
+     * @throws GuzzleException
      */
     protected function sendWithToken($method, $url, $content = null)
     {

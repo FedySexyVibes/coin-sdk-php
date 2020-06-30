@@ -202,7 +202,7 @@ class PortingPerformedRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\PortingPerformedSeq
+     * @return PortingPerformedSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class PortingPerformedRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\PortingPerformedSeq $seq seq
+     * @param PortingPerformedSeq $seq seq
      *
      * @return $this
      */

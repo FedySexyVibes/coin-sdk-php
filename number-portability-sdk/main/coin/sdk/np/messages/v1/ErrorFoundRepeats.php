@@ -202,7 +202,7 @@ class ErrorFoundRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\ErrorFoundSeq
+     * @return ErrorFoundSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class ErrorFoundRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\ErrorFoundSeq $seq seq
+     * @param ErrorFoundSeq $seq seq
      *
      * @return $this
      */

@@ -28,6 +28,11 @@
 
 namespace coin\sdk\np;
 
+use DateTime;
+use InvalidArgumentException;
+use Psr\Http\Message\StreamInterface;
+use SplFileObject;
+
 /**
  * ObjectSerializer Class Doc Comment
  *
@@ -51,8 +56,8 @@ class ObjectSerializer
     {
         if (is_scalar($data) || null === $data) {
             return $data;
-        } elseif ($data instanceof \DateTime) {
-            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(\DateTime::ATOM);
+        } elseif ($data instanceof DateTime) {
+            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(DateTime::ATOM);
         } elseif (is_array($data)) {
             foreach ($data as $property => $value) {
                 $data[$property] = self::sanitizeForSerialization($value);
@@ -69,7 +74,7 @@ class ObjectSerializer
                     && method_exists($swaggerType, 'getAllowableEnumValues')
                     && !in_array($value, $swaggerType::getAllowableEnumValues())) {
                     $imploded = implode("', '", $swaggerType::getAllowableEnumValues());
-                    throw new \InvalidArgumentException("Invalid value for enum '$swaggerType', must be one of: '$imploded'");
+                    throw new InvalidArgumentException("Invalid value for enum '$swaggerType', must be one of: '$imploded'");
                 }
                 if ($value !== null) {
                     $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $swaggerType, $formats[$property]);
@@ -117,7 +122,7 @@ class ObjectSerializer
      * If it's a string, pass through unchanged. It will be url-encoded
      * later.
      *
-     * @param string[]|string|\DateTime $object an object to be serialized to a string
+     * @param string[]|string|DateTime $object an object to be serialized to a string
      *
      * @return string the serialized object
      */
@@ -149,13 +154,13 @@ class ObjectSerializer
      * the http body (form parameter). If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string|\SplFileObject $value the value of the form parameter
+     * @param string|SplFileObject $value the value of the form parameter
      *
      * @return string the form string
      */
     public static function toFormValue($value)
     {
-        if ($value instanceof \SplFileObject) {
+        if ($value instanceof SplFileObject) {
             return $value->getRealPath();
         } else {
             return self::toString($value);
@@ -167,14 +172,14 @@ class ObjectSerializer
      * the parameter. If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string|\DateTime $value the value of the parameter
+     * @param string|DateTime $value the value of the parameter
      *
      * @return string the header string
      */
     public static function toString($value)
     {
-        if ($value instanceof \DateTime) { // datetime in ISO8601 format
-            return $value->format(\DateTime::ATOM);
+        if ($value instanceof DateTime) { // datetime in ISO8601 format
+            return $value->format(DateTime::ATOM);
         } else {
             return $value;
         }
@@ -257,7 +262,7 @@ class ObjectSerializer
             // be interpreted as a missing field/value. Let's handle
             // this graceful.
             if (!empty($data)) {
-                return new \DateTime($data);
+                return new DateTime($data);
             } else {
                 return null;
             }
@@ -265,7 +270,7 @@ class ObjectSerializer
             settype($data, $class);
             return $data;
         } elseif ($class === '\SplFileObject') {
-            /** @var \Psr\Http\Message\StreamInterface $data */
+            /** @var StreamInterface $data */
 
             // determine file name
             if (array_key_exists('Content-Disposition', $httpHeaders) &&
@@ -281,11 +286,11 @@ class ObjectSerializer
             }
             fclose($file);
 
-            return new \SplFileObject($filename, 'r');
+            return new SplFileObject($filename, 'r');
         } elseif (method_exists($class, 'getAllowableEnumValues')) {
             if (!in_array($data, $class::getAllowableEnumValues())) {
                 $imploded = implode("', '", $class::getAllowableEnumValues());
-                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
+                throw new InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
             }
             return $data;
         } else {

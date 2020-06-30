@@ -232,7 +232,7 @@ class PortingRequestAnswerSeq implements ModelInterface, ArrayAccess
     /**
      * Gets numberseries
      *
-     * @return \coin\sdk\np\messages\v1\NumberSeries
+     * @return NumberSeries
      */
     public function getNumberseries()
     {
@@ -242,7 +242,7 @@ class PortingRequestAnswerSeq implements ModelInterface, ArrayAccess
     /**
      * Sets numberseries
      *
-     * @param \coin\sdk\np\messages\v1\NumberSeries $numberseries numberseries
+     * @param NumberSeries $numberseries numberseries
      *
      * @return $this
      */

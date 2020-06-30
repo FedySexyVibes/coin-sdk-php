@@ -202,7 +202,7 @@ class DeactivationBody implements ModelInterface, ArrayAccess
     /**
      * Gets deactivation
      *
-     * @return \coin\sdk\np\messages\v1\Deactivation
+     * @return Deactivation
      */
     public function getDeactivation()
     {
@@ -212,7 +212,7 @@ class DeactivationBody implements ModelInterface, ArrayAccess
     /**
      * Sets deactivation
      *
-     * @param \coin\sdk\np\messages\v1\Deactivation $deactivation deactivation
+     * @param Deactivation $deactivation deactivation
      *
      * @return $this
      */

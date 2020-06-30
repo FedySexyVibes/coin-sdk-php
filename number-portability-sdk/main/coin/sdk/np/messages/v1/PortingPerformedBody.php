@@ -202,7 +202,7 @@ class PortingPerformedBody implements ModelInterface, ArrayAccess
     /**
      * Gets portingperformed
      *
-     * @return \coin\sdk\np\messages\v1\PortingPerformed
+     * @return PortingPerformed
      */
     public function getPortingperformed()
     {
@@ -212,7 +212,7 @@ class PortingPerformedBody implements ModelInterface, ArrayAccess
     /**
      * Sets portingperformed
      *
-     * @param \coin\sdk\np\messages\v1\PortingPerformed $portingperformed portingperformed
+     * @param PortingPerformed $portingperformed portingperformed
      *
      * @return $this
      */

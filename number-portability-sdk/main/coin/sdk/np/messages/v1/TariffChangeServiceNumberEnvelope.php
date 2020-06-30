@@ -202,7 +202,7 @@ class TariffChangeServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage
+     * @return TariffChangeServiceNumberMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class TariffChangeServiceNumberEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage $message message
+     * @param TariffChangeServiceNumberMessage $message message
      *
      * @return $this
      */

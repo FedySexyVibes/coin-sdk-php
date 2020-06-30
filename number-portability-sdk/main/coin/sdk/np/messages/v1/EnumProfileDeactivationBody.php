@@ -202,7 +202,7 @@ class EnumProfileDeactivationBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumprofiledeactivation
      *
-     * @return \coin\sdk\np\messages\v1\EnumProfileDeactivation
+     * @return EnumProfileDeactivation
      */
     public function getEnumprofiledeactivation()
     {
@@ -212,7 +212,7 @@ class EnumProfileDeactivationBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumprofiledeactivation
      *
-     * @param \coin\sdk\np\messages\v1\EnumProfileDeactivation $enumprofiledeactivation enumprofiledeactivation
+     * @param EnumProfileDeactivation $enumprofiledeactivation enumprofiledeactivation
      *
      * @return $this
      */

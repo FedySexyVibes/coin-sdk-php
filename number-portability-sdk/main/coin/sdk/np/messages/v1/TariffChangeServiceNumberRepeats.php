@@ -202,7 +202,7 @@ class TariffChangeServiceNumberRepeats implements ModelInterface, ArrayAccess
     /**
      * Gets seq
      *
-     * @return \coin\sdk\np\messages\v1\TariffChangeServiceNumberSeq
+     * @return TariffChangeServiceNumberSeq
      */
     public function getSeq()
     {
@@ -212,7 +212,7 @@ class TariffChangeServiceNumberRepeats implements ModelInterface, ArrayAccess
     /**
      * Sets seq
      *
-     * @param \coin\sdk\np\messages\v1\TariffChangeServiceNumberSeq $seq seq
+     * @param TariffChangeServiceNumberSeq $seq seq
      *
      * @return $this
      */

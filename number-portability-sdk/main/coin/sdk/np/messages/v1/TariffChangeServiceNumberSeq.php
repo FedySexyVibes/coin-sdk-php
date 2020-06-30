@@ -211,7 +211,7 @@ class TariffChangeServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Gets numberseries
      *
-     * @return \coin\sdk\np\messages\v1\NumberSeries
+     * @return NumberSeries
      */
     public function getNumberseries()
     {
@@ -221,7 +221,7 @@ class TariffChangeServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Sets numberseries
      *
-     * @param \coin\sdk\np\messages\v1\NumberSeries $numberseries numberseries
+     * @param NumberSeries $numberseries numberseries
      *
      * @return $this
      */
@@ -235,7 +235,7 @@ class TariffChangeServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Gets tariffinfonew
      *
-     * @return \coin\sdk\np\messages\v1\TariffInfo
+     * @return TariffInfo
      */
     public function getTariffinfonew()
     {
@@ -245,7 +245,7 @@ class TariffChangeServiceNumberSeq implements ModelInterface, ArrayAccess
     /**
      * Sets tariffinfonew
      *
-     * @param \coin\sdk\np\messages\v1\TariffInfo $tariffinfonew tariffinfonew
+     * @param TariffInfo $tariffinfonew tariffinfonew
      *
      * @return $this
      */

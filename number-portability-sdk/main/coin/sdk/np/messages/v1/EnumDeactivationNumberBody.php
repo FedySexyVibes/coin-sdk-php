@@ -202,7 +202,7 @@ class EnumDeactivationNumberBody implements ModelInterface, ArrayAccess
     /**
      * Gets enumdeactivationnumber
      *
-     * @return \coin\sdk\np\messages\v1\EnumContent
+     * @return EnumContent
      */
     public function getEnumdeactivationnumber()
     {
@@ -212,7 +212,7 @@ class EnumDeactivationNumberBody implements ModelInterface, ArrayAccess
     /**
      * Sets enumdeactivationnumber
      *
-     * @param \coin\sdk\np\messages\v1\EnumContent $enumdeactivationnumber enumdeactivationnumber
+     * @param EnumContent $enumdeactivationnumber enumdeactivationnumber
      *
      * @return $this
      */

@@ -202,7 +202,7 @@ class TariffChangeServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Gets tariffchangesn
      *
-     * @return \coin\sdk\np\messages\v1\TariffChangeServiceNumber
+     * @return TariffChangeServiceNumber
      */
     public function getTariffchangesn()
     {
@@ -212,7 +212,7 @@ class TariffChangeServiceNumberBody implements ModelInterface, ArrayAccess
     /**
      * Sets tariffchangesn
      *
-     * @param \coin\sdk\np\messages\v1\TariffChangeServiceNumber $tariffchangesn tariffchangesn
+     * @param TariffChangeServiceNumber $tariffchangesn tariffchangesn
      *
      * @return $this
      */

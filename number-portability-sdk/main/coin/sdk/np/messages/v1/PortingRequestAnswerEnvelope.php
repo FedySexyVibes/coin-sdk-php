@@ -202,7 +202,7 @@ class PortingRequestAnswerEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\PortingRequestAnswerMessage
+     * @return PortingRequestAnswerMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class PortingRequestAnswerEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\PortingRequestAnswerMessage $message message
+     * @param PortingRequestAnswerMessage $message message
      *
      * @return $this
      */

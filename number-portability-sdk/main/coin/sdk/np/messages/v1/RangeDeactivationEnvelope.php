@@ -202,7 +202,7 @@ class RangeDeactivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v1\RangeDeactivationMessage
+     * @return RangeDeactivationMessage
      */
     public function getMessage()
     {
@@ -212,7 +212,7 @@ class RangeDeactivationEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v1\RangeDeactivationMessage $message message
+     * @param RangeDeactivationMessage $message message
      *
      * @return $this
      */

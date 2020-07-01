@@ -30,7 +30,7 @@ class NumberPortabilityMessageConsumerSample extends TestCase
     public function testConsumeMessages()
     {
         $consumer = new NumberPortabilityMessageConsumer();
-        $listener = new SampleListener();
+        $listener = new NPSampleListener();
         // $service = new NumberPortabilityService();
         $consumer->consumeUnconfirmed($listener);
         $messageIds = $consumer->consumeUnconfirmed($listener);
@@ -42,7 +42,7 @@ class NumberPortabilityMessageConsumerSample extends TestCase
     }
 }
 
-class SampleListener implements INumberPortabilityMessageListener
+class NPSampleListener implements INumberPortabilityMessageListener
 {
     function onPortingRequest($messageId, PortingRequestMessage $message)
     {

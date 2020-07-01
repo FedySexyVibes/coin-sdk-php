@@ -70,7 +70,7 @@ class SseConsumer extends RestApiClient
      * @param callable $handleSSE
      * @param callable $onException
      * @param string[] $messageTypes [optional]
-     * @param array $params [optional]
+     * @param string[][] $params [optional]
      * @return Generator
      */
     public function consumeUnconfirmed($handleSSE, $onException, $messageTypes = [], $params = [])
@@ -84,7 +84,7 @@ class SseConsumer extends RestApiClient
      * @param IOffsetPersister $offsetPersister
      * @param int $offset [optional]
      * @param string[] $messageTypes [optional]
-     * @param array $params [optional]
+     * @param string[][] $params [optional]
      * @return Generator
      */
     public function consumeUnconfirmedWithOffsetPersistence($handleSSE, $onException, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
@@ -96,9 +96,9 @@ class SseConsumer extends RestApiClient
      * @param callable $handleSSE
      * @param callable $onException
      * @param IOffsetPersister $offsetPersister
-     * @param int $offset
-     * @param string[] $messageTypes
-     * @param string[][] $params
+     * @param int $offset [optional]
+     * @param string[] $messageTypes [optional]
+     * @param string[][] $params [optional]
      * @return Generator|Event[]
      */
     public function consumeAll($handleSSE, $onException, IOffsetPersister $offsetPersister, $offset = -1, $messageTypes = [], $params = [])
@@ -174,8 +174,7 @@ class SseConsumer extends RestApiClient
         return $client->getEvents();
     }
 
-    private
-    function backOff(IOffsetPersister $offsetPersister)
+    private function backOff(IOffsetPersister $offsetPersister)
     {
         if ($this->retriesLeft-- == 0) {
             throw new ConnectException("sse stream disconnected", new GuzzleHttp\Psr7\Request("GET", $this->sseUri));
@@ -188,15 +187,14 @@ class SseConsumer extends RestApiClient
             $this->currentBackOffValue *= 2;
     }
 
-    private
-    function createUrl($confirmationStatus, $messageTypes, $params)
+    private function createUrl($confirmationStatus, $messageTypes, $params)
     {
         $paramToString = function (array $param) {
             $key = array_shift($param);
-            return empty($param) ? "" :  ("&" . $key . "=" . implode(",", $param));
+            return empty($param) ? "" :  ("&$key=" . implode(",", $param));
         };
         return ($this->sseUri) . "?offset=$this->offset&confirmationStatus=$confirmationStatus" .
-            (empty($messageTypes) ? "" : "&messageTypes=" . (implode(",", $messageTypes))) .
+            (empty($messageTypes) ? "" : ("&messageTypes=" . implode(",", $messageTypes))) .
             implode(array_map($paramToString, $params));
     }
 }

@@ -61,7 +61,8 @@ class BundleSwitchingMessageConsumer extends RestApiClient
         $onException = function(Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
-        return $this->sseConsumer->consumeUnconfirmed($handleSse, $onException, $messageTypes, [array_unshift($serviceProviders, "serviceproviders")]);
+        array_unshift($serviceProviders, "serviceproviders");
+        return $this->sseConsumer->consumeUnconfirmed($handleSse, $onException, $messageTypes, [$serviceProviders]);
     }
 
     /**
@@ -86,8 +87,9 @@ class BundleSwitchingMessageConsumer extends RestApiClient
         $onException = function(Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
+        array_unshift($serviceProviders, "serviceproviders");
         return $this->sseConsumer->consumeAll($handleSse, $onException, $offsetPersister, $offset,
-            $messageTypes, [array_unshift($serviceProviders, "serviceproviders")]);
+            $messageTypes, [$serviceProviders]);
     }
 
     /**
@@ -114,8 +116,9 @@ class BundleSwitchingMessageConsumer extends RestApiClient
         $onException = function(Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
+        array_unshift($serviceProviders, "serviceproviders");
         return $this->sseConsumer->consumeUnconfirmedWithOffsetPersistence($handleSse, $onException, $offsetPersister,
-            $offset, $messageTypes, [array_unshift($serviceProviders, "serviceproviders")]);
+            $offset, $messageTypes, [$serviceProviders]);
     }
 
     private function handleMessage(Event $event, IBundleSwitchingMessageListener $listener)

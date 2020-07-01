@@ -174,7 +174,7 @@ class SseConsumer extends RestApiClient
         return $client->getEvents();
     }
 
-    private function backOff(IOffsetPersister $offsetPersister)
+    private function backOff(IOffsetPersister $offsetPersister = null)
     {
         if ($this->retriesLeft-- == 0) {
             throw new ConnectException("sse stream disconnected", new GuzzleHttp\Psr7\Request("GET", $this->sseUri));

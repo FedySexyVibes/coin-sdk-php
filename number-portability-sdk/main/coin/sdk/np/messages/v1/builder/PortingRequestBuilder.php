@@ -3,7 +3,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\CustomerInfo;
 use coin\sdk\np\messages\v1\EnumProfileSeq;
@@ -48,7 +48,7 @@ class PortingRequestSequenceBuilder {
     }
 }
 
-class PortingRequestBuilder extends MessageBuilder
+class PortingRequestBuilder extends NPMessageBuilder
 {
     private $portingrequest;
     private $repeats;
@@ -66,8 +66,7 @@ class PortingRequestBuilder extends MessageBuilder
     }
 
     public static function create() {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setDossierId($dossierId) {

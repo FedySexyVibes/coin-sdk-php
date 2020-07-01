@@ -6,7 +6,7 @@ use coin\sdk\np\messages\v1\Header;
 use coin\sdk\np\messages\v1\Receiver;
 use coin\sdk\np\messages\v1\Sender;
 
-interface IMessageBuilder extends IHeaderBuilder {
+interface INPMessageBuilder extends INPHeaderBuilder {
 
     /**
      * @return Message
@@ -16,7 +16,7 @@ interface IMessageBuilder extends IHeaderBuilder {
     public static function create();
 }
 
-abstract class MessageBuilder implements IMessageBuilder {
+abstract class NPMessageBuilder implements INPMessageBuilder {
     protected abstract function getThis();
 
     protected $header;
@@ -39,6 +39,6 @@ abstract class MessageBuilder implements IMessageBuilder {
     }
 }
 
-interface EnumBuilder extends IMessageBuilder {
+interface EnumBuilder extends INPMessageBuilder {
     public function addRepeatsItem($repeatsItem);
 }

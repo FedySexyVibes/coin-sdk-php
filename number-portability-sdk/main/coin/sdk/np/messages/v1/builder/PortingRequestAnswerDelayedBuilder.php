@@ -3,14 +3,14 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Header;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayed;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayedBody;
 use coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage;
 
-class PortingRequestAnswerDelayedBuilder extends MessageBuilder
+class PortingRequestAnswerDelayedBuilder extends NPMessageBuilder
 {
     private $portingRequestAnswerDelayed;
 
@@ -27,8 +27,7 @@ class PortingRequestAnswerDelayedBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setAnswerDueDateTime($answerDueDateTime) {

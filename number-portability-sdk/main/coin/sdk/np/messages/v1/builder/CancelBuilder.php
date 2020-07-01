@@ -6,11 +6,11 @@ use coin\sdk\np\messages\v1\Cancel;
 use coin\sdk\np\messages\v1\CancelBody;
 use coin\sdk\np\messages\v1\CancelMessage;
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Header;
 
-class CancelBuilder extends MessageBuilder
+class CancelBuilder extends NPMessageBuilder
 {
     private $cancel;
 
@@ -26,8 +26,7 @@ class CancelBuilder extends MessageBuilder
     }
 
     public static function create() {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setDossierId($dossierId) {

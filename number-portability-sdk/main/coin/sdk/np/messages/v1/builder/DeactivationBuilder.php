@@ -3,7 +3,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Deactivation;
 use coin\sdk\np\messages\v1\DeactivationBody;
@@ -11,7 +11,7 @@ use coin\sdk\np\messages\v1\DeactivationMessage;
 use coin\sdk\np\messages\v1\DeactivationRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class DeactivationBuilder extends MessageBuilder
+class DeactivationBuilder extends NPMessageBuilder
 {
     private $deactivation;
     private $repeats;
@@ -30,8 +30,7 @@ class DeactivationBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setCurrentNetworkOperator($currentNetworkOperator) {

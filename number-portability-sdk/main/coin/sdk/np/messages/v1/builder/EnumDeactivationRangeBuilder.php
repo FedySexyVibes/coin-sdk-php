@@ -6,7 +6,7 @@ namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\EnumBuilder;
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\EnumContent;
 use coin\sdk\np\messages\v1\EnumDeactivationRangeBody;
@@ -14,7 +14,7 @@ use coin\sdk\np\messages\v1\EnumDeactivationRangeMessage;
 use coin\sdk\np\messages\v1\EnumNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class EnumDeactivationRangeBuilder extends MessageBuilder implements EnumBuilder
+class EnumDeactivationRangeBuilder extends NPMessageBuilder implements EnumBuilder
 {
     private $enumContent;
     private $repeats;
@@ -33,8 +33,7 @@ class EnumDeactivationRangeBuilder extends MessageBuilder implements EnumBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setCurrentNetworkOperator($currentNetworkOperator) {

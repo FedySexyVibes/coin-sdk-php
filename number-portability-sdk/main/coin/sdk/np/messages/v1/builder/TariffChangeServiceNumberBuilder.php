@@ -4,14 +4,14 @@ namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\ActivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Header;
 use coin\sdk\np\messages\v1\TariffChangeServiceNumber;
 use coin\sdk\np\messages\v1\TariffChangeServiceNumberBody;
 use coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage;
 
-class TariffChangeServiceNumberBuilder extends MessageBuilder
+class TariffChangeServiceNumberBuilder extends NPMessageBuilder
 {
     private $tariffChangeServiceNumber;
     private $repeats;
@@ -30,8 +30,7 @@ class TariffChangeServiceNumberBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setDossierId($dossierId) {

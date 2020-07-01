@@ -3,7 +3,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\DeactivationServiceNumber;
 use coin\sdk\np\messages\v1\DeactivationServiceNumberBody;
@@ -11,7 +11,7 @@ use coin\sdk\np\messages\v1\DeactivationServiceNumberMessage;
 use coin\sdk\np\messages\v1\DeactivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\Header;
 
-class DeactivationServiceNumberBuilder extends MessageBuilder
+class DeactivationServiceNumberBuilder extends NPMessageBuilder
 {
     private $deactivationServiceNumber;
     private $repeats;
@@ -30,8 +30,7 @@ class DeactivationServiceNumberBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setDossierId($dossierId) {

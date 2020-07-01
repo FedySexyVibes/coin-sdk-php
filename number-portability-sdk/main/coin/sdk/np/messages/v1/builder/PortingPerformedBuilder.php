@@ -3,7 +3,7 @@
 namespace coin\sdk\np\messages\v1\builder;
 
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Header;
 use coin\sdk\np\messages\v1\NumberSeries;
@@ -56,7 +56,7 @@ class PortingPerformedSequenceBuilder {
 }
 
 
-class PortingPerformedBuilder extends MessageBuilder
+class PortingPerformedBuilder extends NPMessageBuilder
 {
     private $portingPerformed;
     private $repeats;
@@ -75,8 +75,7 @@ class PortingPerformedBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setActualDateTime($ActualDateTime) {

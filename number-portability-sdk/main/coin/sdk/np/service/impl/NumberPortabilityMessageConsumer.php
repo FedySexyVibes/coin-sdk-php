@@ -49,7 +49,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      * @param string ...$messageTypes [optional]
      * @return Generator
      */
-    function consumeUnconfirmed(INumberPortabilityMessageListener $listener, array $messageTypes = [])
+    function consumeUnconfirmed(INumberPortabilityMessageListener $listener, ...$messageTypes)
     {
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);
@@ -70,7 +70,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      * @return Generator
      */
     function consumeAll(INumberPortabilityMessageListener $listener, IOffsetPersister $offsetPersister,
-                               $offset = -1, array $messageTypes = [])
+                               $offset = -1, ...$messageTypes)
     {
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);
@@ -93,7 +93,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
      * @return Generator
      */
     function consumeUnconfirmedWithOffsetPersistence(INumberPortabilityMessageListener $listener, IOffsetPersister $offsetPersister,
-                                                            $offset = -1, array $messageTypes = [])
+                                                            $offset = -1, ...$messageTypes)
     {
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);

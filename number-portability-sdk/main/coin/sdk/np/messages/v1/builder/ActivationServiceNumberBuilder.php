@@ -7,11 +7,11 @@ use coin\sdk\np\messages\v1\ActivationServiceNumberBody;
 use coin\sdk\np\messages\v1\ActivationServiceNumberMessage;
 use coin\sdk\np\messages\v1\ActivationServiceNumberRepeats;
 use coin\sdk\np\messages\v1\common\Message;
-use coin\sdk\np\messages\v1\common\MessageBuilder;
+use coin\sdk\np\messages\v1\common\NPMessageBuilder;
 use coin\sdk\np\messages\v1\common\MessageType;
 use coin\sdk\np\messages\v1\Header;
 
-class ActivationServiceNumberBuilder extends MessageBuilder
+class ActivationServiceNumberBuilder extends NPMessageBuilder
 {
     private $activationServiceNumber;
     private $repeats;
@@ -30,8 +30,7 @@ class ActivationServiceNumberBuilder extends MessageBuilder
 
     public static function create()
     {
-        $builder = new self;
-        return $builder;
+        return new self;
     }
 
     public function setDossierId($dossierId) {

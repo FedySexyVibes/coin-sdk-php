@@ -121,9 +121,10 @@ The number portability API can return errors in two ways:
 
     The REST layer of the system only performs basic payload checks, such as swagger schema validity and message authorization.
     Any errors in these checks are immediately returned as an error reply.
-    
-2. As a ServerSentEvent containing an `ErrorFoundMessage` (asynchronous)
 
-    The system performs detailed functional validation, such as number range validation, asynchronously.
-    Errors in this stage are sent in the event stream as `ErrorFound` messages.
-    ***Note:*** These need to be confirmed like any other message received through the event stream.
+2. As a ServerSentEvent containing an `ErrorFoundEnvelope` (asynchronous)
+
+    The system performs detailed functional validation, such as number range validation etc, asynchronously. Errors in this stage are sent via a `ServerSentEvent`, 
+    which will eventually be offered in the `onErrorFound($messageId, ErrorFoundMessage $message)` of the `INumberPortabilityMessageListener`.
+
+    ***Note:*** `ErrorFound` messages need to be confirmed like any other message received via a `ServerSentEvent`. 

@@ -193,11 +193,11 @@ class SseConsumer extends RestApiClient
     {
         $paramToString = function (array $param) {
             $key = array_shift($param);
-            return $key . "=" . implode(",", $param);
+            return empty($param) ? "" :  ("&" . $key . "=" . implode(",", $param));
         };
         return ($this->sseUri) . "?offset=$this->offset&confirmationStatus=$confirmationStatus" .
             (empty($messageTypes) ? "" : "&messageTypes=" . (implode(",", $messageTypes))) .
-            (empty($messageTypes) ? "" : "&" . implode("&", array_map($paramToString, $params)));
+            implode(array_map($paramToString, $params));
     }
 }
 

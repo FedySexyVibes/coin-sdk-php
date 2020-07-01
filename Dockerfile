@@ -11,6 +11,7 @@ COPY composer.json ./
 COPY composer.lock ./
 COPY common-sdk/ ./common-sdk/
 COPY number-portability-sdk/ ./number-portability-sdk/
+COPY bundle-switching-sdk/ ./bundle-switching-sdk/
 COPY keys/ ./keys/
 
 RUN composer install

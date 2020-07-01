@@ -7,7 +7,8 @@
   "autoload": {
     "classmap": [
       "common-sdk",
-      "number-portability-sdk"
+      "number-portability-sdk",
+      "bundle-switching-sdk"
     ]
   },
   "require": {
@@ -24,10 +25,14 @@
   },
   "scripts": {
     "test": [
-      "./vendor/bin/phpunit number-portability-sdk/test --bootstrap number-portability-sdk/test/bootstrap.php"
+      "./vendor/bin/phpunit number-portability-sdk/test --bootstrap number-portability-sdk/test/bootstrap.php",
+      "./vendor/bin/phpunit bundle-switching-sdk/test --bootstrap bundle-switching-sdk/test/bootstrap.php"
     ],
-    "samples": [
+    "np-samples": [
       "./vendor/bin/phpunit number-portability-sdk-samples/test --bootstrap number-portability-sdk-samples/bootstrap.php"
+    ],
+    "bs-samples": [
+      "./vendor/bin/phpunit bundle-switching-sdk-samples/test --bootstrap bundle-switching-sdk-samples/bootstrap.php"
     ]
   }
 }

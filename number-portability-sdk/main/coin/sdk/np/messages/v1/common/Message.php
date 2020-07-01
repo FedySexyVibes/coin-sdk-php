@@ -39,7 +39,7 @@ class Message {
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'message' => '\Swagger\Client\Model\CancelMessage'
+        'message' => '\coin\sdk\np\messages\v1\CancelMessage'
     ];
 
     /**

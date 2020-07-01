@@ -30,7 +30,7 @@
 namespace coin\sdk\bs\messages\v4;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use coin\sdk\bs\ObjectSerializer;
 
 /**
  * ContractTerminationPerformedBody Class Doc Comment

@@ -31,7 +31,7 @@ namespace coin\sdk\bs\messages\v4;
 
 use \ArrayAccess;
 use InvalidArgumentException;
-use \Swagger\Client\ObjectSerializer;
+use coin\sdk\bs\ObjectSerializer;
 
 /**
  * AddressBlock Class Doc Comment

@@ -30,8 +30,8 @@
 namespace coin\sdk\bs\messages\v4;
 
 use \ArrayAccess;
+use coin\sdk\bs\ObjectSerializer;
 use InvalidArgumentException;
-use \Swagger\Client\ObjectSerializer;
 
 /**
  * ContractTerminationRequestAnswer Class Doc Comment

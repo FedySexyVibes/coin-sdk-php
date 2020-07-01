@@ -2,11 +2,11 @@
 
 namespace coin\sdk\bs\service\impl;
 
+use coin\sdk\bs\ObjectSerializer;
 use coin\sdk\common\client\RestApiClient;
 use coin\sdk\common\client\sse\Event;
 use coin\sdk\common\client\sse\IOffsetPersister;
 use coin\sdk\common\client\sse\SseConsumer;
-use coin\sdk\bs\ObjectSerializer;
 use Exception;
 use Generator;
 
@@ -58,7 +58,7 @@ class BundleSwitchingMessageConsumer extends RestApiClient
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);
         };
-        $onException = function(Exception $exception) use ($listener) {
+        $onException = function (Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
         array_unshift($serviceProviders, "serviceproviders");
@@ -84,7 +84,7 @@ class BundleSwitchingMessageConsumer extends RestApiClient
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);
         };
-        $onException = function(Exception $exception) use ($listener) {
+        $onException = function (Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
         array_unshift($serviceProviders, "serviceproviders");
@@ -108,12 +108,12 @@ class BundleSwitchingMessageConsumer extends RestApiClient
      * @return Generator
      */
     function consumeUnconfirmedWithOffsetPersistence(IBundleSwitchingMessageListener $listener, IOffsetPersister $offsetPersister,
-                                                            $offset = -1, array $messageTypes = [], ...$serviceProviders)
+                                                     $offset = -1, array $messageTypes = [], ...$serviceProviders)
     {
         $handleSse = function (Event $event) use ($listener) {
             $this->handleMessage($event, $listener);
         };
-        $onException = function(Exception $exception) use ($listener) {
+        $onException = function (Exception $exception) use ($listener) {
             $listener->onException($exception);
         };
         array_unshift($serviceProviders, "serviceproviders");
@@ -123,9 +123,7 @@ class BundleSwitchingMessageConsumer extends RestApiClient
 
     private function handleMessage(Event $event, IBundleSwitchingMessageListener $listener)
     {
-        $type = $event->getEventType();
-
-        switch ($type) {
+        switch ($event->getEventType()) {
             case "cancel-v4":
                 executeOnMessage($event, 'CancelMessage', $listener, 'onCancel');
                 break;
@@ -142,7 +140,11 @@ class BundleSwitchingMessageConsumer extends RestApiClient
                 executeOnMessage($event, 'ContractTerminationRequestAnswerMessage', $listener, 'onContractTerminationRequestAnswer');
                 break;
             default:
-                $listener->onUnknownMessage($event->getId(), $event->getData());
+                if ($event->getData()) {
+                    $listener->onUnknownMessage($event->getId(), $event->getData());
+                } else {
+                    $listener->onKeepAlive();
+                }
         }
     }
 }

@@ -131,10 +131,12 @@ class SseConsumer extends RestApiClient
 
                     $handleSse($event);
                     $id = $event->getId();
-                    if ($id && $offsetPersister) {
-                        $offsetPersister->setOffset($id);
+                    if ($id) {
+                        if ($offsetPersister) {
+                            $offsetPersister->setOffset($id);
+                        }
+                        yield $id;
                     }
-                    yield $id;
                     if ($this->isInterrupted()) {
                         break;
                     }

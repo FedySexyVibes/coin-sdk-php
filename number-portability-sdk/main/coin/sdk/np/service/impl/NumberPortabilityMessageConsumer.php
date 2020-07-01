@@ -106,9 +106,7 @@ class NumberPortabilityMessageConsumer extends RestApiClient
 
     private function handleMessage(Event $event, INumberPortabilityMessageListener $listener)
     {
-        $type = $event->getEventType();
-
-        switch ($type) {
+        switch ($event->getEventType()) {
             case "activationsn-v1":
                 executeOnMessage($event, 'ActivationServiceNumberMessage', $listener, 'onActivationServiceNumber');
                 break;
@@ -170,7 +168,11 @@ class NumberPortabilityMessageConsumer extends RestApiClient
                 executeOnMessage($event, 'TariffChangeServiceNumberMessage', $listener, 'onTariffChangeServiceNumber');
                 break;
             default:
-                $listener->onUnknownMessage($event->getId(), $event->getData());
+                if ($event->getData()) {
+                    $listener->onUnknownMessage($event->getId(), $event->getData());
+                } else {
+                    $listener->onKeepAlive();
+                }
         }
     }
 }

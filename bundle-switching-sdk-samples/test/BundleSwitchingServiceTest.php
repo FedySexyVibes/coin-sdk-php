@@ -33,7 +33,7 @@ class BundleSwitchingServiceSample extends TestCase
                 ->setEarlytermination("N")
                 ->setName("name")
                 ->setAddress("1234AB", "1")
-                // ->addNumberSeries("0612345678")
+                ->addNumberSeries("0612345678")
                 // ->addValidationBlock("contractid", "sdfj-0j945Aec")
                 ->build();
         echo "\n\nsending message:\n".$message->__toString();

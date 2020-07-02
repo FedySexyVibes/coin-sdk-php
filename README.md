@@ -58,8 +58,8 @@ Once the public key has been registered, the following private and public keys a
     
 ## Choose an API
 
-### PHP SDKs for the APIs
-- The PHP SDK documentation for the Number Portability API can be found [here](https://gitlab.com/verenigingcoin-public/coin-sdk-php/blob/master/number-portability-sdk/README.md).
+- [Number Portability](number-portability-sdk/README.md)
+- [Bundle Switching](bundle-switching-sdk/README.md)
 
 ## Additional Resources
 

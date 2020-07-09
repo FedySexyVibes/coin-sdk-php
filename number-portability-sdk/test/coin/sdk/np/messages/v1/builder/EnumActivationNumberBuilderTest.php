@@ -17,7 +17,7 @@ class EnumActivationNumberBuilderTest extends SendMessageBaseTest
             ->setHeader("TEST01", "TEST02", "TEST01", "TEST02")
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
-            ->setTypeOfNumber("Mobile")
+            ->setTypeOfNumber("3")
             ->setCurrentNetworkOperator("TEST01")
             ->addEnumNumberSequence()
                 ->setNumberSeries("01234567890", "0987654321")

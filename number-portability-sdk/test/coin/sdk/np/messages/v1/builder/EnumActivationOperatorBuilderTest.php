@@ -15,7 +15,7 @@ class EnumActivationOperatorBuilderTest extends SendMessageBaseTest
             ->setHeader("TEST01", "TEST02", "TEST01", "TEST02")
             ->setTimestamp(date("Ymdhis", time()))
             ->setDossierId("TEST01-12345")
-            ->setTypeOfNumber("Mobile")
+            ->setTypeOfNumber("3")
             ->setCurrentNetworkOperator("TEST01")
             ->addEnumOperatorSequence()
                 ->setProfileId("PROF-1234")

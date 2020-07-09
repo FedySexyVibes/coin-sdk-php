@@ -18,7 +18,7 @@ class EnumProfileDeactivationBuilderTest extends SendMessageBaseTest
             ->setDossierId("TEST01-12345")
             ->setCurrentNetworkOperator("TEST01")
             ->setProfileId("PROF1")
-            ->setTypeOfNumber("mobile");
+            ->setTypeOfNumber("3");
 
         $enumprofiledeactivation = $builder->build();
 

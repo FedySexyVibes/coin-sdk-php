@@ -16,11 +16,11 @@ class BundleSwitchingMessageConsumerSample extends TestCase
     {
         $consumer = new BundleSwitchingMessageConsumer();
         $listener = new BSSampleListener();
-        // $service = new BundleSwitchingService();
+        $service = new BundleSwitchingService();
         $messageIds = $consumer->consumeUnconfirmed($listener);
         // runs forever (until connection drops and all retries fail)
         foreach($messageIds as $id) {
-            // $service->sendConfirmation($id);
+            $service->sendConfirmation($id);
         }
         // alternatively, consume a single message by calling $messageIds->next().
     }

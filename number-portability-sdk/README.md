@@ -92,6 +92,7 @@ class MySender
 ### Create Message Listener
 For message consumption, the number portability API makes use of HTTP's [ServerSentEvents](https://en.wikipedia.org/wiki/Server-sent_events).
 The SDK offers a Listener interface `INumberPortabilityMessageListener` which is triggered upon reception of a message payload.
+Whenever the API doesn't send any other message for 20 seconds, it sends an empty 'heartbeat' message, which triggers the onKeepAlive() function.
 
 ### Start consuming messages 
 The `NumberPortabilityMessageConsumer` has three `consume...()` methods for consuming messages, of which `consumeUnconfirmed()` is most useful.

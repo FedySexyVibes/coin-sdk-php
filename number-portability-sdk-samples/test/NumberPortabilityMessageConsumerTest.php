@@ -32,7 +32,6 @@ class NumberPortabilityMessageConsumerSample extends TestCase
         $consumer = new NumberPortabilityMessageConsumer();
         $listener = new NPSampleListener();
         $service = new NumberPortabilityService();
-        $consumer->consumeUnconfirmed($listener);
         $messageIds = $consumer->consumeUnconfirmed($listener);
         // runs forever (until connection drops and all retries fail)
         foreach($messageIds as $id) {

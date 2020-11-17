@@ -1,5 +1,6 @@
 <?php
 
+use coin\sdk\common\client\RestApiClient;
 use coin\sdk\np\messages\v1\ActivationServiceNumberMessage;
 use coin\sdk\np\messages\v1\CancelMessage;
 use coin\sdk\np\messages\v1\DeactivationMessage;
@@ -37,6 +38,25 @@ class NumberPortabilityMessageConsumerSample extends TestCase
         foreach($messageIds as $id) {
             $service->sendConfirmation($id);
         }
+        // alternatively, consume a single message by calling $messageIds->next().
+    }
+
+    public function testConsumeMessagesWithInterrupt()
+    {
+        $consumer = new NumberPortabilityMessageConsumer();
+        $listener = new NPSampleListener();
+        $service = new NumberPortabilityService();
+        $stopStreamService = new StopStreamService();
+        $messageIds = $consumer->consumeUnconfirmed($listener);
+        // runs forever (until connection drops and all retries fail)
+        $numberOfMessages = 20;
+        foreach($messageIds as $id) {
+            $service->sendConfirmation($id);
+            $numberOfMessages--;
+            if ($numberOfMessages == 0) break;
+            elseif ($numberOfMessages == 10) $stopStreamService->stopStream();
+        }
+        $this->assertEquals(0, $numberOfMessages);
         // alternatively, consume a single message by calling $messageIds->next().
     }
 }
@@ -156,5 +176,24 @@ class NPSampleListener implements INumberPortabilityMessageListener
     function onUnknownMessage($messageId, $message)
     {
         echo "\nTestListener received a message with an unknown type with id $messageId";
+    }
+}
+
+class StopStreamService extends RestApiClient {
+    private $apiUrl;
+
+    public function __construct($consumerName = null, $privateKeyFile = null, $encryptedHmacSecretFile = null, $validPeriodInSeconds = 30, $coinBaseUrl = null) {
+        parent::__construct(
+            $consumerName,
+            $privateKeyFile,
+            $encryptedHmacSecretFile,
+            $validPeriodInSeconds
+        );
+        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v1';
+    }
+
+    public function stopStream() {
+        $url = "$this->apiUrl/dossiers/stopstream";
+        return $this->sendWithToken('GET', $url, "");
     }
 }

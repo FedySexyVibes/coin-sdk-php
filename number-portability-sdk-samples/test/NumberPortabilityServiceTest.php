@@ -1,7 +1,7 @@
 <?php
 
-use coin\sdk\np\messages\v1\builder\PortingRequestBuilder;
-use coin\sdk\np\service\impl\NumberPortabilityService;
+use coin\sdk\np\messages\v3\api\NumberPortabilityService;
+use coin\sdk\np\messages\v3\builder\PortingRequestBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,6 +28,7 @@ class NumberPortabilityServiceSample extends TestCase
                 ->setTimestamp(date("Ymdhis", time()))
                 ->setDossierId("$this->operator-$randomId")
                 ->setRecipientnetworkoperator($this->operator)
+                ->setContract("EARLY_TERMINATION")
                 ->addPortingRequestSequence()
                     ->setNumberSeries('0612345678', '0612345678')
                     ->finish()

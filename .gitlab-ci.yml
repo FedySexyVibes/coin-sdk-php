@@ -14,3 +14,4 @@ test:
     - ./setup/run-tests
   after_script:
     - ./setup/stop-docker-compose
+

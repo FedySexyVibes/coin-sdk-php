@@ -64,10 +64,21 @@ Once the public key has been registered, the following private and public keys a
 ## Additional Resources
 
 ### COIN APIs
+
 - [Swagger-UI](https://test-api.coin.nl/docs)
 - [Swagger-File](https://test-api.coin.nl/docs/number-portability/v1/swagger.json)
 - [API Dashboard](https://test-portal.coin.nl/apis)
 - [General info about accessing Coin APIs](https://gitlab.com/verenigingcoin-public/cpc-client)
 
 ## Support
+
 If you need support, feel free to send an email to the [Coin devops team](mailto:devops@coin.nl).
+
+## Local Development
+
+To run the tests locally:
+
+```bash
+CI_JOB_ID=local ./setup/start-docker-compose
+CI_JOB_ID=local ./setup/run-tests
+```

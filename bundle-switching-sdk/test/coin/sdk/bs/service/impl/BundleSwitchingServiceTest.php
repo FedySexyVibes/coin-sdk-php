@@ -45,6 +45,6 @@ class BundleSwitchingServiceTest extends TestCase
     {
         $randomId = rand(100, 999);
         $response = $this->service->sendConfirmation($randomId);
-        $this->assertRegExp('/OK/i', $response->getBody(), "A transactionId with the correct pattern should be received");
+        $this->assertMatchesRegularExpression('/OK/i', $response->getBody(), "A transactionId with the correct pattern should be received");
     }
 }

@@ -1,29 +1,29 @@
 <?php
 
 use coin\sdk\common\client\RestApiClient;
-use coin\sdk\np\messages\v1\ActivationServiceNumberMessage;
-use coin\sdk\np\messages\v1\CancelMessage;
-use coin\sdk\np\messages\v1\DeactivationMessage;
-use coin\sdk\np\messages\v1\DeactivationServiceNumberMessage;
-use coin\sdk\np\messages\v1\EnumActivationNumberMessage;
-use coin\sdk\np\messages\v1\EnumActivationOperatorMessage;
-use coin\sdk\np\messages\v1\EnumActivationRangeMessage;
-use coin\sdk\np\messages\v1\EnumDeactivationNumberMessage;
-use coin\sdk\np\messages\v1\EnumDeactivationOperatorMessage;
-use coin\sdk\np\messages\v1\EnumDeactivationRangeMessage;
-use coin\sdk\np\messages\v1\EnumProfileActivationMessage;
-use coin\sdk\np\messages\v1\EnumProfileDeactivationMessage;
-use coin\sdk\np\messages\v1\ErrorFoundMessage;
-use coin\sdk\np\messages\v1\PortingPerformedMessage;
-use coin\sdk\np\messages\v1\PortingRequestAnswerDelayedMessage;
-use coin\sdk\np\messages\v1\PortingRequestAnswerMessage;
-use coin\sdk\np\messages\v1\PortingRequestMessage;
-use coin\sdk\np\messages\v1\RangeActivationMessage;
-use coin\sdk\np\messages\v1\RangeDeactivationMessage;
-use coin\sdk\np\messages\v1\TariffChangeServiceNumberMessage;
-use coin\sdk\np\service\impl\INumberPortabilityMessageListener;
-use coin\sdk\np\service\impl\NumberPortabilityMessageConsumer;
-use coin\sdk\np\service\impl\NumberPortabilityService;
+use coin\sdk\np\messages\v3\api\INumberPortabilityMessageListener;
+use coin\sdk\np\messages\v3\api\NumberPortabilityMessageConsumer;
+use coin\sdk\np\messages\v3\api\NumberPortabilityService;
+use coin\sdk\np\messages\v3\model\ActivationServiceNumberMessage;
+use coin\sdk\np\messages\v3\model\CancelMessage;
+use coin\sdk\np\messages\v3\model\DeactivationMessage;
+use coin\sdk\np\messages\v3\model\DeactivationServiceNumberMessage;
+use coin\sdk\np\messages\v3\model\EnumActivationNumberMessage;
+use coin\sdk\np\messages\v3\model\EnumActivationOperatorMessage;
+use coin\sdk\np\messages\v3\model\EnumActivationRangeMessage;
+use coin\sdk\np\messages\v3\model\EnumDeactivationNumberMessage;
+use coin\sdk\np\messages\v3\model\EnumDeactivationOperatorMessage;
+use coin\sdk\np\messages\v3\model\EnumDeactivationRangeMessage;
+use coin\sdk\np\messages\v3\model\EnumProfileActivationMessage;
+use coin\sdk\np\messages\v3\model\EnumProfileDeactivationMessage;
+use coin\sdk\np\messages\v3\model\ErrorFoundMessage;
+use coin\sdk\np\messages\v3\model\PortingPerformedMessage;
+use coin\sdk\np\messages\v3\model\PortingRequestAnswerDelayedMessage;
+use coin\sdk\np\messages\v3\model\PortingRequestAnswerMessage;
+use coin\sdk\np\messages\v3\model\PortingRequestMessage;
+use coin\sdk\np\messages\v3\model\RangeActivationMessage;
+use coin\sdk\np\messages\v3\model\RangeDeactivationMessage;
+use coin\sdk\np\messages\v3\model\TariffChangeServiceNumberMessage;
 use PHPUnit\Framework\TestCase;
 
 class NumberPortabilityMessageConsumerSample extends TestCase
@@ -189,7 +189,7 @@ class StopStreamService extends RestApiClient {
             $encryptedHmacSecretFile,
             $validPeriodInSeconds
         );
-        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v1';
+        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/number-portability/v3';
     }
 
     public function stopStream() {

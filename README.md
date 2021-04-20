@@ -17,7 +17,6 @@ For a quick start, follow the steps below:
 * [Additional Resources](#additional-resources)
 * [Support](#support)
 
-
 ## Configure Credentials
 
 ### Generate Keys

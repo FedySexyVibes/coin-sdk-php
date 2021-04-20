@@ -273,29 +273,29 @@ class ObjectSerializer
             settype($data, $class);
             return $data;
         } elseif ($class === '\SplFileObject') {
-            /** @var \Psr\Http\Message\StreamInterface $data */
-            // determine file name
-                if (array_key_exists('Content-Disposition', $httpHeaders) &&
-                    preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)) {
-                    $filename = Configuration::getDefaultConfiguration()->getTempFolderPath() . DIRECTORY_SEPARATOR . self::sanitizeFilename($match[1]);
-                } else {
-                    $filename = tempnam(Configuration::getDefaultConfiguration()->getTempFolderPath(), '');
-                }
-
-                $file = fopen($filename, 'w');
-                while ($chunk = $data->read(200)) {
-                    fwrite($file, $chunk);
-                }
-                fclose($file);
-
-                return new \SplFileObject($filename, 'r');
-            } elseif (method_exists($class, 'getAllowableEnumValues')) {
-                if (!in_array($data, $class::getAllowableEnumValues(), true)) {
-                    $imploded = implode("', '", $class::getAllowableEnumValues());
-                    throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
-                }
-                return $data;
+        /** @var \Psr\Http\Message\StreamInterface $data */
+        // determine file name
+            if (array_key_exists('Content-Disposition', $httpHeaders) &&
+                preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)) {
+                $filename = Configuration::getDefaultConfiguration()->getTempFolderPath() . DIRECTORY_SEPARATOR . self::sanitizeFilename($match[1]);
             } else {
+                $filename = tempnam(Configuration::getDefaultConfiguration()->getTempFolderPath(), '');
+            }
+
+            $file = fopen($filename, 'w');
+            while ($chunk = $data->read(200)) {
+                fwrite($file, $chunk);
+            }
+            fclose($file);
+
+            return new \SplFileObject($filename, 'r');
+        } elseif (method_exists($class, 'getAllowableEnumValues')) {
+            if (!in_array($data, $class::getAllowableEnumValues(), true)) {
+                $imploded = implode("', '", $class::getAllowableEnumValues());
+                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
+            }
+            return $data;
+        } else {
             // If a discriminator is defined and points to a valid subclass, use it.
             $discriminator = $class::DISCRIMINATOR;
             if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {

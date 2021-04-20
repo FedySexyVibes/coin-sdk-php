@@ -38,7 +38,9 @@ class Message {
      * Array of property to type mappings. Used for (de)serialization
      * @var string[]
      */
-    protected static $swaggerTypes = [];
+    protected static $swaggerTypes = [
+        'message' => '\coin\sdk\np\messages\v3\model\CancelMessage'
+    ];
 
     /**
      * Array of property to format mappings. Used for (de)serialization

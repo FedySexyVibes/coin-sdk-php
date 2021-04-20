@@ -1,5 +1,8 @@
 # COIN REST APIs
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/coin/sdk.svg?style=flat-square)](https://packagist.org/packages/coin/sdk)
+[![CI Status](https://gitlab.com/verenigingcoin-public/coin-sdk-php/badges/master/pipeline.svg)](https://gitlab.com/verenigingcoin-public/coin-sdk-php/-/pipelines/latest)
+
 ## Introduction
 
 The COIN RESTful APIs serve as modern replacements for the outdated MQ and SOAP interfaces.

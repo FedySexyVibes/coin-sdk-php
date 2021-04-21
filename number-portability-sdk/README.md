@@ -139,6 +139,5 @@ The number portability API can return errors in two ways:
 The API code is mostely generated through [Swagger codegen v3.0.25](https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.25/swagger-codegen-cli-3.0.25.jar):
 
 ```bash
-wget https://api.coin.nl/docs/number-portability/v3/swagger.json
-java -jar swagger-codegen-cli-3.0.25.jar generate -c config.json -i swagger.json -l php
+java -jar swagger-codegen-cli-3.0.25.jar generate -c config.json -i ../swagger/number-portability-v3.json -l php
 ```

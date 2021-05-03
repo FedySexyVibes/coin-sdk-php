@@ -3,6 +3,12 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/coin/sdk.svg?style=flat-square)](https://packagist.org/packages/coin/sdk)
 [![CI Status](https://gitlab.com/verenigingcoin-public/coin-sdk-php/badges/master/pipeline.svg)](https://gitlab.com/verenigingcoin-public/coin-sdk-php/-/pipelines/latest)
 
+| Api                 | SDK Version | Api Version    | Changelog |
+|---------------------|-------------|----------------|----------------
+| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | 1.1.0       | [v3](https://api.coin.nl/docs/number-portability/v3)             | [click](CHANGELOG.md#version-1.1.0)
+|                    | 0.0.0 - 1.0.2   | [v1](https://api.coin.nl/docs/number-portability/v1)             | -
+| [bundle-switching](https://coin.nl/en/services/overstappen)   | n/a         | n/a            | n/a
+
 ## Introduction
 
 The COIN RESTful APIs serve as modern replacements for the outdated MQ and SOAP interfaces.

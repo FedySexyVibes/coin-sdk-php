@@ -49,7 +49,7 @@ abstract class RestApiClient
                 "Authorization" => $hmac,
                 "User-Agent" => $this::getFullVersion(),
                 'Content-Type' => 'application/json; charset=utf-8',
-                "cookie" => "jwt=$jwt; path=$localPath")
+                "cookie" => "jwt=$jwt;")
             )
         ]);
 

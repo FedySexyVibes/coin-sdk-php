@@ -26,7 +26,7 @@ use coin\sdk\np\messages\v3\model\RangeDeactivationMessage;
 use coin\sdk\np\messages\v3\model\TariffChangeServiceNumberMessage;
 use PHPUnit\Framework\TestCase;
 
-class NumberPortabilityMessageConsumerSample extends TestCase
+class NumberPortabilityMessageConsumerTest extends TestCase
 {
     public function testConsumeMessages()
     {
@@ -49,7 +49,7 @@ class NumberPortabilityMessageConsumerSample extends TestCase
         $stopStreamService = new StopStreamService();
         $messageIds = $consumer->consumeUnconfirmed($listener);
         // runs forever (until connection drops and all retries fail)
-        $numberOfMessages = 20;
+        $numberOfMessages = 1;
         foreach($messageIds as $id) {
             $service->sendConfirmation($id);
             $numberOfMessages--;

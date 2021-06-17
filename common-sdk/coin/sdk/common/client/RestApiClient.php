@@ -11,7 +11,7 @@ abstract class RestApiClient
 {
     public static function getFullVersion() {
         // NOTE: automatically updated by pre_tag_command
-        return 'coin-sdk-php-1.0.2';
+        return 'coin-sdk-php-1.1.0';
     }
 
     protected $hmacSecret;

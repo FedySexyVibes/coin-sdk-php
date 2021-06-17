@@ -1,5 +1,14 @@
 # COIN REST APIs
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/coin/sdk.svg?style=flat-square)](https://packagist.org/packages/coin/sdk)
+[![CI Status](https://gitlab.com/verenigingcoin-public/coin-sdk-php/badges/master/pipeline.svg)](https://gitlab.com/verenigingcoin-public/coin-sdk-php/-/pipelines/latest)
+
+| Api                 | SDK Version | Api Version    | Changelog |
+|---------------------|-------------|----------------|----------------
+| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | 1.1.0       | [v3](https://api.coin.nl/docs/number-portability/v3)             | [click](CHANGELOG.md#version-1.1.0)
+|                    | 0.0.0 - 1.0.2   | [v1](https://api.coin.nl/docs/number-portability/v1)             | -
+| [bundle-switching](https://coin.nl/en/services/overstappen)   | n/a         | n/a            | n/a
+
 ## Introduction
 
 The COIN RESTful APIs serve as modern replacements for the outdated MQ and SOAP interfaces.
@@ -13,7 +22,6 @@ For a quick start, follow the steps below:
 * [Choose an API](#choose-an-api)
 * [Additional Resources](#additional-resources)
 * [Support](#support)
-
 
 ## Configure Credentials
 
@@ -64,10 +72,21 @@ Once the public key has been registered, the following private and public keys a
 ## Additional Resources
 
 ### COIN APIs
+
 - [Swagger-UI](https://test-api.coin.nl/docs)
 - [Swagger-File](https://test-api.coin.nl/docs/number-portability/v1/swagger.json)
 - [API Dashboard](https://test-portal.coin.nl/apis)
 - [General info about accessing Coin APIs](https://gitlab.com/verenigingcoin-public/cpc-client)
 
 ## Support
+
 If you need support, feel free to send an email to the [Coin devops team](mailto:devops@coin.nl).
+
+## Local Development
+
+To run the tests locally:
+
+```bash
+CI_JOB_ID=local ./setup/start-docker-compose
+CI_JOB_ID=local ./setup/run-tests
+```

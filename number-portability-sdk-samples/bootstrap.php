@@ -1,8 +1,9 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
 
-$CoinBaseUrl = 'https://test-api.coin.nl';
-$Operator = 'OPERATOR_CODE';
-$ConsumerName = 'CONSUMER_NAME';
-$PrivateKeyFile = 'PRIVATE_KEY_FILE';
-$EncryptedHmacSecretFile = "ENCRYPTED_HMAC_SECRET_FILE";
+$CoinBaseUrl = 'https://dev-api.coin.nl';
+$SenderOperator = 'TST01';
+$ReceiverOperator = 'TST02';
+$ConsumerName = 'API_T_TST01';
+$PrivateKeyFile = 'keys/demo1-private-key.pem';
+$EncryptedHmacSecretFile = "keys/demo1-sharedkey.encrypted";

@@ -25,8 +25,8 @@ A sample project is provided in the [number-portability-sdk-samples](https://git
 ## Configure Credentials
 
 For secure access credentials are required.
-- Check the [README introduction](../README.md#introduction) to find out how to configure these.
-- In summary you will need:
+- Check [this README](https://gitlab.com/verenigingcoin-public/consumer-configuration/-/blob/master/README.md) to find out how to configure these.
+- In summary, you will need:
     - a consumer name
     - a private key file
     - a file containing the encrypted Hmac secret
@@ -35,12 +35,12 @@ For secure access credentials are required.
 If you instantiate these without consumer name etc., the required values will be searched in `$_ENV` and subsequently in `$GLOBALS`
 under the following names:
 
-| $_ENV | $GLOBALS |
-|---|---|
-| CONSUMER_NAME | ConsumerName |
-| PRIVATE_KEY_FILE | PrivateKeyFile |
+| $_ENV                      | $GLOBALS                |
+|----------------------------|-------------------------|
+| CONSUMER_NAME              | ConsumerName            |
+| PRIVATE_KEY_FILE           | PrivateKeyFile          |
 | ENCRYPTED_HMAC_SECRET_FILE | EncryptedHmacSecretFile |
-| COIN_BASE_URL | CoinBaseUrl |
+| COIN_BASE_URL              | CoinBaseUrl             |
 
 For populating the `$_ENV` variable, [PHP dotenv](https://github.com/vlucas/phpdotenv) could be used.
 
@@ -136,7 +136,7 @@ The number portability API can return errors in two ways:
 
 ## API Generation
 
-The API code is mostely generated through [Swagger codegen v3.0.25](https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.25/swagger-codegen-cli-3.0.25.jar):
+The API code is mostly generated through [Swagger codegen v3.0.25](https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.25/swagger-codegen-cli-3.0.25.jar):
 
 ```bash
 java -jar swagger-codegen-cli-3.0.25.jar generate -c config.json -i ../swagger/number-portability-v3.json -l php

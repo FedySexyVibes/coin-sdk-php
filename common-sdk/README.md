@@ -9,8 +9,8 @@ It contains no specific API implementation. Together with all other SDKs in this
 ## Configure Credentials
 
 For secure access credentials are required.
-- Check the [README introduction](../README.md#introduction) to find out how to configure these.
-- In summary you will need:
+- Check [this README](https://gitlab.com/verenigingcoin-public/consumer-configuration/-/blob/master/README.md) to find out how to configure these.
+- In summary, you will need:
     - a consumer name
     - a private key file
     - a file containing the encrypted Hmac secret
@@ -18,10 +18,10 @@ For secure access credentials are required.
 If you instantiate it without consumer name etc., the required values will be searched in `$_ENV` and subsequently in `$GLOBALS`
 under the following names:
 
-| $_ENV | $GLOBALS |
-|---|---|
-| CONSUMER_NAME | ConsumerName |
-| PRIVATE_KEY_FILE | PrivateKeyFile |
+| $_ENV                      | $GLOBALS                |
+|----------------------------|-------------------------|
+| CONSUMER_NAME              | ConsumerName            |
+| PRIVATE_KEY_FILE           | PrivateKeyFile          |
 | ENCRYPTED_HMAC_SECRET_FILE | EncryptedHmacSecretFile |
 
 For populating the `$_ENV` variable, [PHP dotenv](https://github.com/vlucas/phpdotenv) could be used.

@@ -1,6 +1,6 @@
 FROM composer:2.3.8 AS composer
 
-FROM php:7.3
+FROM php:7.4
 RUN apt-get update && apt-get install -y git zip
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

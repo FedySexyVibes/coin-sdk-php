@@ -29,7 +29,7 @@
 
 namespace coin\sdk\bs\messages\v4;
 
-use \ArrayAccess;
+use ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
 
 /**
@@ -49,14 +49,14 @@ class CancelMessage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CancelMessage';
+    protected static string $swaggerModelName = 'CancelMessage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'header' => '\coin\sdk\bs\messages\v4\Header',
         'body' => '\coin\sdk\bs\messages\v4\CancelBody'
     ];
@@ -66,7 +66,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
       *
       * @var string[]
       */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'header' => null,
         'body' => null
     ];
@@ -76,7 +76,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -86,7 +86,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -97,7 +97,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'header' => 'header',
         'body' => 'body'
     ];
@@ -107,7 +107,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'header' => 'setHeader',
         'body' => 'setBody'
     ];
@@ -117,7 +117,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'header' => 'getHeader',
         'body' => 'getBody'
     ];
@@ -128,7 +128,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -138,7 +138,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -148,7 +148,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -158,32 +158,32 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
 
-    
 
-    
+
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['header'] = isset($data['header']) ? $data['header'] : null;
-        $this->container['body'] = isset($data['body']) ? $data['body'] : null;
+        $this->container['header'] = $data['header'] ?? null;
+        $this->container['body'] = $data['body'] ?? null;
     }
 
     /**
@@ -191,7 +191,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = [];
 
@@ -210,7 +210,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -221,7 +221,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return Header
      */
-    public function getHeader()
+    public function getHeader(): Header
     {
         return $this->container['header'];
     }
@@ -233,7 +233,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setHeader($header)
+    public function setHeader(Header $header): static
     {
         $this->container['header'] = $header;
 
@@ -245,7 +245,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return CancelBody
      */
-    public function getBody()
+    public function getBody(): CancelBody
     {
         return $this->container['body'];
     }
@@ -257,7 +257,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(CancelBody $body): static
     {
         $this->container['body'] = $body;
 
@@ -270,7 +270,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -282,9 +282,9 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
@@ -295,7 +295,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -311,7 +311,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

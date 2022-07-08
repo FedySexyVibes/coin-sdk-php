@@ -237,7 +237,7 @@ class ContractTerminationPerformedEnvelope implements ModelInterface, ArrayAcces
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->container[$offset]);
     }

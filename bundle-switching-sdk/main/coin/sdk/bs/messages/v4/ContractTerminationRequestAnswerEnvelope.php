@@ -237,7 +237,7 @@ class ContractTerminationRequestAnswerEnvelope implements ModelInterface, ArrayA
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->container[$offset]);
     }

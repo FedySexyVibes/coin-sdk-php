@@ -262,7 +262,8 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset
+): bool
     {
         return isset($this->container[$offset]);
     }
@@ -274,7 +275,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -287,7 +288,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -303,7 +304,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

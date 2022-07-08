@@ -158,9 +158,9 @@ class ContractTerminationRequestAnswerBody implements ModelInterface, ArrayAcces
         return self::$swaggerModelName;
     }
 
-    
 
-    
+
+
 
     /**
      * Associative array for storing property values
@@ -249,7 +249,7 @@ class ContractTerminationRequestAnswerBody implements ModelInterface, ArrayAcces
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
@@ -262,7 +262,7 @@ class ContractTerminationRequestAnswerBody implements ModelInterface, ArrayAcces
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -278,7 +278,7 @@ class ContractTerminationRequestAnswerBody implements ModelInterface, ArrayAcces
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

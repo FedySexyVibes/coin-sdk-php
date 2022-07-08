@@ -282,7 +282,7 @@ class CancelMessage implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->container[$offset] ?? null;
     }

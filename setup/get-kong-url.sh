@@ -2,7 +2,7 @@
 
 PORT=$1
 
-if [[ "$(uname -s)" == "Darwin" ]] ; then
+if [[ "$(uname -s)" == "Darwin" || -z ${CI_JOB_ID} ]] ; then
 	export DOCKER0=0.0.0.0
 else
 	export DOCKER0=$(printf "import netifaces\nprint(netifaces.gateways()['default'][netifaces.AF_INET][0])\n" | python)

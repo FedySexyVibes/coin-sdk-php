@@ -28,8 +28,8 @@
 
 namespace coin\sdk\np\messages\v3\model;
 
-use \ArrayAccess;
-use \coin\sdk\np\messages\v3\ObjectSerializer;
+use ArrayAccess;
+use coin\sdk\np\messages\v3\ObjectSerializer;
 
 /**
  * CancelBody Class Doc Comment
@@ -44,34 +44,34 @@ class CancelBody implements ModelInterface, ArrayAccess
     const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
-    protected static $swaggerModelName = 'CancelBody';
+     * The original name of the model.
+     *
+     * @var string
+     */
+    protected static string $swaggerModelName = 'CancelBody';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerTypes = [
-        'cancel' => '\coin\sdk\np\messages\v3\model\Cancel'    ];
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerTypes = [
+        'cancel' => '\coin\sdk\np\messages\v3\model\Cancel'];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerFormats = [
-        'cancel' => null    ];
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerFormats = [
+        'cancel' => null];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -81,7 +81,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -92,24 +92,24 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
-        'cancel' => 'cancel'    ];
+    protected static array $attributeMap = [
+        'cancel' => 'cancel'];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
      * @var string[]
      */
-    protected static $setters = [
-        'cancel' => 'setCancel'    ];
+    protected static array $setters = [
+        'cancel' => 'setCancel'];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-        'cancel' => 'getCancel'    ];
+    protected static array $getters = [
+        'cancel' => 'getCancel'];
 
     /**
      * Array of attributes where the key is the local name,
@@ -117,7 +117,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -127,7 +127,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -137,7 +137,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -147,29 +147,28 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
 
-    
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['cancel'] = isset($data['cancel']) ? $data['cancel'] : null;
+        $this->container['cancel'] = $data['cancel'] ?? null;
     }
 
     /**
@@ -177,7 +176,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = [];
 
@@ -193,7 +192,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -202,9 +201,9 @@ class CancelBody implements ModelInterface, ArrayAccess
     /**
      * Gets cancel
      *
-     * @return \coin\sdk\np\messages\v3\model\Cancel
+     * @return Cancel
      */
-    public function getCancel()
+    public function getCancel(): Cancel
     {
         return $this->container['cancel'];
     }
@@ -212,16 +211,17 @@ class CancelBody implements ModelInterface, ArrayAccess
     /**
      * Sets cancel
      *
-     * @param \coin\sdk\np\messages\v3\model\Cancel $cancel cancel
+     * @param Cancel $cancel cancel
      *
      * @return $this
      */
-    public function setCancel($cancel)
+    public function setCancel(Cancel $cancel): static
     {
         $this->container['cancel'] = $cancel;
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -229,7 +229,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -241,20 +241,20 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
      * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param mixed $value Value to be set
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -270,7 +270,7 @@ class CancelBody implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }

@@ -5,9 +5,9 @@
 
 | Api                                                                   | SDK Version   | Api Version                                          | Changelog                           |
 |-----------------------------------------------------------------------|---------------|------------------------------------------------------|-------------------------------------|
-| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | 1.1.0         | [v3](https://api.coin.nl/docs/number-portability/v3) | [click](CHANGELOG.md#version-1.1.0) |
+| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | >= 1.1.0      | [v3](https://api.coin.nl/docs/number-portability/v3) | [click](CHANGELOG.md#version-1.1.0) |
 |                                                                       | 0.0.0 - 1.0.2 | [v1](https://api.coin.nl/docs/number-portability/v1) | -                                   |
-| [bundle-switching](https://coin.nl/en/services/overstappen)           | 1.1.0         | [v4](https://api.coin.nl/docs/bundle-switching/v4)   | n/a                                 |
+| [bundle-switching](https://coin.nl/en/services/overstappen)           | >= 1.1.0      | [v4](https://api.coin.nl/docs/bundle-switching/v4)   | n/a                                 |
 
 This project contains SDKs for various COIN APIs.
 - [Number Portability](number-portability-sdk/README.md)

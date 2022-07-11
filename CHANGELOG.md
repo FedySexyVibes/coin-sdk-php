@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.x.x
+
+Upgrade to PHP 8
+
 ## Version 1.1.0
 
 Added:

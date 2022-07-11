@@ -28,8 +28,8 @@
 
 namespace coin\sdk\np\messages\v3\model;
 
-use \ArrayAccess;
-use \coin\sdk\np\messages\v3\ObjectSerializer;
+use ArrayAccess;
+use coin\sdk\np\messages\v3\ObjectSerializer;
 
 /**
  * CancelEnvelope Class Doc Comment
@@ -44,34 +44,34 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
     const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
-    protected static $swaggerModelName = 'CancelEnvelope';
+     * The original name of the model.
+     *
+     * @var string
+     */
+    protected static string $swaggerModelName = 'CancelEnvelope';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerTypes = [
-        'message' => '\coin\sdk\np\messages\v3\model\CancelMessage'    ];
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerTypes = [
+        'message' => '\coin\sdk\np\messages\v3\model\CancelMessage'];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerFormats = [
-        'message' => null    ];
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerFormats = [
+        'message' => null];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -81,7 +81,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -92,24 +92,24 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
-        'message' => 'message'    ];
+    protected static array $attributeMap = [
+        'message' => 'message'];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
      * @var string[]
      */
-    protected static $setters = [
-        'message' => 'setMessage'    ];
+    protected static array $setters = [
+        'message' => 'setMessage'];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-        'message' => 'getMessage'    ];
+    protected static array $getters = [
+        'message' => 'getMessage'];
 
     /**
      * Array of attributes where the key is the local name,
@@ -117,7 +117,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -127,7 +127,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -137,7 +137,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -147,29 +147,28 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
 
-    
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['message'] = $data['message'] ?? null;
     }
 
     /**
@@ -177,7 +176,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = [];
 
@@ -193,7 +192,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -202,9 +201,9 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
     /**
      * Gets message
      *
-     * @return \coin\sdk\np\messages\v3\model\CancelMessage
+     * @return CancelMessage
      */
-    public function getMessage()
+    public function getMessage(): CancelMessage
     {
         return $this->container['message'];
     }
@@ -212,16 +211,17 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
     /**
      * Sets message
      *
-     * @param \coin\sdk\np\messages\v3\model\CancelMessage $message message
+     * @param CancelMessage $message message
      *
      * @return $this
      */
-    public function setMessage($message)
+    public function setMessage(CancelMessage $message): static
     {
         $this->container['message'] = $message;
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -229,7 +229,8 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset
+): bool
     {
         return isset($this->container[$offset]);
     }
@@ -241,20 +242,20 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
      * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param mixed $value Value to be set
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -270,7 +271,7 @@ class CancelEnvelope implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

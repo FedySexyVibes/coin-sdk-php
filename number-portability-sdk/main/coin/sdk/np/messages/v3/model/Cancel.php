@@ -28,8 +28,8 @@
 
 namespace coin\sdk\np\messages\v3\model;
 
-use \ArrayAccess;
-use \coin\sdk\np\messages\v3\ObjectSerializer;
+use ArrayAccess;
+use coin\sdk\np\messages\v3\ObjectSerializer;
 
 /**
  * Cancel Class Doc Comment
@@ -44,36 +44,36 @@ class Cancel implements ModelInterface, ArrayAccess
     const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
-    protected static $swaggerModelName = 'Cancel';
+     * The original name of the model.
+     *
+     * @var string
+     */
+    protected static string $swaggerModelName = 'Cancel';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerTypes = [
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerTypes = [
         'dossierid' => 'string',
-'note' => 'string'    ];
+        'note' => 'string'];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $swaggerFormats = [
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static array $swaggerFormats = [
         'dossierid' => null,
-'note' => null    ];
+        'note' => null];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -83,7 +83,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -94,27 +94,27 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'dossierid' => 'dossierid',
-'note' => 'note'    ];
+        'note' => 'note'];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'dossierid' => 'setDossierid',
-'note' => 'setNote'    ];
+        'note' => 'setNote'];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'dossierid' => 'getDossierid',
-'note' => 'getNote'    ];
+        'note' => 'getNote'];
 
     /**
      * Array of attributes where the key is the local name,
@@ -122,7 +122,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -132,7 +132,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -142,7 +142,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -152,30 +152,29 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
 
-    
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['dossierid'] = isset($data['dossierid']) ? $data['dossierid'] : null;
-        $this->container['note'] = isset($data['note']) ? $data['note'] : null;
+        $this->container['dossierid'] = $data['dossierid'] ?? null;
+        $this->container['note'] = $data['note'] ?? null;
     }
 
     /**
@@ -183,7 +182,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = [];
 
@@ -199,7 +198,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -210,7 +209,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getDossierid()
+    public function getDossierid(): string
     {
         return $this->container['dossierid'];
     }
@@ -222,7 +221,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setDossierid($dossierid)
+    public function setDossierid(string $dossierid): static
     {
         $this->container['dossierid'] = $dossierid;
 
@@ -234,7 +233,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getNote()
+    public function getNote(): string
     {
         return $this->container['note'];
     }
@@ -246,12 +245,13 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setNote($note)
+    public function setNote(string $note): static
     {
         $this->container['note'] = $note;
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -259,7 +259,8 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset
+): bool
     {
         return isset($this->container[$offset]);
     }
@@ -271,20 +272,20 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
      * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param mixed $value Value to be set
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -300,7 +301,7 @@ class Cancel implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

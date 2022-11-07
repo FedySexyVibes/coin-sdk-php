@@ -1,10 +1,10 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\common;
+namespace coin\sdk\bs\messages\v5\common;
 
-use coin\sdk\bs\messages\v4\Header;
-use coin\sdk\bs\messages\v4\Receiver;
-use coin\sdk\bs\messages\v4\Sender;
+use coin\sdk\bs\messages\v5\Header;
+use coin\sdk\bs\messages\v5\Receiver;
+use coin\sdk\bs\messages\v5\Sender;
 
 interface IBSMessageBuilder extends IBSHeaderBuilder {
 

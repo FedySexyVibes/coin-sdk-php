@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpParamsInspection */
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
 use coin\sdk\bs\ObjectSerializer;
 
@@ -24,7 +24,7 @@ class ContractTerminationPerformedBuilderTest extends SendMessageBaseTest
 
         $response = $this->service->sendMessage($contractTerminationPerformed);
         $object = json_decode($response->getBody());
-        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v4\MessageResponse');
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v5\MessageResponse');
         $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 }

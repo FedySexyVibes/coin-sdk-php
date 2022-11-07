@@ -1,6 +1,6 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\common;
+namespace coin\sdk\bs\messages\v5\common;
 
 use coin\sdk\bs\ObjectSerializer;
 
@@ -22,7 +22,7 @@ class Message {
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'message' => '\coin\sdk\bs\messages\v4\CancelMessage'
+        'message' => '\coin\sdk\bs\messages\v5\CancelMessage'
     ];
 
     /**

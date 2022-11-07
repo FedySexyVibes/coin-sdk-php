@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -57,8 +57,8 @@ class ErrorFoundMessage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'header' => '\coin\sdk\bs\messages\v4\Header',
-        'body' => '\coin\sdk\bs\messages\v4\ErrorFoundBody'
+        'header' => '\coin\sdk\bs\messages\v5\Header',
+        'body' => '\coin\sdk\bs\messages\v5\ErrorFoundBody'
     ];
 
     /**

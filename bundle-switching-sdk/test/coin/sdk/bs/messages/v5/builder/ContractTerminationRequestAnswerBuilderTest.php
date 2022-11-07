@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpParamsInspection */
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
 use coin\sdk\bs\ObjectSerializer;
 
@@ -15,8 +15,7 @@ class ContractTerminationRequestAnswerBuilderTest extends SendMessageBaseTest
             ->setHeader("TEST01", "TEST02", "TEST01", "TEST02")
             ->setDossierId("TEST01-TEST02-12345-01")
             ->setBlocking("Y")
-            ->setBlockingcode("7")
-            ->setBusiness("N");
+            ->setBlockingcode("7");
 
         $contractTerminationRequestAnswer = $builder->build();
 
@@ -25,7 +24,7 @@ class ContractTerminationRequestAnswerBuilderTest extends SendMessageBaseTest
 
         $response = $this->service->sendMessage($contractTerminationRequestAnswer);
         $object = json_decode($response->getBody());
-        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v4\MessageResponse');
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v5\MessageResponse');
         $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 }

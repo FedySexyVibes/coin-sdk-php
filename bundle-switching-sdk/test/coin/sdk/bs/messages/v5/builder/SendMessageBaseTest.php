@@ -1,7 +1,7 @@
 <?php
 
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
 
 use coin\sdk\bs\service\impl\BundleSwitchingService;

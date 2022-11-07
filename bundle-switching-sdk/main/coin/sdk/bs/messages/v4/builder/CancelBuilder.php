@@ -1,14 +1,14 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
-use coin\sdk\bs\messages\v4\Cancel;
-use coin\sdk\bs\messages\v4\CancelBody;
-use coin\sdk\bs\messages\v4\CancelMessage;
-use coin\sdk\bs\messages\v4\common\BSMessageBuilder;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\common\MessageType;
-use coin\sdk\bs\messages\v4\Header;
+use coin\sdk\bs\messages\v5\Cancel;
+use coin\sdk\bs\messages\v5\CancelBody;
+use coin\sdk\bs\messages\v5\CancelMessage;
+use coin\sdk\bs\messages\v5\common\BSMessageBuilder;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\common\MessageType;
+use coin\sdk\bs\messages\v5\Header;
 
 class CancelBuilder extends BSMessageBuilder
 {

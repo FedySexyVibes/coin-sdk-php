@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -57,7 +57,7 @@ class ErrorMessages implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'errors' => '\coin\sdk\bs\messages\v4\ErrorMessage[]',
+        'errors' => '\coin\sdk\bs\messages\v5\ErrorMessage[]',
         'transaction_id' => 'string'
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\common;
+namespace coin\sdk\bs\messages\v5\common;
 
 interface IBSHeaderBuilder
 {

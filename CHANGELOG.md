@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.1.x
+
+Added:
+
+- Support for Bundle Switching v5; removes the business field from contract termination requests and contract termination request answers
+
 ## Version 2.x.x
 
 Upgrade to PHP 8
@@ -8,7 +14,7 @@ Upgrade to PHP 8
 
 Added:
 
-- Support for the number portability api v3
+- Support for Number Portability v3; adds the contract field to porting requests
 
 Changed:
 

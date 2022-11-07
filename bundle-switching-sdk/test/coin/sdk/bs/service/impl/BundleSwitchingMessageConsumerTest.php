@@ -1,10 +1,10 @@
 <?php /** @noinspection PhpParamsInspection */
 
-use coin\sdk\bs\messages\v4\CancelMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationPerformedMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestAnswerMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestMessage;
-use coin\sdk\bs\messages\v4\ErrorFoundMessage;
+use coin\sdk\bs\messages\v5\CancelMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationPerformedMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestAnswerMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestMessage;
+use coin\sdk\bs\messages\v5\ErrorFoundMessage;
 use coin\sdk\bs\service\impl\IBundleSwitchingMessageListener;
 use coin\sdk\bs\service\impl\BundleSwitchingMessageConsumer;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-use coin\sdk\bs\messages\v4\builder\ContractTerminationRequestBuilder;
+use coin\sdk\bs\messages\v5\builder\ContractTerminationRequestBuilder;
 use coin\sdk\bs\ObjectSerializer;
 use coin\sdk\bs\service\impl\BundleSwitchingService;
 use PHPUnit\Framework\TestCase;
@@ -30,14 +30,13 @@ class BundleSwitchingServiceTest extends TestCase
             ->setDossierId("$this->provider-TST-$randomId-01")
             ->setRecipientserviceprovider($this->provider)
             ->setDonorserviceprovider('TST')
-            ->setBusiness("N")
             ->setEarlytermination("N")
             ->setName("name")
             ->setAddress("1234AB", "1")
             ->build();
         $response = $this->service->sendMessage($message);
         $object = json_decode($response->getBody());
-        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v4\MessageResponse');
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v5\MessageResponse');
         $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 

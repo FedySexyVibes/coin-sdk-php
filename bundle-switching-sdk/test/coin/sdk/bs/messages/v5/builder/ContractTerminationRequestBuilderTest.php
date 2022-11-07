@@ -1,7 +1,7 @@
 <?php /** @noinspection PhpParamsInspection */
 
-use coin\sdk\bs\messages\v4\builder\ContractTerminationRequestBuilder;
-use coin\sdk\bs\messages\v4\builder\SendMessageBaseTest;
+use coin\sdk\bs\messages\v5\builder\ContractTerminationRequestBuilder;
+use coin\sdk\bs\messages\v5\builder\SendMessageBaseTest;
 use coin\sdk\bs\ObjectSerializer;
 
 class ContractTerminationRequestBuilderTest extends SendMessageBaseTest
@@ -19,7 +19,6 @@ class ContractTerminationRequestBuilderTest extends SendMessageBaseTest
             ->setRecipientserviceprovider("LOADA")
             ->setDonornetworkoperator("LOADB")
             ->setDonorserviceprovider("LOADB")
-            ->setBusiness("N")
             ->setEarlytermination("N")
             ->setName("name")
             ->setAddress("1234AB", "1");
@@ -30,7 +29,7 @@ class ContractTerminationRequestBuilderTest extends SendMessageBaseTest
 
         $response = $this->service->sendMessage($contractterminationrequest);
         $object = json_decode($response->getBody());
-        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v4\MessageResponse');
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v5\MessageResponse');
         $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 }

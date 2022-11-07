@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use InvalidArgumentException;
@@ -58,8 +58,8 @@ class Header implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'receiver' => '\coin\sdk\bs\messages\v4\Receiver',
-        'sender' => '\coin\sdk\bs\messages\v4\Sender',
+        'receiver' => '\coin\sdk\bs\messages\v5\Receiver',
+        'sender' => '\coin\sdk\bs\messages\v5\Sender',
         'messageid' => 'string',
         'timestamp' => 'string'
     ];

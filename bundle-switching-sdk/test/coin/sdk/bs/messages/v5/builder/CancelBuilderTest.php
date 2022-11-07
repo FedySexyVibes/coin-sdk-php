@@ -1,15 +1,15 @@
 <?php /** @noinspection PhpParamsInspection */
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
-use coin\sdk\bs\messages\v4\Cancel;
-use coin\sdk\bs\messages\v4\CancelBody;
-use coin\sdk\bs\messages\v4\CancelMessage;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\common\MessageType;
-use coin\sdk\bs\messages\v4\Header;
-use coin\sdk\bs\messages\v4\Receiver;
-use coin\sdk\bs\messages\v4\Sender;
+use coin\sdk\bs\messages\v5\Cancel;
+use coin\sdk\bs\messages\v5\CancelBody;
+use coin\sdk\bs\messages\v5\CancelMessage;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\common\MessageType;
+use coin\sdk\bs\messages\v5\Header;
+use coin\sdk\bs\messages\v5\Receiver;
+use coin\sdk\bs\messages\v5\Sender;
 use coin\sdk\bs\ObjectSerializer;
 
 class CancelBuilderTest extends SendMessageBaseTest
@@ -31,7 +31,7 @@ class CancelBuilderTest extends SendMessageBaseTest
 
         $response = $this->service->sendMessage($cancel);
         $object = json_decode($response->getBody());
-        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v4\MessageResponse');
+        $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\bs\messages\v5\MessageResponse');
         $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 

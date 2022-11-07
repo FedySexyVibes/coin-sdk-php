@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -57,7 +57,7 @@ class ContractTerminationPerformedBody implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contractterminationperformed' => '\coin\sdk\bs\messages\v4\ContractTerminationPerformed'
+        'contractterminationperformed' => '\coin\sdk\bs\messages\v5\ContractTerminationPerformed'
     ];
 
     /**

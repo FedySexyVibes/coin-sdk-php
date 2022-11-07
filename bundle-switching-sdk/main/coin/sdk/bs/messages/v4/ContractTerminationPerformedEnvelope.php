@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -57,7 +57,7 @@ class ContractTerminationPerformedEnvelope implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'message' => '\coin\sdk\bs\messages\v4\ContractTerminationPerformedMessage'
+        'message' => '\coin\sdk\bs\messages\v5\ContractTerminationPerformedMessage'
     ];
 
     /**

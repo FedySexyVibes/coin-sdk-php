@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use InvalidArgumentException;
@@ -63,12 +63,11 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         'recipientnetworkoperator' => 'string',
         'donornetworkoperator' => 'string',
         'donorserviceprovider' => 'string',
-        'business' => 'string',
         'earlytermination' => 'string',
         'name' => 'string',
-        'addressblock' => '\coin\sdk\bs\messages\v4\AddressBlock',
-        'numberseries' => '\coin\sdk\bs\messages\v4\NumberSeries[]',
-        'validationblock' => '\coin\sdk\bs\messages\v4\ValidationBlock[]',
+        'addressblock' => '\coin\sdk\bs\messages\v5\AddressBlock',
+        'numberseries' => '\coin\sdk\bs\messages\v5\NumberSeries[]',
+        'validationblock' => '\coin\sdk\bs\messages\v5\ValidationBlock[]',
         'note' => 'string'
     ];
 
@@ -83,7 +82,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         'recipientnetworkoperator' => null,
         'donornetworkoperator' => null,
         'donorserviceprovider' => null,
-        'business' => null,
         'earlytermination' => null,
         'name' => null,
         'addressblock' => null,
@@ -124,7 +122,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         'recipientnetworkoperator' => 'recipientnetworkoperator',
         'donornetworkoperator' => 'donornetworkoperator',
         'donorserviceprovider' => 'donorserviceprovider',
-        'business' => 'business',
         'earlytermination' => 'earlytermination',
         'name' => 'name',
         'addressblock' => 'addressblock',
@@ -144,7 +141,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         'recipientnetworkoperator' => 'setRecipientnetworkoperator',
         'donornetworkoperator' => 'setDonornetworkoperator',
         'donorserviceprovider' => 'setDonorserviceprovider',
-        'business' => 'setBusiness',
         'earlytermination' => 'setEarlytermination',
         'name' => 'setName',
         'addressblock' => 'setAddressblock',
@@ -164,7 +160,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         'recipientnetworkoperator' => 'getRecipientnetworkoperator',
         'donornetworkoperator' => 'getDonornetworkoperator',
         'donorserviceprovider' => 'getDonorserviceprovider',
-        'business' => 'getBusiness',
         'earlytermination' => 'getEarlytermination',
         'name' => 'getName',
         'addressblock' => 'getAddressblock',
@@ -238,7 +233,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         $this->container['recipientnetworkoperator'] = isset($data['recipientnetworkoperator']) ? $data['recipientnetworkoperator'] : null;
         $this->container['donornetworkoperator'] = isset($data['donornetworkoperator']) ? $data['donornetworkoperator'] : null;
         $this->container['donorserviceprovider'] = isset($data['donorserviceprovider']) ? $data['donorserviceprovider'] : null;
-        $this->container['business'] = isset($data['business']) ? $data['business'] : null;
         $this->container['earlytermination'] = isset($data['earlytermination']) ? $data['earlytermination'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['addressblock'] = isset($data['addressblock']) ? $data['addressblock'] : null;
@@ -291,13 +285,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         }
         if (!preg_match("/^[0-9A-Z]{3,6}$/", $this->container['donorserviceprovider'])) {
             $invalidProperties[] = "invalid value for 'donorserviceprovider', must be conform to the pattern /^[0-9A-Z]{3,6}$/.";
-        }
-
-        if ($this->container['business'] === null) {
-            $invalidProperties[] = "'business' can't be null";
-        }
-        if (!preg_match("/^[YN]$/", $this->container['business'])) {
-            $invalidProperties[] = "invalid value for 'business', must be conform to the pattern /^[YN]$/.";
         }
 
         if ($this->container['earlytermination'] === null) {
@@ -490,35 +477,6 @@ class ContractTerminationRequest implements ModelInterface, ArrayAccess
         }
 
         $this->container['donorserviceprovider'] = $donorserviceprovider;
-
-        return $this;
-    }
-
-    /**
-     * Gets business
-     *
-     * @return string
-     */
-    public function getBusiness()
-    {
-        return $this->container['business'];
-    }
-
-    /**
-     * Sets business
-     *
-     * @param string $business Indicates whether the dossier is a business request or not
-     *
-     * @return $this
-     */
-    public function setBusiness($business)
-    {
-
-        if ((!preg_match("/^[YN]$/", $business))) {
-            throw new InvalidArgumentException("invalid value for $business when calling ContractTerminationRequest., must conform to the pattern /^[YN]$/.");
-        }
-
-        $this->container['business'] = $business;
 
         return $this;
     }

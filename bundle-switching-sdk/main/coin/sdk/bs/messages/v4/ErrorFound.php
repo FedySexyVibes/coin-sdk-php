@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use InvalidArgumentException;
@@ -63,7 +63,7 @@ class ErrorFound implements ModelInterface, ArrayAccess
         'messageid' => 'string',
         'originalmessage' => 'string',
         'errorlog' => 'string',
-        'repeats' => '\coin\sdk\bs\messages\v4\ErrorFoundRepeats[]'
+        'repeats' => '\coin\sdk\bs\messages\v5\ErrorFoundRepeats[]'
     ];
 
     /**

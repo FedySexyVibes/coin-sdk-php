@@ -30,7 +30,7 @@ class BundleSwitchingMessageConsumer extends RestApiClient
                          $backOffPeriod = 1, $numberOfRetries = 20)
     {
         parent::__construct($consumerName, $privateKeyFile, $encryptedHmacSecretFile);
-        $sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']) . '/bundle-switching/v4/dossiers/events';
+        $sseUri = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']) . '/bundle-switching/v5/dossiers/events';
         $this->sseConsumer = new SseConsumer($sseUri, $consumerName, $privateKeyFile, $encryptedHmacSecretFile, $backOffPeriod, $numberOfRetries);
     }
 
@@ -124,19 +124,19 @@ class BundleSwitchingMessageConsumer extends RestApiClient
     private function handleMessage(Event $event, IBundleSwitchingMessageListener $listener)
     {
         switch ($event->getEventType()) {
-            case "cancel-v4":
+            case "cancel-v5":
                 executeOnMessage($event, 'CancelMessage', $listener, 'onCancel');
                 break;
-            case "errorfound-v4":
+            case "errorfound-v5":
                 executeOnMessage($event, 'ErrorFoundMessage', $listener, 'onErrorFound');
                 break;
-            case "contractterminationperformed-v4":
+            case "contractterminationperformed-v5":
                 executeOnMessage($event, 'ContractTerminationPerformedMessage', $listener, 'onContractTerminationPerformed');
                 break;
-            case "contractterminationrequest-v4":
+            case "contractterminationrequest-v5":
                 executeOnMessage($event, 'ContractTerminationRequestMessage', $listener, 'onContractTerminationRequest');
                 break;
-            case "contractterminationrequestanswer-v4":
+            case "contractterminationrequestanswer-v5":
                 executeOnMessage($event, 'ContractTerminationRequestAnswerMessage', $listener, 'onContractTerminationRequestAnswer');
                 break;
             default:
@@ -154,7 +154,7 @@ function executeOnMessage($event, $class, $listener, $function)
     $data = $event->getData();
     $object = json_decode($data)->message;
     $id = $event->getId();
-    $message = ObjectSerializer::deserialize($object, "coin\\sdk\\bs\messages\\v4\\" . $class);
+    $message = ObjectSerializer::deserialize($object, "coin\\sdk\\bs\messages\\v5\\" . $class);
     $listener->$function($id, $message);
 }
 

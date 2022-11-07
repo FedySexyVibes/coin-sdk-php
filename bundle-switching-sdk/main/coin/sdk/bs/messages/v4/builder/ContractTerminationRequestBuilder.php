@@ -1,17 +1,17 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
-use coin\sdk\bs\messages\v4\AddressBlock;
-use coin\sdk\bs\messages\v4\common\BSMessageBuilder;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\common\MessageType;
-use coin\sdk\bs\messages\v4\ContractTerminationRequest;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestBody;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestMessage;
-use coin\sdk\bs\messages\v4\Header;
-use coin\sdk\bs\messages\v4\NumberSeries;
-use coin\sdk\bs\messages\v4\ValidationBlock;
+use coin\sdk\bs\messages\v5\AddressBlock;
+use coin\sdk\bs\messages\v5\common\BSMessageBuilder;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\common\MessageType;
+use coin\sdk\bs\messages\v5\ContractTerminationRequest;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestBody;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestMessage;
+use coin\sdk\bs\messages\v5\Header;
+use coin\sdk\bs\messages\v5\NumberSeries;
+use coin\sdk\bs\messages\v5\ValidationBlock;
 
 
 class ContractTerminationRequestBuilder extends BSMessageBuilder
@@ -77,12 +77,6 @@ class ContractTerminationRequestBuilder extends BSMessageBuilder
         $numberSeries = (new NumberSeries())->setStart($start)->setEnd($end);
         array_push($allNumberSeries, $numberSeries);
         $this->contractTerminationRequest->setNumberseries($allNumberSeries);
-        return $this;
-    }
-
-    public function setBusiness($business)
-    {
-        $this->contractTerminationRequest->setBusiness($business);
         return $this;
     }
 

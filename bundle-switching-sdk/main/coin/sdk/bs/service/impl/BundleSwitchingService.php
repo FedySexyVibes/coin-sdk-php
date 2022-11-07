@@ -3,8 +3,8 @@
 namespace coin\sdk\bs\service\impl;
 
 use coin\sdk\common\client\RestApiClient;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\ConfirmationMessage;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\ConfirmationMessage;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -20,7 +20,7 @@ class BundleSwitchingService extends RestApiClient
             $encryptedHmacSecretFile,
             $validPeriodInSeconds
         );
-        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/bundle-switching/v4';
+        $this->apiUrl = ($coinBaseUrl ?: @$_ENV['COIN_BASE_URL'] ?: $GLOBALS['CoinBaseUrl']).'/bundle-switching/v5';
     }
 
     /**

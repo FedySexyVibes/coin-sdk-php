@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -57,7 +57,7 @@ class ErrorFoundRepeats implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'seq' => '\coin\sdk\bs\messages\v4\ErrorFoundSeq'
+        'seq' => '\coin\sdk\bs\messages\v5\ErrorFoundSeq'
     ];
 
     /**

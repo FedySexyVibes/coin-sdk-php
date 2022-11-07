@@ -3,11 +3,12 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/coin/sdk.svg?style=flat-square)](https://packagist.org/packages/coin/sdk)
 [![CI Status](https://gitlab.com/verenigingcoin-public/coin-sdk-php/badges/master/pipeline.svg)](https://gitlab.com/verenigingcoin-public/coin-sdk-php/-/pipelines/latest)
 
-| Api                                                                   | SDK Version   | Api Version                                          | Changelog                           |
-|-----------------------------------------------------------------------|---------------|------------------------------------------------------|-------------------------------------|
-| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | >= 1.1.0      | [v3](https://api.coin.nl/docs/number-portability/v3) | [click](CHANGELOG.md#version-1.1.0) |
-|                                                                       | 0.0.0 - 1.0.2 | [v1](https://api.coin.nl/docs/number-portability/v1) | -                                   |
-| [bundle-switching](https://coin.nl/en/services/overstappen)           | >= 1.1.0      | [v4](https://api.coin.nl/docs/bundle-switching/v4)   | n/a                                 |
+| Api                                                                   | SDK Version   | Api Version                                          | Changelog                          |
+|-----------------------------------------------------------------------|---------------|------------------------------------------------------|------------------------------------|
+| [number-portability](https://coin.nl/en/services/nummerportabiliteit) | 1.1.0 +       | [v3](https://api.coin.nl/docs/number-portability/v3) | [here](CHANGELOG.md#version-1.1.0) |
+|                                                                       | 0.0.0 - 1.0.2 | [v1](https://api.coin.nl/docs/number-portability/v1) | -                                  |
+| [bundle-switching](https://coin.nl/en/services/overstappen)           | 2.1.0 +       | [v5](https://api.coin.nl/docs/bundle-switching/v4)   | [here](CHANGELOG.md#version-2.1.0) |
+|                                                                       | 1.1.0 - 2.0.2 | [v4](https://api.coin.nl/docs/bundle-switching/v4)   | -                                  |
 
 This project contains SDKs for various COIN APIs.
 - [Number Portability](number-portability-sdk/README.md)

@@ -1,14 +1,14 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
-use coin\sdk\bs\messages\v4\common\BSMessageBuilder;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\common\MessageType;
-use coin\sdk\bs\messages\v4\ContractTerminationPerformed;
-use coin\sdk\bs\messages\v4\ContractTerminationPerformedBody;
-use coin\sdk\bs\messages\v4\ContractTerminationPerformedMessage;
-use coin\sdk\bs\messages\v4\Header;
+use coin\sdk\bs\messages\v5\common\BSMessageBuilder;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\common\MessageType;
+use coin\sdk\bs\messages\v5\ContractTerminationPerformed;
+use coin\sdk\bs\messages\v5\ContractTerminationPerformedBody;
+use coin\sdk\bs\messages\v5\ContractTerminationPerformedMessage;
+use coin\sdk\bs\messages\v5\Header;
 
 class ContractTerminationPerformedBuilder extends BSMessageBuilder
 {

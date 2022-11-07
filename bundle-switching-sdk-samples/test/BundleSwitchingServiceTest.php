@@ -1,6 +1,6 @@
 <?php
 
-use coin\sdk\bs\messages\v4\builder\ContractTerminationRequestBuilder;
+use coin\sdk\bs\messages\v5\builder\ContractTerminationRequestBuilder;
 use coin\sdk\bs\service\impl\BundleSwitchingService;
 use PHPUnit\Framework\TestCase;
 
@@ -29,7 +29,6 @@ class BundleSwitchingServiceSample extends TestCase
                 ->setDossierId("$this->provider-$this->donor-$randomId-01")
                 ->setRecipientserviceprovider($this->provider)
                 ->setDonorserviceprovider($this->donor)
-                ->setBusiness("N")
                 ->setEarlytermination("N")
                 ->setName("name")
                 ->setAddress("1234AB", "1")

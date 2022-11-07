@@ -27,7 +27,7 @@
  * Do not edit the class manually.
  */
 
-namespace coin\sdk\bs\messages\v4;
+namespace coin\sdk\bs\messages\v5;
 
 use \ArrayAccess;
 use coin\sdk\bs\ObjectSerializer;
@@ -59,11 +59,10 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'dossierid' => 'string',
-        'business' => 'string',
         'blocking' => 'string',
         'blockingcode' => 'string',
         'firstpossibledate' => 'string',
-        'infrablock' => '\coin\sdk\bs\messages\v4\InfraBlock',
+        'infrablock' => '\coin\sdk\bs\messages\v5\InfraBlock',
         'note' => 'string'
     ];
 
@@ -74,7 +73,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'dossierid' => null,
-        'business' => null,
         'blocking' => null,
         'blockingcode' => null,
         'firstpossibledate' => null,
@@ -110,7 +108,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'dossierid' => 'dossierid',
-        'business' => 'business',
         'blocking' => 'blocking',
         'blockingcode' => 'blockingcode',
         'firstpossibledate' => 'firstpossibledate',
@@ -125,7 +122,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'dossierid' => 'setDossierid',
-        'business' => 'setBusiness',
         'blocking' => 'setBlocking',
         'blockingcode' => 'setBlockingcode',
         'firstpossibledate' => 'setFirstpossibledate',
@@ -140,7 +136,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'dossierid' => 'getDossierid',
-        'business' => 'getBusiness',
         'blocking' => 'getBlocking',
         'blockingcode' => 'getBlockingcode',
         'firstpossibledate' => 'getFirstpossibledate',
@@ -209,7 +204,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['dossierid'] = isset($data['dossierid']) ? $data['dossierid'] : null;
-        $this->container['business'] = isset($data['business']) ? $data['business'] : null;
         $this->container['blocking'] = isset($data['blocking']) ? $data['blocking'] : null;
         $this->container['blockingcode'] = isset($data['blockingcode']) ? $data['blockingcode'] : null;
         $this->container['firstpossibledate'] = isset($data['firstpossibledate']) ? $data['firstpossibledate'] : null;
@@ -239,13 +233,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
 
         if (!preg_match("/^[A-Z0-9]{1,6}-[A-Z0-9]{1,6}-[A-Za-z0-9]{1,22}-[0-9]{1,3}$/", $this->container['dossierid'])) {
             $invalidProperties[] = "invalid value for 'dossierid', must be conform to the pattern /^[A-Z0-9]{1,6}-[A-Z0-9]{1,6}-[A-Za-z0-9]{1,22}-[0-9]{1,3}$/.";
-        }
-
-        if ($this->container['business'] === null) {
-            $invalidProperties[] = "'business' can't be null";
-        }
-        if (!preg_match("/^[YN]$/", $this->container['business'])) {
-            $invalidProperties[] = "invalid value for 'business', must be conform to the pattern /^[YN]$/.";
         }
 
         if ($this->container['blocking'] === null) {
@@ -316,35 +303,6 @@ class ContractTerminationRequestAnswer implements ModelInterface, ArrayAccess
         }
 
         $this->container['dossierid'] = $dossierid;
-
-        return $this;
-    }
-
-    /**
-     * Gets business
-     *
-     * @return string
-     */
-    public function getBusiness()
-    {
-        return $this->container['business'];
-    }
-
-    /**
-     * Sets business
-     *
-     * @param string $business Indicates whether the dossier is a business request or not
-     *
-     * @return $this
-     */
-    public function setBusiness($business)
-    {
-
-        if ((!preg_match("/^[YN]$/", $business))) {
-            throw new InvalidArgumentException("invalid value for $business when calling ContractTerminationRequestAnswer., must conform to the pattern /^[YN]$/.");
-        }
-
-        $this->container['business'] = $business;
 
         return $this;
     }

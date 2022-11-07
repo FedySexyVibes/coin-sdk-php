@@ -1,15 +1,15 @@
 <?php
 
-namespace coin\sdk\bs\messages\v4\builder;
+namespace coin\sdk\bs\messages\v5\builder;
 
-use coin\sdk\bs\messages\v4\common\BSMessageBuilder;
-use coin\sdk\bs\messages\v4\common\Message;
-use coin\sdk\bs\messages\v4\common\MessageType;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestAnswer;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestAnswerBody;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestAnswerMessage;
-use coin\sdk\bs\messages\v4\Header;
-use coin\sdk\bs\messages\v4\InfraBlock;
+use coin\sdk\bs\messages\v5\common\BSMessageBuilder;
+use coin\sdk\bs\messages\v5\common\Message;
+use coin\sdk\bs\messages\v5\common\MessageType;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestAnswer;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestAnswerBody;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestAnswerMessage;
+use coin\sdk\bs\messages\v5\Header;
+use coin\sdk\bs\messages\v5\InfraBlock;
 
 class ContractTerminationRequestAnswerBuilder extends BSMessageBuilder
 {
@@ -43,12 +43,6 @@ class ContractTerminationRequestAnswerBuilder extends BSMessageBuilder
     public function setBlocking($blocking)
     {
         $this->contractTerminationRequestAnswer->setBlocking($blocking);
-        return $this;
-    }
-
-    public function setBusiness($business)
-    {
-        $this->contractTerminationRequestAnswer->setBusiness($business);
         return $this;
     }
 

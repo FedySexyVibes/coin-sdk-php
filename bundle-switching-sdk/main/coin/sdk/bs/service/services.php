@@ -2,11 +2,11 @@
 
 namespace coin\sdk\bs\service\impl;
 
-use coin\sdk\bs\messages\v4\CancelMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationPerformedMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestAnswerMessage;
-use coin\sdk\bs\messages\v4\ContractTerminationRequestMessage;
-use coin\sdk\bs\messages\v4\ErrorFoundMessage;
+use coin\sdk\bs\messages\v5\CancelMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationPerformedMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestAnswerMessage;
+use coin\sdk\bs\messages\v5\ContractTerminationRequestMessage;
+use coin\sdk\bs\messages\v5\ErrorFoundMessage;
 
 interface IBundleSwitchingMessageListener {
 

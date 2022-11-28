@@ -1,8 +1,9 @@
 <?php
 
+namespace coin\sdk\bs\service\impl;
+
 use coin\sdk\bs\messages\v5\builder\ContractTerminationRequestBuilder;
 use coin\sdk\bs\ObjectSerializer;
-use coin\sdk\bs\service\impl\BundleSwitchingService;
 use PHPUnit\Framework\TestCase;
 
 /**

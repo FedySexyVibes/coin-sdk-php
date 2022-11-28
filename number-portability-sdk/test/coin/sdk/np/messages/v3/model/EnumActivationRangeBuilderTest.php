@@ -32,6 +32,6 @@ class EnumActivationRangeBuilderTest extends SendMessageBaseTest
         $response = $this->service->sendMessage($enumactivationrange);
         $object = json_decode($response->getBody());
         $messageResponse = ObjectSerializer::deserialize($object, 'coin\sdk\np\messages\v3\model\MessageResponse');
-        $this->assertMatchesRegularExpression('/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}/i', $messageResponse->getTransactionId(), "A transactionId with the correct pattern should be received");
+        $this->assertNotNull($messageResponse->getTransactionId(), "A transactionId should be received");
     }
 }

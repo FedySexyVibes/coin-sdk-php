@@ -3,8 +3,8 @@
 namespace coin\sdk\common\crypto;
 
 use Firebase\JWT\JWT;
-use phpseclib3\Crypt\Hash;
-use phpseclib3\Crypt\RSA;
+use phpseclib\Crypt\Hash;
+use phpseclib\Crypt\RSA;
 
 class ApiClientUtil
 {

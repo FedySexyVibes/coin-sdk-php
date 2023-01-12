@@ -6,6 +6,10 @@ Added:
 
 - Support for Bundle Switching v5; removes the business field from contract termination requests and contract termination request answers
 
+Update:
+
+- Updated phpseclib to version 3 and added phpseclib2-compat to prevent issues with testing
+
 ## Version 2.x.x
 
 Upgrade to PHP 8

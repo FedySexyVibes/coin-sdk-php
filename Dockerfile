@@ -1,6 +1,6 @@
 FROM composer:2.5.1 AS composer
 
-FROM php:8.1
+FROM php:8.2
 RUN apt-get update && apt-get install -y git zip
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

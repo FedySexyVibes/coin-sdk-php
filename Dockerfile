@@ -1,4 +1,4 @@
-FROM composer:2.5.1 AS composer
+FROM composer:2.5.5 AS composer
 
 FROM php:8.1
 RUN apt-get update && apt-get install -y git zip

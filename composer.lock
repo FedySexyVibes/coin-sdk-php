@@ -628,23 +628,23 @@
         },
         {
             "name": "phpseclib/phpseclib2_compat",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib2_compat.git",
-                "reference": "cfe43e264e60ddb4d3694626567364521bec5a07"
+                "reference": "3c7441fbd80e5a29958e0bd88d2e83e8258e196b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib2_compat/zipball/cfe43e264e60ddb4d3694626567364521bec5a07",
-                "reference": "cfe43e264e60ddb4d3694626567364521bec5a07",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib2_compat/zipball/3c7441fbd80e5a29958e0bd88d2e83e8258e196b",
+                "reference": "3c7441fbd80e5a29958e0bd88d2e83e8258e196b",
                 "shasum": ""
             },
             "require": {
                 "phpseclib/phpseclib": "^3.0"
             },
             "provide": {
-                "phpseclib/phpseclib": "2.0.31"
+                "phpseclib/phpseclib": "2.0.42"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.7|^6.0|^9.4"
@@ -672,7 +672,7 @@
                 "issues": "https://github.com/phpseclib/phpseclib2_compat/issues",
                 "source": "https://github.com/phpseclib/phpseclib2_compat"
             },
-            "time": "2021-05-28T21:27:18+00:00"
+            "time": "2023-03-06T13:03:48+00:00"
         },
         {
             "name": "psr/http-client",
